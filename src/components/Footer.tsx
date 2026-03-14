@@ -1,4 +1,4 @@
-import { Package, Instagram, Facebook, Twitter } from "lucide-react";
+import { Package, Instagram, Facebook, Twitter, ArrowRight, MapPin, Phone, Mail } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
@@ -8,14 +8,19 @@ const Footer = () => {
     <footer className="bg-primary text-primary-foreground">
       {/* Newsletter */}
       <div className="border-b border-primary-foreground/10">
-        <div className="container mx-auto px-4 py-8 flex flex-col md:flex-row items-center justify-between gap-4">
-          <div>
-            <h3 className="text-lg font-bold">Kampanya ve İndirimlerden Haberdar Olun</h3>
-            <p className="text-sm text-primary-foreground/60">E-posta adresinizi bırakın, fırsatları kaçırmayın!</p>
+        <div className="container mx-auto px-4 py-10 flex flex-col md:flex-row items-center justify-between gap-6">
+          <div className="text-center md:text-left">
+            <h3 className="text-xl font-black mb-1">Kampanya ve İndirimlerden Haberdar Olun</h3>
+            <p className="text-sm text-primary-foreground/50">E-posta adresinizi bırakın, fırsatları kaçırmayın!</p>
           </div>
           <form className="flex gap-2 w-full md:w-auto" onSubmit={(e) => e.preventDefault()}>
-            <Input placeholder="E-posta adresiniz" className="bg-primary-foreground/10 border-primary-foreground/20 text-primary-foreground placeholder:text-primary-foreground/40 w-64" />
-            <Button variant="hero" size="default">Abone Ol</Button>
+            <Input
+              placeholder="E-posta adresiniz"
+              className="bg-primary-foreground/10 border-primary-foreground/15 text-primary-foreground placeholder:text-primary-foreground/30 w-64 rounded-full px-5"
+            />
+            <Button variant="hero" size="default" className="rounded-full px-6 gap-1.5">
+              Abone Ol <ArrowRight className="w-3.5 h-3.5" />
+            </Button>
           </form>
         </div>
       </div>
@@ -24,78 +29,84 @@ const Footer = () => {
         <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-8">
           {/* Brand */}
           <div className="col-span-2 md:col-span-1 lg:col-span-1">
-            <Link to="/" className="flex items-center gap-2 mb-4">
-              <Package className="w-5 h-5" />
+            <Link to="/" className="flex items-center gap-2 mb-5 group">
+              <Package className="w-5 h-5 group-hover:text-secondary transition-smooth" />
               <span className="text-lg font-black">nipo</span>
-              <span className="text-[10px] font-semibold tracking-[0.2em] uppercase">AMBALAJ</span>
+              <span className="text-[9px] font-semibold tracking-[0.2em] uppercase opacity-70">AMBALAJ</span>
             </Link>
-            <p className="text-xs text-primary-foreground/60 leading-relaxed mb-4">
+            <p className="text-xs text-primary-foreground/50 leading-relaxed mb-5">
               Markana Renk Kat! Kaliteli ve uygun fiyatlı ambalaj çözümlerinde güvenilir adresiniz.
             </p>
-            <div className="flex gap-3">
-              <a href="#" className="w-8 h-8 rounded-full bg-primary-foreground/10 flex items-center justify-center hover:bg-primary-foreground/20 transition-colors">
-                <Instagram className="w-4 h-4" />
-              </a>
-              <a href="#" className="w-8 h-8 rounded-full bg-primary-foreground/10 flex items-center justify-center hover:bg-primary-foreground/20 transition-colors">
-                <Facebook className="w-4 h-4" />
-              </a>
-              <a href="#" className="w-8 h-8 rounded-full bg-primary-foreground/10 flex items-center justify-center hover:bg-primary-foreground/20 transition-colors">
-                <Twitter className="w-4 h-4" />
-              </a>
+            <div className="space-y-2 mb-5">
+              <div className="flex items-center gap-2 text-[11px] text-primary-foreground/50">
+                <MapPin className="w-3 h-3 shrink-0" />
+                <span>Büyükçekmece / İSTANBUL</span>
+              </div>
+              <div className="flex items-center gap-2 text-[11px] text-primary-foreground/50">
+                <Phone className="w-3 h-3 shrink-0" />
+                <span>0212 883 55 08</span>
+              </div>
+              <div className="flex items-center gap-2 text-[11px] text-primary-foreground/50">
+                <Mail className="w-3 h-3 shrink-0" />
+                <span>info@nipo.com.tr</span>
+              </div>
+            </div>
+            <div className="flex gap-2">
+              {[Instagram, Facebook, Twitter].map((Icon, i) => (
+                <a key={i} href="#" className="w-8 h-8 rounded-full bg-primary-foreground/8 flex items-center justify-center hover:bg-secondary hover:text-secondary-foreground transition-smooth">
+                  <Icon className="w-3.5 h-3.5" />
+                </a>
+              ))}
             </div>
           </div>
 
           {/* Product categories */}
           <div>
-            <h4 className="font-bold mb-3 text-xs uppercase tracking-wider">Ürün Grupları</h4>
-            <ul className="space-y-1.5 text-xs text-primary-foreground/60">
-              <li><Link to="/urunler" className="hover:text-primary-foreground transition-colors">Baskılı Kutular</Link></li>
-              <li><Link to="/urunler" className="hover:text-primary-foreground transition-colors">Kağıt Çantalar</Link></li>
-              <li><Link to="/urunler" className="hover:text-primary-foreground transition-colors">Bardak & Kase</Link></li>
-              <li><Link to="/urunler" className="hover:text-primary-foreground transition-colors">Etiket & Sticker</Link></li>
-              <li><Link to="/urunler" className="hover:text-primary-foreground transition-colors">Peçete & Servis</Link></li>
+            <h4 className="font-bold mb-4 text-xs uppercase tracking-wider text-primary-foreground/80">Ürün Grupları</h4>
+            <ul className="space-y-2 text-xs text-primary-foreground/50">
+              {["Baskılı Kutular", "Kağıt Çantalar", "Bardak & Kase", "Etiket & Sticker", "Peçete & Servis"].map(item => (
+                <li key={item}><Link to="/urunler" className="hover:text-primary-foreground hover:pl-1 transition-smooth">{item}</Link></li>
+              ))}
             </ul>
           </div>
 
           <div>
-            <h4 className="font-bold mb-3 text-xs uppercase tracking-wider">Daha Fazla</h4>
-            <ul className="space-y-1.5 text-xs text-primary-foreground/60">
-              <li><Link to="/urunler" className="hover:text-primary-foreground transition-colors">Poşet Grubu</Link></li>
-              <li><Link to="/urunler" className="hover:text-primary-foreground transition-colors">Streç Film</Link></li>
-              <li><Link to="/urunler" className="hover:text-primary-foreground transition-colors">Koli Bandı</Link></li>
-              <li><Link to="/urunler" className="hover:text-primary-foreground transition-colors">Koruyucu Ambalaj</Link></li>
-              <li><Link to="/urunler" className="hover:text-primary-foreground transition-colors">Islak Mendil</Link></li>
+            <h4 className="font-bold mb-4 text-xs uppercase tracking-wider text-primary-foreground/80">Daha Fazla</h4>
+            <ul className="space-y-2 text-xs text-primary-foreground/50">
+              {["Poşet Grubu", "Streç Film", "Koli Bandı", "Koruyucu Ambalaj", "Islak Mendil"].map(item => (
+                <li key={item}><Link to="/urunler" className="hover:text-primary-foreground hover:pl-1 transition-smooth">{item}</Link></li>
+              ))}
             </ul>
           </div>
 
           <div>
-            <h4 className="font-bold mb-3 text-xs uppercase tracking-wider">Kurumsal</h4>
-            <ul className="space-y-1.5 text-xs text-primary-foreground/60">
-              <li><Link to="/kurumsal" className="hover:text-primary-foreground transition-colors">Hakkımızda</Link></li>
-              <li><Link to="/iletisim" className="hover:text-primary-foreground transition-colors">İletişim</Link></li>
-              <li><a href="#" className="hover:text-primary-foreground transition-colors">Kariyer</a></li>
-              <li><a href="#" className="hover:text-primary-foreground transition-colors">Blog</a></li>
-              <li><a href="#" className="hover:text-primary-foreground transition-colors">Duyurular</a></li>
+            <h4 className="font-bold mb-4 text-xs uppercase tracking-wider text-primary-foreground/80">Kurumsal</h4>
+            <ul className="space-y-2 text-xs text-primary-foreground/50">
+              <li><Link to="/kurumsal" className="hover:text-primary-foreground hover:pl-1 transition-smooth">Hakkımızda</Link></li>
+              <li><Link to="/iletisim" className="hover:text-primary-foreground hover:pl-1 transition-smooth">İletişim</Link></li>
+              <li><a href="#" className="hover:text-primary-foreground hover:pl-1 transition-smooth">Kariyer</a></li>
+              <li><a href="#" className="hover:text-primary-foreground hover:pl-1 transition-smooth">Blog</a></li>
+              <li><a href="#" className="hover:text-primary-foreground hover:pl-1 transition-smooth">Duyurular</a></li>
             </ul>
           </div>
 
           <div>
-            <h4 className="font-bold mb-3 text-xs uppercase tracking-wider">Müşteri Hizmetleri</h4>
-            <ul className="space-y-1.5 text-xs text-primary-foreground/60">
-              <li><Link to="/sss" className="hover:text-primary-foreground transition-colors">S.S.S</Link></li>
-              <li><a href="#" className="hover:text-primary-foreground transition-colors">Kargo Bilgileri</a></li>
-              <li><a href="#" className="hover:text-primary-foreground transition-colors">İade Koşulları</a></li>
-              <li><a href="#" className="hover:text-primary-foreground transition-colors">Gizlilik Politikası</a></li>
-              <li><a href="#" className="hover:text-primary-foreground transition-colors">KVKK</a></li>
+            <h4 className="font-bold mb-4 text-xs uppercase tracking-wider text-primary-foreground/80">Müşteri Hizmetleri</h4>
+            <ul className="space-y-2 text-xs text-primary-foreground/50">
+              <li><Link to="/sss" className="hover:text-primary-foreground hover:pl-1 transition-smooth">S.S.S</Link></li>
+              <li><a href="#" className="hover:text-primary-foreground hover:pl-1 transition-smooth">Kargo Bilgileri</a></li>
+              <li><a href="#" className="hover:text-primary-foreground hover:pl-1 transition-smooth">İade Koşulları</a></li>
+              <li><a href="#" className="hover:text-primary-foreground hover:pl-1 transition-smooth">Gizlilik Politikası</a></li>
+              <li><a href="#" className="hover:text-primary-foreground hover:pl-1 transition-smooth">KVKK</a></li>
             </ul>
           </div>
         </div>
 
-        <div className="border-t border-primary-foreground/10 mt-8 pt-6 flex flex-col md:flex-row items-center justify-between gap-3">
-          <p className="text-[11px] text-primary-foreground/40">
-            © 2026 Nipo Ambalaj. Tüm hakları saklıdır. | nipo.com.tr
+        <div className="border-t border-primary-foreground/8 mt-10 pt-6 flex flex-col md:flex-row items-center justify-between gap-3">
+          <p className="text-[11px] text-primary-foreground/30">
+            © 2026 Nipo Ambalaj. Tüm hakları saklıdır.
           </p>
-          <p className="text-[11px] text-primary-foreground/40">
+          <p className="text-[11px] text-primary-foreground/30">
             Mimar Sinan Merkez Mh. İnönü Cd. No:95/3 Büyükçekmece / İSTANBUL
           </p>
         </div>
