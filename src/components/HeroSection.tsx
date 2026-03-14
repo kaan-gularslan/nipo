@@ -137,9 +137,11 @@ const HeroSection = () => {
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: 0.5 }}
                     >
-                      <Button size="lg" className="rounded-full font-semibold">
-                        Alışverişe Başla
-                        <ArrowUpRight className="w-4 h-4" />
+                      <Button size="lg" className="rounded-full font-semibold" asChild>
+                        <Link to="/urunler">
+                          Alışverişe Başla
+                          <ArrowUpRight className="w-4 h-4" />
+                        </Link>
                       </Button>
                     </motion.div>
                   </div>
