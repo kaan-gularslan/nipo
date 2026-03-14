@@ -74,7 +74,7 @@ const HeroSection = () => {
                   </span>
                   <span className="flex-1">{cat}</span>
                   <ChevronRight className="w-4 h-4 text-muted-foreground" />
-                </a>
+                </Link>
               ))}
               <a
                 href="#products"
