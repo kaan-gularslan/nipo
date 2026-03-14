@@ -1,5 +1,5 @@
-import { useState, useEffect, useCallback, useRef } from "react";
-import { ChevronLeft, ChevronRight, ArrowRight, Heart, ShoppingCart, Star, Eye } from "lucide-react";
+import { useState, useEffect, useCallback } from "react";
+import { ChevronLeft, ChevronRight, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
@@ -8,144 +8,164 @@ import slideKutu from "@/assets/slides/slide-kutu.jpg";
 import slideCanta from "@/assets/slides/slide-canta.jpg";
 import slideBardak from "@/assets/slides/slide-bardak.jpg";
 
-import kutuImg from "@/assets/products/kutu-cesitleri.jpg";
-import cantaImg from "@/assets/products/kagit-cantalar.jpg";
-import gidaImg from "@/assets/products/gida-ambalaj.jpg";
-
 const slides = [
   {
     img: slideKutu,
-    title: "KUTU TASARIMLARI",
+    subtitle: "Özel Tasarım",
+    title: "KUTU\nTASARIMLARI",
     desc: "Pizza, Lahmacun, Pide Kutuları ve markanıza özel tasarımlar.",
     cta: "Kutuları Keşfet",
+    accent: "bg-secondary",
   },
   {
     img: slideCanta,
-    title: "BASKILI ÇANTALAR",
+    subtitle: "Kraft & Karton",
+    title: "BASKILI\nÇANTALAR",
     desc: "Kraft Çanta, Karton Çanta ve Özel Tasarım Çanta Çözümleri.",
     cta: "Çantaları İncele",
+    accent: "bg-accent",
   },
   {
     img: slideBardak,
-    title: "BARDAK & KASE",
+    subtitle: "Paket Servis",
+    title: "BARDAK\n& KASE",
     desc: "Baskılı Karton Bardak, Gıda Kasesi ve Paket Servis Ürünleri.",
     cta: "Ürünleri Gör",
+    accent: "bg-primary",
   },
 ];
 
-// Promo icons strip - like Hepsiburada's circular icons row
-const promoIcons = [
-  { icon: "📦", label: "Baskılı Kutular", sub: "100+ Ürün" },
-  { icon: "👜", label: "Kağıt Çantalar", sub: "Kraft & Karton" },
-  { icon: "🥤", label: "Bardak Grubu", sub: "Baskılı" },
-  { icon: "🍽️", label: "Amerikan Servis", sub: "Özel Tasarım" },
-  { icon: "🏷️", label: "Etiket & Sticker", sub: "Rulo & Yapışkan" },
-  { icon: "🧻", label: "Peçete Grubu", sub: "Baskılı" },
-  { icon: "🛍️", label: "Poşet Grubu", sub: "Baskılı" },
-  { icon: "📋", label: "Streç & Bant", sub: "Ambalaj" },
-  { icon: "🔥", label: "Kampanyalar", sub: "Fırsatları Kaçırma" },
-  { icon: "⭐", label: "Çok Satanlar", sub: "En Popüler" },
-  { icon: "🆕", label: "Yeni Ürünler", sub: "Son Eklenenler" },
-  { icon: "💰", label: "İndirimli Ürünler", sub: "%25'e Varan" },
-];
-
-// Recommended products for right panel
-const recommendedProducts = [
-  { id: 1, name: "Pizza Kutusu 26cm Baskılı", price: "₺3.20", oldPrice: "₺4.50", img: kutuImg, rating: 4.8 },
-  { id: 7, name: "Karton Bardak 8oz Baskılı", price: "₺0.65", oldPrice: "₺0.90", img: gidaImg, rating: 4.8 },
-  { id: 5, name: "Kraft Çanta 26x32 Baskılı", price: "₺5.50", oldPrice: "₺7.00", img: cantaImg, rating: 4.7 },
+const categories = [
+  { name: "Baskılı Kağıt Grubu", icon: "📄" },
+  { name: "Amerikan Servis", icon: "🍽️" },
+  { name: "Kasap Kağıtları", icon: "🥩" },
+  { name: "Baskılı Çanta Grubu", icon: "👜" },
+  { name: "Baskılı Oluklu Kutu Grubu", icon: "📦" },
+  { name: "Baskılı Islak Mendil Grubu", icon: "🧻" },
+  { name: "Baskılı Poşet Grubu", icon: "🛍️" },
+  { name: "Baskılı Toz Dolum Grubu", icon: "☕" },
+  { name: "Baskılı Bardak Grubu", icon: "🥤" },
+  { name: "Baskılı Gıda Kabı Grubu", icon: "🥡" },
+  { name: "Baskılı Peçete Grubu", icon: "🧴" },
+  { name: "Baskılı Etiket Grubu", icon: "🏷️" },
 ];
 
 const HeroSection = () => {
   const [current, setCurrent] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
-  const promoRef = useRef<HTMLDivElement>(null);
 
-  const next = useCallback(() => setCurrent((p) => (p + 1) % slides.length), []);
-  const prev = useCallback(() => setCurrent((p) => (p - 1 + slides.length) % slides.length), []);
+  const next = useCallback(() => {
+    setCurrent((prev) => (prev + 1) % slides.length);
+  }, []);
+
+  const prev = useCallback(() => {
+    setCurrent((prev) => (prev - 1 + slides.length) % slides.length);
+  }, []);
 
   useEffect(() => {
     if (isPaused) return;
-    const t = setInterval(next, 5000);
-    return () => clearInterval(t);
+    const timer = setInterval(next, 5500);
+    return () => clearInterval(timer);
   }, [isPaused, next]);
 
   return (
     <section className="bg-background">
-      <div className="container mx-auto px-4">
-        {/* Promo icons strip - Hepsiburada style */}
-        <div className="relative py-4">
-          <div
-            ref={promoRef}
-            className="flex items-start gap-2 overflow-x-auto pb-2 scrollbar-hide"
-            style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
-          >
-            {promoIcons.map((p, i) => (
+      <div className="container mx-auto px-4 py-4 md:py-5">
+        <div className="flex gap-5">
+          {/* Category Sidebar - desktop only */}
+          <div className="hidden lg:block w-[270px] shrink-0">
+            <div className="bg-card rounded-xl border border-border overflow-hidden shadow-nipo-card">
+              <div className="max-h-[524px] overflow-y-auto scrollbar-thin">
+                {categories.map((cat, i) => (
+                  <Link
+                    key={cat.name}
+                    to="/urunler"
+                    className={`group flex items-center gap-3 px-4 py-[11px] text-[13px] text-foreground hover:bg-nipo-blue-light hover:text-primary transition-smooth ${
+                      i < categories.length - 1 ? "border-b border-border/40" : ""
+                    }`}
+                  >
+                    <span className="text-base w-6 text-center shrink-0">{cat.icon}</span>
+                    <span className="flex-1 font-medium">{cat.name}</span>
+                    <ChevronRight className="w-3.5 h-3.5 text-muted-foreground/50 group-hover:text-primary group-hover:translate-x-0.5 transition-smooth" />
+                  </Link>
+                ))}
+              </div>
               <Link
-                key={i}
                 to="/urunler"
-                className="group flex flex-col items-center gap-1.5 shrink-0 w-[85px] md:w-[95px] py-2 rounded-xl hover:bg-muted/50 transition-smooth"
+                className="flex items-center justify-center gap-2 px-4 py-3 text-xs font-bold text-primary bg-nipo-blue-light/50 hover:bg-nipo-blue-light transition-smooth border-t border-border/40"
               >
-                <div className="w-14 h-14 md:w-16 md:h-16 rounded-full bg-muted/60 border-2 border-transparent group-hover:border-primary/20 flex items-center justify-center text-2xl md:text-3xl transition-smooth group-hover:scale-105 group-hover:shadow-nipo-card">
-                  {p.icon}
-                </div>
-                <div className="text-center">
-                  <div className="text-[11px] font-semibold text-foreground leading-tight">{p.label}</div>
-                  <div className="text-[9px] text-muted-foreground leading-tight mt-0.5">{p.sub}</div>
-                </div>
+                TÜM KATEGORİLERİ GÖR
+                <ArrowRight className="w-3.5 h-3.5" />
               </Link>
-            ))}
+            </div>
           </div>
-        </div>
 
-        {/* Hero: Split layout - Slider left, Recommendations right */}
-        <div className="flex gap-4 pb-5">
-          {/* Main Slider */}
+          {/* Slider */}
           <div
-            className="flex-1 relative rounded-xl overflow-hidden min-h-[250px] md:min-h-[380px]"
+            className="flex-1 relative rounded-2xl overflow-hidden min-h-[300px] md:min-h-[524px] shadow-nipo"
             onMouseEnter={() => setIsPaused(true)}
             onMouseLeave={() => setIsPaused(false)}
           >
             <AnimatePresence mode="wait">
               <motion.div
                 key={current}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.5 }}
+                initial={{ opacity: 0, scale: 1.05 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.98 }}
+                transition={{ duration: 0.6, ease: "easeOut" }}
                 className="absolute inset-0"
               >
-                <img src={slides[current].img} alt={slides[current].title} className="w-full h-full object-cover" />
-                <div className="absolute inset-0 bg-gradient-to-r from-primary/85 via-primary/50 to-transparent" />
-                <div className="absolute inset-0 bg-gradient-to-t from-primary/20 to-transparent" />
+                <img
+                  src={slides[current].img}
+                  alt={slides[current].title}
+                  className="w-full h-full object-cover"
+                />
+                {/* Gradient overlay */}
+                <div className="absolute inset-0 bg-gradient-to-r from-primary/90 via-primary/50 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-primary/30 via-transparent to-transparent" />
 
-                <div className="absolute inset-0 flex items-center px-7 md:px-12">
-                  <div className="max-w-md">
+                <div className="absolute inset-0 flex items-center px-8 md:px-14">
+                  <div className="max-w-lg">
+                    <motion.div
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: 0.15, duration: 0.5 }}
+                    >
+                      <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary-foreground/15 backdrop-blur-sm text-primary-foreground text-xs font-semibold mb-4 border border-primary-foreground/10">
+                        <span className={`w-1.5 h-1.5 rounded-full ${slides[current].accent}`} />
+                        {slides[current].subtitle}
+                      </span>
+                    </motion.div>
                     <motion.h2
-                      initial={{ opacity: 0, y: 15 }}
+                      initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: 0.2 }}
-                      className="text-2xl md:text-4xl font-black text-primary-foreground mb-3 leading-tight drop-shadow-md"
+                      transition={{ delay: 0.25, duration: 0.5 }}
+                      className="text-3xl md:text-[3.2rem] font-black text-primary-foreground mb-4 leading-[1.1] whitespace-pre-line drop-shadow-md"
                     >
                       {slides[current].title}
                     </motion.h2>
                     <motion.p
-                      initial={{ opacity: 0, y: 15 }}
+                      initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: 0.3 }}
-                      className="text-primary-foreground/80 mb-5 text-sm max-w-xs"
+                      transition={{ delay: 0.35, duration: 0.5 }}
+                      className="text-primary-foreground/80 mb-8 text-sm md:text-base max-w-sm leading-relaxed"
                     >
                       {slides[current].desc}
                     </motion.p>
                     <motion.div
-                      initial={{ opacity: 0, y: 15 }}
+                      initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: 0.4 }}
+                      transition={{ delay: 0.45, duration: 0.5 }}
+                      className="flex items-center gap-3"
                     >
-                      <Button variant="hero" className="rounded-lg gap-1.5" asChild>
+                      <Button size="lg" variant="hero" className="rounded-full px-8 shadow-lg" asChild>
                         <Link to="/urunler">
-                          {slides[current].cta} <ArrowRight className="w-4 h-4" />
+                          {slides[current].cta}
+                          <ArrowRight className="w-4 h-4" />
                         </Link>
+                      </Button>
+                      <Button size="lg" variant="hero-outline" className="rounded-full px-6" asChild>
+                        <Link to="/iletisim">Teklif Al</Link>
                       </Button>
                     </motion.div>
                   </div>
@@ -153,72 +173,33 @@ const HeroSection = () => {
               </motion.div>
             </AnimatePresence>
 
-            {/* Slide controls */}
-            <button onClick={prev} className="absolute left-2 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-card/80 backdrop-blur-sm flex items-center justify-center text-foreground hover:bg-card transition-smooth z-10 shadow-sm">
-              <ChevronLeft className="w-4 h-4" />
+            {/* Arrows */}
+            <button
+              onClick={prev}
+              className="absolute left-4 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-primary-foreground/10 backdrop-blur-md flex items-center justify-center text-primary-foreground hover:bg-primary-foreground/20 transition-smooth z-10 border border-primary-foreground/10"
+            >
+              <ChevronLeft className="w-5 h-5" />
             </button>
-            <button onClick={next} className="absolute right-2 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-card/80 backdrop-blur-sm flex items-center justify-center text-foreground hover:bg-card transition-smooth z-10 shadow-sm">
-              <ChevronRight className="w-4 h-4" />
+            <button
+              onClick={next}
+              className="absolute right-4 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-primary-foreground/10 backdrop-blur-md flex items-center justify-center text-primary-foreground hover:bg-primary-foreground/20 transition-smooth z-10 border border-primary-foreground/10"
+            >
+              <ChevronRight className="w-5 h-5" />
             </button>
 
-            {/* Counter */}
-            <div className="absolute bottom-3 right-3 bg-primary/60 backdrop-blur-sm text-primary-foreground text-[11px] font-medium px-2.5 py-1 rounded-full z-10">
-              {current + 1} / {slides.length}
-            </div>
-
-            {/* Dots */}
-            <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1.5 z-10">
+            {/* Progress dots */}
+            <div className="absolute bottom-5 left-1/2 -translate-x-1/2 flex items-center gap-2 z-10 bg-primary/30 backdrop-blur-sm rounded-full px-3 py-1.5">
               {slides.map((_, i) => (
                 <button
                   key={i}
                   onClick={() => setCurrent(i)}
-                  className={`rounded-full transition-all duration-400 ${
-                    i === current ? "w-6 h-1.5 bg-secondary" : "w-1.5 h-1.5 bg-primary-foreground/40"
+                  className={`rounded-full transition-all duration-500 ${
+                    i === current
+                      ? "w-8 h-2 bg-secondary"
+                      : "w-2 h-2 bg-primary-foreground/40 hover:bg-primary-foreground/60"
                   }`}
                 />
               ))}
-            </div>
-          </div>
-
-          {/* Right panel - Recommendations (desktop) */}
-          <div className="hidden lg:flex flex-col w-[320px] shrink-0 bg-card rounded-xl border border-border/60 overflow-hidden shadow-nipo-card">
-            <div className="px-4 py-3 border-b border-border/40 flex items-center justify-between">
-              <h3 className="text-sm font-bold text-foreground">Sizin İçin Seçtiklerimiz</h3>
-              <Link to="/urunler" className="text-[11px] text-primary font-semibold hover:underline">Tümü</Link>
-            </div>
-            <div className="flex-1 divide-y divide-border/30">
-              {recommendedProducts.map((p) => (
-                <Link
-                  key={p.id}
-                  to="/urunler"
-                  className="flex gap-3 p-3 hover:bg-muted/30 transition-smooth group"
-                >
-                  <div className="w-20 h-20 rounded-lg overflow-hidden shrink-0 bg-muted/30">
-                    <img src={p.img} alt={p.name} className="w-full h-full object-cover group-hover:scale-105 transition-all duration-500" />
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <h4 className="text-xs font-medium text-foreground line-clamp-2 mb-1 group-hover:text-primary transition-smooth">{p.name}</h4>
-                    <div className="flex items-center gap-0.5 mb-1.5">
-                      {Array.from({ length: 5 }).map((_, i) => (
-                        <Star key={i} className={`w-2.5 h-2.5 ${i < Math.floor(p.rating) ? "fill-amber-400 text-amber-400" : "text-muted"}`} />
-                      ))}
-                      <span className="text-[9px] text-muted-foreground ml-1">({p.rating})</span>
-                    </div>
-                    <div className="flex items-baseline gap-1.5">
-                      <span className="text-sm font-black text-primary">{p.price}</span>
-                      {p.oldPrice && <span className="text-[11px] text-muted-foreground line-through">{p.oldPrice}</span>}
-                    </div>
-                  </div>
-                  <button className="self-center p-1.5 rounded-md hover:bg-primary hover:text-primary-foreground text-muted-foreground transition-smooth opacity-0 group-hover:opacity-100">
-                    <ShoppingCart className="w-3.5 h-3.5" />
-                  </button>
-                </Link>
-              ))}
-            </div>
-            <div className="p-3 border-t border-border/40">
-              <Button size="sm" variant="outline" className="w-full text-xs rounded-lg" asChild>
-                <Link to="/urunler">Tüm Ürünleri Gör</Link>
-              </Button>
             </div>
           </div>
         </div>
