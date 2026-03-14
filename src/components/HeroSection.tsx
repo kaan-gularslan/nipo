@@ -76,8 +76,8 @@ const HeroSection = () => {
                   <ChevronRight className="w-4 h-4 text-muted-foreground" />
                 </Link>
               ))}
-              <a
-                href="#products"
+              <Link
+                to="/urunler"
                 className="flex items-center gap-3 px-4 py-3 text-sm font-bold text-primary hover:bg-muted transition-colors"
               >
                 <span className="w-7 h-7 rounded-md bg-muted flex items-center justify-center text-primary shrink-0">
