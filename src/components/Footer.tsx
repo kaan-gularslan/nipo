@@ -1,6 +1,7 @@
 import { Package, Instagram, Facebook, Twitter } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
@@ -23,11 +24,11 @@ const Footer = () => {
         <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-8">
           {/* Brand */}
           <div className="col-span-2 md:col-span-1 lg:col-span-1">
-            <div className="flex items-center gap-2 mb-4">
+            <Link to="/" className="flex items-center gap-2 mb-4">
               <Package className="w-5 h-5" />
               <span className="text-lg font-black">nipo</span>
               <span className="text-[10px] font-semibold tracking-[0.2em] uppercase">AMBALAJ</span>
-            </div>
+            </Link>
             <p className="text-xs text-primary-foreground/60 leading-relaxed mb-4">
               Markana Renk Kat! Kaliteli ve uygun fiyatlı ambalaj çözümlerinde güvenilir adresiniz.
             </p>
@@ -48,30 +49,30 @@ const Footer = () => {
           <div>
             <h4 className="font-bold mb-3 text-xs uppercase tracking-wider">Ürün Grupları</h4>
             <ul className="space-y-1.5 text-xs text-primary-foreground/60">
-              <li><a href="#" className="hover:text-primary-foreground transition-colors">Baskılı Kutular</a></li>
-              <li><a href="#" className="hover:text-primary-foreground transition-colors">Kağıt Çantalar</a></li>
-              <li><a href="#" className="hover:text-primary-foreground transition-colors">Bardak & Kase</a></li>
-              <li><a href="#" className="hover:text-primary-foreground transition-colors">Etiket & Sticker</a></li>
-              <li><a href="#" className="hover:text-primary-foreground transition-colors">Peçete & Servis</a></li>
+              <li><Link to="/urunler" className="hover:text-primary-foreground transition-colors">Baskılı Kutular</Link></li>
+              <li><Link to="/urunler" className="hover:text-primary-foreground transition-colors">Kağıt Çantalar</Link></li>
+              <li><Link to="/urunler" className="hover:text-primary-foreground transition-colors">Bardak & Kase</Link></li>
+              <li><Link to="/urunler" className="hover:text-primary-foreground transition-colors">Etiket & Sticker</Link></li>
+              <li><Link to="/urunler" className="hover:text-primary-foreground transition-colors">Peçete & Servis</Link></li>
             </ul>
           </div>
 
           <div>
             <h4 className="font-bold mb-3 text-xs uppercase tracking-wider">Daha Fazla</h4>
             <ul className="space-y-1.5 text-xs text-primary-foreground/60">
-              <li><a href="#" className="hover:text-primary-foreground transition-colors">Poşet Grubu</a></li>
-              <li><a href="#" className="hover:text-primary-foreground transition-colors">Streç Film</a></li>
-              <li><a href="#" className="hover:text-primary-foreground transition-colors">Koli Bandı</a></li>
-              <li><a href="#" className="hover:text-primary-foreground transition-colors">Koruyucu Ambalaj</a></li>
-              <li><a href="#" className="hover:text-primary-foreground transition-colors">Islak Mendil</a></li>
+              <li><Link to="/urunler" className="hover:text-primary-foreground transition-colors">Poşet Grubu</Link></li>
+              <li><Link to="/urunler" className="hover:text-primary-foreground transition-colors">Streç Film</Link></li>
+              <li><Link to="/urunler" className="hover:text-primary-foreground transition-colors">Koli Bandı</Link></li>
+              <li><Link to="/urunler" className="hover:text-primary-foreground transition-colors">Koruyucu Ambalaj</Link></li>
+              <li><Link to="/urunler" className="hover:text-primary-foreground transition-colors">Islak Mendil</Link></li>
             </ul>
           </div>
 
           <div>
             <h4 className="font-bold mb-3 text-xs uppercase tracking-wider">Kurumsal</h4>
             <ul className="space-y-1.5 text-xs text-primary-foreground/60">
-              <li><a href="#" className="hover:text-primary-foreground transition-colors">Hakkımızda</a></li>
-              <li><a href="#" className="hover:text-primary-foreground transition-colors">İletişim</a></li>
+              <li><Link to="/kurumsal" className="hover:text-primary-foreground transition-colors">Hakkımızda</Link></li>
+              <li><Link to="/iletisim" className="hover:text-primary-foreground transition-colors">İletişim</Link></li>
               <li><a href="#" className="hover:text-primary-foreground transition-colors">Kariyer</a></li>
               <li><a href="#" className="hover:text-primary-foreground transition-colors">Blog</a></li>
               <li><a href="#" className="hover:text-primary-foreground transition-colors">Duyurular</a></li>
@@ -81,7 +82,7 @@ const Footer = () => {
           <div>
             <h4 className="font-bold mb-3 text-xs uppercase tracking-wider">Müşteri Hizmetleri</h4>
             <ul className="space-y-1.5 text-xs text-primary-foreground/60">
-              <li><a href="#" className="hover:text-primary-foreground transition-colors">S.S.S</a></li>
+              <li><Link to="/sss" className="hover:text-primary-foreground transition-colors">S.S.S</Link></li>
               <li><a href="#" className="hover:text-primary-foreground transition-colors">Kargo Bilgileri</a></li>
               <li><a href="#" className="hover:text-primary-foreground transition-colors">İade Koşulları</a></li>
               <li><a href="#" className="hover:text-primary-foreground transition-colors">Gizlilik Politikası</a></li>

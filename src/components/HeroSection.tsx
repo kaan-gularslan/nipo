@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { ChevronLeft, ChevronRight, ArrowUpRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
+import { Link } from "react-router-dom";
 
 import slideKutu from "@/assets/slides/slide-kutu.jpg";
 import slideCanta from "@/assets/slides/slide-canta.jpg";
@@ -61,9 +62,9 @@ const HeroSection = () => {
           <div className="hidden lg:block w-72 shrink-0">
             <div className="bg-card rounded-xl border border-border overflow-hidden">
               {categories.map((cat, i) => (
-                <a
+                <Link
                   key={cat}
-                  href="#products"
+                  to="/urunler"
                   className={`flex items-center gap-3 px-4 py-3 text-sm text-foreground hover:bg-muted hover:text-primary transition-colors ${
                     i < categories.length - 1 ? "border-b border-border/50" : ""
                   }`}
@@ -73,17 +74,17 @@ const HeroSection = () => {
                   </span>
                   <span className="flex-1">{cat}</span>
                   <ChevronRight className="w-4 h-4 text-muted-foreground" />
-                </a>
+                </Link>
               ))}
-              <a
-                href="#products"
+              <Link
+                to="/urunler"
                 className="flex items-center gap-3 px-4 py-3 text-sm font-bold text-primary hover:bg-muted transition-colors"
               >
                 <span className="w-7 h-7 rounded-md bg-muted flex items-center justify-center text-primary shrink-0">
                   <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" /></svg>
                 </span>
                 TÜMÜNÜ GÖR
-              </a>
+              </Link>
             </div>
           </div>
 
@@ -136,9 +137,11 @@ const HeroSection = () => {
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: 0.5 }}
                     >
-                      <Button size="lg" className="rounded-full font-semibold">
-                        Alışverişe Başla
-                        <ArrowUpRight className="w-4 h-4" />
+                      <Button size="lg" className="rounded-full font-semibold" asChild>
+                        <Link to="/urunler">
+                          Alışverişe Başla
+                          <ArrowUpRight className="w-4 h-4" />
+                        </Link>
                       </Button>
                     </motion.div>
                   </div>
