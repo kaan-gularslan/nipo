@@ -62,9 +62,9 @@ const HeroSection = () => {
           <div className="hidden lg:block w-72 shrink-0">
             <div className="bg-card rounded-xl border border-border overflow-hidden">
               {categories.map((cat, i) => (
-                <a
+                <Link
                   key={cat}
-                  href="#products"
+                  to="/urunler"
                   className={`flex items-center gap-3 px-4 py-3 text-sm text-foreground hover:bg-muted hover:text-primary transition-colors ${
                     i < categories.length - 1 ? "border-b border-border/50" : ""
                   }`}
