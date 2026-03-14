@@ -13,7 +13,16 @@ export default {
       },
     },
     extend: {
+      fontFamily: {
+        montserrat: ["Montserrat", "sans-serif"],
+      },
       colors: {
+        "nipo-blue": "hsl(var(--nipo-blue))",
+        "nipo-pink": "hsl(var(--nipo-pink))",
+        "nipo-green": "hsl(var(--nipo-green))",
+        "nipo-blue-light": "hsl(var(--nipo-blue-light))",
+        "nipo-pink-light": "hsl(var(--nipo-pink-light))",
+        "nipo-green-light": "hsl(var(--nipo-green-light))",
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
