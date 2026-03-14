@@ -1,17 +1,17 @@
 import { useState } from "react";
 import { Search, User, ShoppingCart, Heart, Phone, ChevronDown, Menu, X } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { AnimatePresence, motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
 const navItems = [
-  { label: "Anasayfa", href: "#" },
-  { label: "Kurumsal", href: "#about" },
-  { label: "Ürünler", href: "#products", hasSub: true },
-  { label: "S.S.S", href: "#faq" },
-  { label: "Kampanyalar", href: "#campaigns" },
+  { label: "Anasayfa", href: "/" },
+  { label: "Kurumsal", href: "/kurumsal" },
+  { label: "Ürünler", href: "/urunler", hasSub: true },
+  { label: "S.S.S", href: "/sss" },
+  { label: "Kampanyalar", href: "/kampanyalar" },
   { label: "Duyurular", href: "#" },
-  { label: "İletişim", href: "#contact" },
+  { label: "İletişim", href: "/iletisim" },
 ];
 
 const categories = [
@@ -45,13 +45,13 @@ const Header = () => {
               <Phone className="w-3 h-3" />
               Desteğe mi İhtiyacınız Var?
             </span>
-            <a href="#contact" className="bg-secondary text-secondary-foreground px-3 py-0.5 rounded text-xs font-bold hover:bg-secondary/90 transition-colors">
+            <Link to="/iletisim" className="bg-secondary text-secondary-foreground px-3 py-0.5 rounded text-xs font-bold hover:bg-secondary/90 transition-colors">
               İletişime Geç!
-            </a>
+            </Link>
           </div>
           <span className="hidden md:block font-medium">Nipo Ambalaj İle Markana Renk Kat!</span>
           <div className="hidden md:flex items-center gap-4 text-xs">
-            <a href="#" className="hover:underline">Teklif İste</a>
+            <Link to="/iletisim" className="hover:underline">Teklif İste</Link>
             <a href="#" className="hover:underline">Hesabım</a>
             <a href="#" className="hover:underline">Favorilerim</a>
           </div>
@@ -61,13 +61,11 @@ const Header = () => {
       {/* Main header */}
       <div className="bg-card border-b border-border">
         <div className="container mx-auto px-4 flex items-center gap-4 md:gap-8 h-16 md:h-20">
-          {/* Mobile menu toggle */}
           <button className="md:hidden text-primary" onClick={() => setMobileOpen(!mobileOpen)}>
             {mobileOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
 
-          {/* Logo */}
-          <a href="#" className="flex items-center gap-1 shrink-0">
+          <Link to="/" className="flex items-center gap-1 shrink-0">
             <span className="text-2xl md:text-3xl font-montserrat font-black tracking-tight text-primary">
               nip
               <span className="relative">
@@ -82,9 +80,8 @@ const Header = () => {
             <span className="text-[10px] md:text-xs font-montserrat font-semibold tracking-[0.2em] text-primary uppercase ml-3">
               AMBALAJ
             </span>
-          </a>
+          </Link>
 
-          {/* Search bar */}
           <div className="hidden md:flex flex-1 max-w-2xl relative">
             <Input
               placeholder="Ürün arayın..."
@@ -95,7 +92,6 @@ const Header = () => {
             </button>
           </div>
 
-          {/* Right actions */}
           <div className="flex items-center gap-2 md:gap-5 ml-auto">
             <a href="#" className="hidden md:flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors">
               <User className="w-5 h-5" />
@@ -124,7 +120,6 @@ const Header = () => {
       {/* Navigation bar */}
       <div className="bg-card border-b border-border hidden md:block">
         <div className="container mx-auto px-4 flex items-center h-12 gap-0">
-          {/* Categories dropdown */}
           <div className="relative">
             <button
               onClick={() => setCatOpen(!catOpen)}
@@ -144,9 +139,9 @@ const Header = () => {
                   className="absolute top-full left-0 w-72 bg-card border border-border rounded-b-lg shadow-nipo-lg z-50"
                 >
                   {categories.map((cat) => (
-                    <a
+                    <Link
                       key={cat}
-                      href="#products"
+                      to="/urunler"
                       className="flex items-center gap-3 px-4 py-3 text-sm text-foreground hover:bg-muted transition-colors border-b border-border/50 last:border-0"
                       onClick={() => setCatOpen(false)}
                     >
@@ -154,35 +149,33 @@ const Header = () => {
                         <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" /></svg>
                       </span>
                       {cat}
-                    </a>
+                    </Link>
                   ))}
-                  <a
-                    href="#products"
+                  <Link
+                    to="/urunler"
                     className="flex items-center gap-3 px-4 py-3 text-sm font-bold text-primary hover:bg-muted transition-colors"
                     onClick={() => setCatOpen(false)}
                   >
                     TÜMÜNÜ GÖR
-                  </a>
+                  </Link>
                 </motion.div>
               )}
             </AnimatePresence>
           </div>
 
-          {/* Nav items */}
           <nav className="flex items-center h-full ml-6 gap-1">
             {navItems.map((item) => (
-              <a
+              <Link
                 key={item.label}
-                href={item.href}
+                to={item.href}
                 className="flex items-center gap-1 px-4 h-full text-sm font-medium text-foreground hover:text-primary transition-colors"
               >
                 {item.label}
                 {item.hasSub && <ChevronDown className="w-3 h-3" />}
-              </a>
+              </Link>
             ))}
           </nav>
 
-          {/* Phone */}
           <div className="ml-auto flex items-center gap-2 text-sm">
             <Phone className="w-4 h-4 text-primary" />
             <div>
@@ -209,21 +202,21 @@ const Header = () => {
               </div>
               <div className="space-y-1 mb-4">
                 {navItems.map((item) => (
-                  <a key={item.label} href={item.href} className="block py-2 text-sm font-medium text-foreground" onClick={() => setMobileOpen(false)}>
+                  <Link key={item.label} to={item.href} className="block py-2 text-sm font-medium text-foreground" onClick={() => setMobileOpen(false)}>
                     {item.label}
-                  </a>
+                  </Link>
                 ))}
               </div>
               <div className="border-t border-border pt-3 space-y-1">
                 <div className="text-xs font-bold text-muted-foreground uppercase tracking-wider mb-2">Kategoriler</div>
                 {categories.slice(0, 8).map((cat) => (
-                  <a key={cat} href="#products" className="block py-1.5 text-sm text-foreground" onClick={() => setMobileOpen(false)}>
+                  <Link key={cat} to="/urunler" className="block py-1.5 text-sm text-foreground" onClick={() => setMobileOpen(false)}>
                     {cat}
-                  </a>
+                  </Link>
                 ))}
-                <a href="#products" className="block py-1.5 text-sm font-bold text-primary" onClick={() => setMobileOpen(false)}>
+                <Link to="/urunler" className="block py-1.5 text-sm font-bold text-primary" onClick={() => setMobileOpen(false)}>
                   Tümünü Gör →
-                </a>
+                </Link>
               </div>
             </div>
           </motion.div>
