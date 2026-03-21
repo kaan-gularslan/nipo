@@ -1,4 +1,3 @@
-import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -15,12 +14,7 @@ const ContactSection = () => {
   return (
     <section id="contact" className="py-10 md:py-14 bg-background">
       <div className="container mx-auto px-4">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-center mb-10"
-        >
+        <div className="text-center mb-10 animate-fade-up">
           <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-nipo-pink-light text-secondary text-xs font-bold mb-3">
             <span className="w-1.5 h-1.5 rounded-full bg-secondary" />
             İletişim
@@ -31,19 +25,15 @@ const ContactSection = () => {
           <p className="text-muted-foreground text-sm mt-2 max-w-md mx-auto">
             Sorularınız, özel teklif talepleriniz veya siparişleriniz için bize ulaşın.
           </p>
-        </motion.div>
+        </div>
 
         <div className="grid lg:grid-cols-5 gap-6">
           {/* Info cards */}
           <div className="lg:col-span-2 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-3">
             {contactInfo.map((item, i) => (
-              <motion.div
+              <div
                 key={item.label}
-                initial={{ opacity: 0, x: -15 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.08 }}
-                className="flex gap-3.5 bg-card rounded-xl p-4 border border-border/60 hover:shadow-nipo-card transition-smooth group"
+                className={`flex gap-3.5 bg-card rounded-xl p-4 border border-border/60 hover:shadow-nipo-card transition-smooth group animate-slide-left delay-${Math.min(i + 1, 4)}`}
               >
                 <div className={`w-10 h-10 rounded-lg ${item.color} flex items-center justify-center shrink-0 group-hover:scale-110 transition-smooth`}>
                   <item.icon className="w-4 h-4" />
@@ -52,16 +42,13 @@ const ContactSection = () => {
                   <div className="font-semibold text-foreground text-sm">{item.label}</div>
                   <div className="text-muted-foreground text-xs mt-0.5">{item.value}</div>
                 </div>
-              </motion.div>
+              </div>
             ))}
           </div>
 
           {/* Form */}
-          <motion.form
-            initial={{ opacity: 0, x: 20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            className="lg:col-span-3 bg-card rounded-xl p-6 md:p-8 shadow-nipo-card border border-border/60 space-y-4"
+          <form
+            className="lg:col-span-3 bg-card rounded-xl p-6 md:p-8 shadow-nipo-card border border-border/60 space-y-4 animate-slide-right"
             onSubmit={(e) => e.preventDefault()}
           >
             <h3 className="text-lg font-bold text-foreground">Teklif veya Bilgi Talebi</h3>
@@ -80,7 +67,7 @@ const ContactSection = () => {
               <Send className="w-4 h-4" />
               Mesaj Gönder
             </Button>
-          </motion.form>
+          </form>
         </div>
       </div>
     </section>
