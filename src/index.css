@@ -68,18 +68,17 @@
     @apply font-montserrat font-bold;
   }
 
-  /* Smooth scrolling */
   html {
     scroll-behavior: smooth;
   }
 
-  /* Better focus styles */
   :focus-visible {
     @apply outline-2 outline-offset-2 outline-primary;
   }
 }
 
 @layer utilities {
+  /* ── Brand gradients ── */
   .gradient-nipo {
     background: linear-gradient(135deg, hsl(var(--nipo-blue)), hsl(var(--nipo-pink)));
   }
@@ -99,46 +98,185 @@
     background-clip: text;
   }
 
+  /* ── Brand shadows ── */
   .shadow-nipo {
     box-shadow: 0 8px 30px -8px hsl(var(--nipo-blue) / 0.15);
   }
-
   .shadow-nipo-lg {
     box-shadow: 0 20px 60px -15px hsl(var(--nipo-blue) / 0.2);
   }
-
   .shadow-nipo-card {
     box-shadow: 0 2px 12px -4px hsl(var(--nipo-blue) / 0.08);
   }
-
   .shadow-nipo-hover {
     box-shadow: 0 12px 40px -12px hsl(var(--nipo-blue) / 0.2);
   }
 
-  /* Smooth transitions for interactive elements */
+  /* ── Smooth transition shorthand ── */
   .transition-smooth {
     @apply transition-all duration-300 ease-out;
   }
 
-  /* Badge pulse animation */
+  /* ── CSS-only scroll reveal ── */
+  @keyframes fade-up {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fade-in {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+  @keyframes slide-in-left {
+    from { opacity: 0; transform: translateX(-20px); }
+    to   { opacity: 1; transform: translateX(0); }
+  }
+  @keyframes slide-in-right {
+    from { opacity: 0; transform: translateX(20px); }
+    to   { opacity: 1; transform: translateX(0); }
+  }
+  @keyframes scale-in {
+    from { opacity: 0; transform: scale(0.92); }
+    to   { opacity: 1; transform: scale(1); }
+  }
+  @keyframes hero-slide {
+    0%   { opacity: 0; transform: scale(1.06); }
+    100% { opacity: 1; transform: scale(1); }
+  }
+
+  .animate-fade-up {
+    animation: fade-up 0.6s ease-out both;
+  }
+  .animate-fade-in {
+    animation: fade-in 0.5s ease-out both;
+  }
+  .animate-slide-left {
+    animation: slide-in-left 0.5s ease-out both;
+  }
+  .animate-slide-right {
+    animation: slide-in-right 0.5s ease-out both;
+  }
+  .animate-scale-in {
+    animation: scale-in 0.5s ease-out both;
+  }
+  .animate-hero-slide {
+    animation: hero-slide 0.7s ease-out both;
+  }
+
+  /* Stagger delays — use with animation classes */
+  .delay-1 { animation-delay: 50ms; }
+  .delay-2 { animation-delay: 100ms; }
+  .delay-3 { animation-delay: 150ms; }
+  .delay-4 { animation-delay: 200ms; }
+  .delay-5 { animation-delay: 250ms; }
+  .delay-6 { animation-delay: 300ms; }
+  .delay-7 { animation-delay: 350ms; }
+  .delay-8 { animation-delay: 400ms; }
+  .delay-9 { animation-delay: 450ms; }
+  .delay-10 { animation-delay: 500ms; }
+  .delay-11 { animation-delay: 550ms; }
+  .delay-12 { animation-delay: 600ms; }
+
+  /* ── Badge pulse ── */
   @keyframes badge-pulse {
     0%, 100% { transform: scale(1); }
     50% { transform: scale(1.05); }
   }
-
   .animate-badge-pulse {
     animation: badge-pulse 2s ease-in-out infinite;
   }
 
-  /* Shimmer effect for loading */
+  /* ── Shimmer ── */
   @keyframes shimmer {
-    0% { background-position: -200% 0; }
+    0%   { background-position: -200% 0; }
     100% { background-position: 200% 0; }
   }
-
   .animate-shimmer {
     background: linear-gradient(90deg, transparent 25%, hsl(var(--nipo-blue) / 0.05) 50%, transparent 75%);
     background-size: 200% 100%;
     animation: shimmer 2s infinite;
+  }
+
+  /* ── Floating animation ── */
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50%      { transform: translateY(-8px); }
+  }
+  .animate-float {
+    animation: float 4s ease-in-out infinite;
+  }
+
+  /* ── Slide progress bar for hero ── */
+  @keyframes slide-progress {
+    from { width: 0%; }
+    to   { width: 100%; }
+  }
+  .animate-slide-progress {
+    animation: slide-progress 5.5s linear;
+  }
+
+  /* ── Product card hover lift ── */
+  .card-hover {
+    @apply transition-all duration-300 ease-out;
+  }
+  .card-hover:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 48px -12px hsl(var(--nipo-blue) / 0.18);
+  }
+
+  /* ── Image zoom on hover ── */
+  .img-zoom {
+    @apply transition-transform duration-700 ease-out;
+  }
+  .group:hover .img-zoom {
+    transform: scale(1.08);
+  }
+
+  /* ── Underline reveal on hover ── */
+  .underline-reveal {
+    position: relative;
+  }
+  .underline-reveal::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: hsl(var(--nipo-pink));
+    border-radius: 1px;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease-out;
+  }
+  .underline-reveal:hover::after {
+    transform: scaleX(1);
+  }
+
+  /* ── Glass effect ── */
+  .glass {
+    background: hsl(var(--card) / 0.7);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+
+  /* ── Scrollbar styling ── */
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 4px;
+  }
+  .scrollbar-thin::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    background: hsl(var(--border));
+    border-radius: 2px;
+  }
+  .scrollbar-thin::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--muted-foreground) / 0.3);
+  }
+
+  /* ── Section divider ── */
+  .section-divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, hsl(var(--border)), transparent);
   }
 }
