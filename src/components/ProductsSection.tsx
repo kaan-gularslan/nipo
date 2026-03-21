@@ -1,4 +1,3 @@
-import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { ShoppingCart, Eye, Star, ChevronRight, ArrowRight, Zap, TrendingUp, Sparkles } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -47,18 +46,12 @@ const getBadgeStyles = (badge: string) => {
   }
 };
 
-const ProductCard = ({ product, index }: { product: typeof allProducts[0]; index: number }) => (
-  <motion.div
-    initial={{ opacity: 0, y: 20 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    viewport={{ once: true }}
-    transition={{ duration: 0.4, delay: index * 0.04 }}
-    className="group bg-card rounded-xl border border-border/60 overflow-hidden hover:shadow-nipo-hover transition-smooth hover:-translate-y-1"
-  >
+const ProductCard = ({ product, delay }: { product: typeof allProducts[0]; delay: string }) => (
+  <article className={`group bg-card rounded-xl border border-border/60 overflow-hidden card-hover animate-fade-up ${delay}`}>
     <div className="relative aspect-square overflow-hidden bg-muted/30">
-      <img src={product.img} alt={product.name} className="w-full h-full object-cover group-hover:scale-110 transition-all duration-700 ease-out" />
+      <img src={product.img} alt={product.name} className="w-full h-full object-cover img-zoom" loading="lazy" />
       {product.badge && (
-        <span className={`absolute top-2.5 left-2.5 px-2 py-0.5 rounded-md text-[10px] font-bold uppercase shadow-sm ${getBadgeStyles(product.badge)}`}>
+        <span className={`absolute top-2.5 left-2.5 px-2.5 py-1 rounded-md text-[10px] font-bold uppercase tracking-wide shadow-sm ${getBadgeStyles(product.badge)}`}>
           {product.badge}
         </span>
       )}
@@ -67,12 +60,13 @@ const ProductCard = ({ product, index }: { product: typeof allProducts[0]; index
           %{Math.round((1 - parseFloat(product.price.replace("₺", "").replace(",", ".")) / parseFloat(product.oldPrice.replace("₺", "").replace(",", "."))) * 100)}
         </span>
       )}
-      <div className="absolute inset-0 bg-gradient-to-t from-primary/0 to-primary/0 group-hover:from-primary/40 group-hover:to-transparent transition-all duration-500 flex items-end justify-center pb-4 opacity-0 group-hover:opacity-100">
-        <div className="flex gap-2">
-          <button className="p-2.5 rounded-full bg-card shadow-md text-primary hover:bg-primary hover:text-primary-foreground transition-smooth transform translate-y-4 group-hover:translate-y-0 duration-300">
+      {/* Hover overlay */}
+      <div className="absolute inset-0 bg-gradient-to-t from-primary/50 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-400 flex items-end justify-center pb-5">
+        <div className="flex gap-2 translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+          <button className="p-2.5 rounded-full bg-card shadow-md text-primary hover:bg-primary hover:text-primary-foreground transition-smooth" aria-label="Ürünü görüntüle">
             <Eye className="w-4 h-4" />
           </button>
-          <button className="p-2.5 rounded-full bg-secondary shadow-md text-secondary-foreground hover:bg-secondary/90 transition-smooth transform translate-y-4 group-hover:translate-y-0 duration-300 delay-75">
+          <button className="p-2.5 rounded-full bg-secondary shadow-md text-secondary-foreground hover:bg-secondary/90 transition-smooth" aria-label="Sepete ekle">
             <ShoppingCart className="w-4 h-4" />
           </button>
         </div>
@@ -81,7 +75,7 @@ const ProductCard = ({ product, index }: { product: typeof allProducts[0]; index
     <div className="p-4">
       <p className="text-[10px] uppercase text-muted-foreground font-semibold tracking-wider mb-1.5">{product.cat}</p>
       <h3 className="font-semibold text-sm text-foreground mb-2 line-clamp-2 leading-snug group-hover:text-primary transition-smooth">{product.name}</h3>
-      <div className="flex items-center gap-0.5 mb-2.5">
+      <div className="flex items-center gap-0.5 mb-2.5" aria-label={`${product.rating} üzerinden 5 yıldız`}>
         {Array.from({ length: 5 }).map((_, i) => (
           <Star key={i} className={`w-3 h-3 ${i < Math.floor(product.rating) ? "fill-amber-400 text-amber-400" : "text-muted/60"}`} />
         ))}
@@ -98,7 +92,7 @@ const ProductCard = ({ product, index }: { product: typeof allProducts[0]; index
         Sepete Ekle
       </Button>
     </div>
-  </motion.div>
+  </article>
 );
 
 const SectionHeader = ({
@@ -114,11 +108,11 @@ const SectionHeader = ({
   linkTo?: string;
   icon?: React.ElementType;
 }) => (
-  <div className="flex items-center justify-between mb-7">
+  <div className="flex items-center justify-between mb-7 animate-fade-up">
     <div className="flex items-center gap-3">
       {Icon && (
         <div className="w-9 h-9 rounded-lg bg-nipo-blue-light flex items-center justify-center text-primary">
-          <Icon className="w-4.5 h-4.5" />
+          <Icon className="w-4 h-4" />
         </div>
       )}
       <h2 className="text-xl md:text-2xl font-black text-foreground">
@@ -131,77 +125,60 @@ const SectionHeader = ({
   </div>
 );
 
+const delayClass = (i: number) => `delay-${Math.min(i + 1, 12)}`;
+
 const ProductsSection = () => {
   return (
     <section id="products" className="py-10 md:py-14 bg-background">
       <div className="container mx-auto px-4">
         {/* Category Cards */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="mb-14"
-        >
+        <div className="mb-14">
           <SectionHeader title="" highlight="Kategoriler" icon={Sparkles} />
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 md:gap-4">
             {categoryCards.map((cat, i) => (
-              <motion.div
+              <Link
                 key={cat.name}
-                initial={{ opacity: 0, y: 15 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.05 }}
+                to="/urunler"
+                className={`group block bg-card rounded-xl border border-border/60 overflow-hidden card-hover animate-fade-up ${delayClass(i)}`}
               >
-                <Link
-                  to="/urunler"
-                  className="group block bg-card rounded-xl border border-border/60 overflow-hidden hover:shadow-nipo-hover transition-smooth hover:-translate-y-1"
-                >
-                  <div className="aspect-[4/3] overflow-hidden relative">
-                    <img src={cat.img} alt={cat.name} className="w-full h-full object-cover group-hover:scale-110 transition-all duration-700" />
-                    <div className="absolute inset-0 bg-gradient-to-t from-primary/60 to-transparent" />
-                    <span className="absolute bottom-2 left-2 text-2xl">{cat.icon}</span>
-                  </div>
-                  <div className="p-3 text-center">
-                    <h3 className="text-sm font-bold text-foreground group-hover:text-primary transition-smooth">{cat.name}</h3>
-                    <p className="text-[10px] text-muted-foreground mt-0.5">{cat.count} ürün</p>
-                  </div>
-                </Link>
-              </motion.div>
+                <div className="aspect-[4/3] overflow-hidden relative">
+                  <img src={cat.img} alt={cat.name} className="w-full h-full object-cover img-zoom" loading="lazy" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-primary/60 to-transparent" />
+                  <span className="absolute bottom-2 left-2 text-2xl">{cat.icon}</span>
+                </div>
+                <div className="p-3 text-center">
+                  <h3 className="text-sm font-bold text-foreground group-hover:text-primary transition-smooth">{cat.name}</h3>
+                  <p className="text-[10px] text-muted-foreground mt-0.5">{cat.count} ürün</p>
+                </div>
+              </Link>
             ))}
           </div>
-        </motion.div>
+        </div>
+
+        {/* Divider */}
+        <div className="section-divider mb-14" />
 
         {/* Popular Products */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="mb-14"
-        >
+        <div className="mb-14">
           <SectionHeader title="Çok Satan" highlight="Ürünler" icon={TrendingUp} />
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4">
             {allProducts.filter(p => p.badge === "Çok Satan").map((product, i) => (
-              <ProductCard key={product.id} product={product} index={i} />
+              <ProductCard key={product.id} product={product} delay={delayClass(i)} />
             ))}
           </div>
-        </motion.div>
+        </div>
 
         {/* Campaign Banner */}
-        <motion.div
-          id="campaigns"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="rounded-2xl gradient-hero-warm p-8 md:p-12 mb-14 text-primary-foreground relative overflow-hidden"
-        >
+        <div className="rounded-2xl gradient-hero-warm p-8 md:p-12 mb-14 text-primary-foreground relative overflow-hidden animate-fade-up">
           <div className="absolute top-0 right-0 w-96 h-96 bg-secondary/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
+          <div className="absolute bottom-0 left-1/3 w-64 h-64 bg-accent/5 rounded-full blur-3xl" />
           <div className="relative max-w-xl">
             <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-secondary text-secondary-foreground text-xs font-bold mb-5">
               <Zap className="w-3 h-3" /> Kampanya
             </span>
             <h2 className="text-2xl md:text-4xl font-black mb-3 leading-tight">Toptan Alımlarda %25'e Varan İndirim!</h2>
-            <p className="text-primary-foreground/70 mb-7 text-sm md:text-base max-w-md">1000 adet ve üzeri siparişlerinizde özel fiyat avantajlarından yararlanın.</p>
-            <div className="flex gap-3">
+            <p className="text-primary-foreground/70 mb-7 text-sm md:text-base max-w-md leading-relaxed">1000 adet ve üzeri siparişlerinizde özel fiyat avantajlarından yararlanın.</p>
+            <div className="flex flex-wrap gap-3">
               <Button variant="hero" size="lg" className="rounded-full px-8" asChild>
                 <Link to="/iletisim">Teklif Al</Link>
               </Button>
@@ -210,42 +187,36 @@ const ProductsSection = () => {
               </Button>
             </div>
           </div>
-        </motion.div>
+        </div>
 
         {/* New Products */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="mb-14"
-        >
+        <div className="mb-14">
           <SectionHeader title="Yeni" highlight="Ürünler" icon={Sparkles} />
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4">
             {allProducts.filter(p => p.badge === "Yeni").map((product, i) => (
-              <ProductCard key={product.id} product={product} index={i} />
+              <ProductCard key={product.id} product={product} delay={delayClass(i)} />
             ))}
           </div>
-        </motion.div>
+        </div>
+
+        {/* Divider */}
+        <div className="section-divider mb-14" />
 
         {/* All Products */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-        >
+        <div>
           <SectionHeader title="Tüm" highlight="Ürünler" />
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4">
             {allProducts.map((product, i) => (
-              <ProductCard key={product.id} product={product} index={i} />
+              <ProductCard key={product.id} product={product} delay={delayClass(i)} />
             ))}
           </div>
           <div className="text-center mt-10">
-            <Button variant="outline" size="lg" className="rounded-full px-10 gap-2">
+            <Button variant="outline" size="lg" className="rounded-full px-10 gap-2 hover:bg-primary hover:text-primary-foreground transition-smooth">
               Daha Fazla Ürün Yükle
               <ArrowRight className="w-4 h-4" />
             </Button>
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );

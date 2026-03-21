@@ -1,4 +1,3 @@
-import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown, ChevronUp, HelpCircle } from "lucide-react";
 import { useState } from "react";
 
@@ -17,12 +16,7 @@ const FaqSection = () => {
   return (
     <section id="faq" className="py-10 md:py-14 bg-muted/30">
       <div className="container mx-auto px-4 max-w-3xl">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-center mb-10"
-        >
+        <div className="text-center mb-10 animate-fade-up">
           <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-nipo-blue-light text-primary text-xs font-bold mb-3">
             <HelpCircle className="w-3 h-3" />
             S.S.S
@@ -31,23 +25,20 @@ const FaqSection = () => {
             Sık Sorulan <span className="text-gradient-nipo">Sorular</span>
           </h2>
           <p className="text-muted-foreground text-sm mt-2">Merak ettiklerinize hızlıca cevap bulun.</p>
-        </motion.div>
+        </div>
 
         <div className="space-y-2.5">
           {faqs.map((faq, i) => (
-            <motion.div
+            <div
               key={i}
-              initial={{ opacity: 0, y: 10 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.05 }}
-              className={`bg-card rounded-xl border overflow-hidden transition-smooth ${
+              className={`bg-card rounded-xl border overflow-hidden transition-smooth animate-fade-up delay-${Math.min(i + 1, 6)} ${
                 openIndex === i ? "border-primary/20 shadow-nipo-card" : "border-border/60"
               }`}
             >
               <button
                 onClick={() => setOpenIndex(openIndex === i ? null : i)}
                 className="w-full flex items-center justify-between px-5 py-4 text-left group"
+                aria-expanded={openIndex === i}
               >
                 <span className="flex items-center gap-3">
                   <span className={`w-7 h-7 rounded-lg flex items-center justify-center text-xs font-bold shrink-0 transition-smooth ${
@@ -63,22 +54,18 @@ const FaqSection = () => {
                   {openIndex === i ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
                 </div>
               </button>
-              <AnimatePresence>
-                {openIndex === i && (
-                  <motion.div
-                    initial={{ height: 0, opacity: 0 }}
-                    animate={{ height: "auto", opacity: 1 }}
-                    exit={{ height: 0, opacity: 0 }}
-                    transition={{ duration: 0.25 }}
-                    className="overflow-hidden"
-                  >
-                    <div className="px-5 pb-4 pl-[60px] text-sm text-muted-foreground leading-relaxed">
-                      {faq.a}
-                    </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </motion.div>
+              <div
+                className="overflow-hidden transition-all duration-300 ease-out"
+                style={{
+                  maxHeight: openIndex === i ? "200px" : "0px",
+                  opacity: openIndex === i ? 1 : 0,
+                }}
+              >
+                <div className="px-5 pb-4 pl-[60px] text-sm text-muted-foreground leading-relaxed">
+                  {faq.a}
+                </div>
+              </div>
+            </div>
           ))}
         </div>
       </div>

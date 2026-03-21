@@ -1,4 +1,3 @@
-import { motion } from "framer-motion";
 import { Shield, Truck, Palette, Recycle, Award, Headphones } from "lucide-react";
 
 const features = [
@@ -10,6 +9,13 @@ const features = [
   { icon: Headphones, title: "7/24 Destek", desc: "Her zaman yanınızda", color: "bg-nipo-pink-light text-secondary" },
 ];
 
+const stats = [
+  { value: "500+", label: "Ürün Çeşidi", color: "bg-nipo-blue-light" },
+  { value: "10K+", label: "Mutlu Müşteri", color: "bg-nipo-pink-light" },
+  { value: "15+", label: "Yıllık Tecrübe", color: "bg-nipo-green-light" },
+  { value: "81", label: "İl'e Teslimat", color: "bg-nipo-blue-light" },
+];
+
 const AboutSection = () => {
   return (
     <section id="about" className="py-10 md:py-14 bg-muted/30">
@@ -17,30 +23,21 @@ const AboutSection = () => {
         {/* Feature strip */}
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3 md:gap-4 mb-14">
           {features.map((f, i) => (
-            <motion.div
+            <div
               key={f.title}
-              initial={{ opacity: 0, y: 15 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.06 }}
-              className="bg-card rounded-xl p-5 text-center border border-border/60 hover:shadow-nipo-hover hover:-translate-y-1 transition-smooth group"
+              className={`bg-card rounded-xl p-5 text-center border border-border/60 card-hover group animate-fade-up delay-${Math.min(i + 1, 6)}`}
             >
               <div className={`w-11 h-11 rounded-xl mx-auto mb-3 ${f.color} flex items-center justify-center group-hover:scale-110 transition-smooth`}>
                 <f.icon className="w-5 h-5" />
               </div>
               <h3 className="font-bold text-sm text-foreground">{f.title}</h3>
               <p className="text-[11px] text-muted-foreground mt-1">{f.desc}</p>
-            </motion.div>
+            </div>
           ))}
         </div>
 
         {/* About content */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="bg-card rounded-2xl border border-border/60 p-8 md:p-12 shadow-nipo-card"
-        >
+        <div className="bg-card rounded-2xl border border-border/60 p-8 md:p-12 shadow-nipo-card animate-fade-up">
           <div className="grid md:grid-cols-2 gap-10 items-center">
             <div>
               <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-nipo-pink-light text-secondary text-xs font-bold mb-4">
@@ -61,24 +58,18 @@ const AboutSection = () => {
               </p>
             </div>
             <div className="grid grid-cols-2 gap-4">
-              {[
-                { value: "500+", label: "Ürün Çeşidi", color: "bg-nipo-blue-light" },
-                { value: "10K+", label: "Mutlu Müşteri", color: "bg-nipo-pink-light" },
-                { value: "15+", label: "Yıllık Tecrübe", color: "bg-nipo-green-light" },
-                { value: "81", label: "İl'e Teslimat", color: "bg-nipo-blue-light" },
-              ].map((s) => (
-                <motion.div
+              {stats.map((s, i) => (
+                <div
                   key={s.label}
-                  whileHover={{ scale: 1.03 }}
-                  className={`${s.color} rounded-xl p-6 text-center transition-smooth`}
+                  className={`${s.color} rounded-xl p-6 text-center hover:scale-[1.03] transition-smooth animate-scale-in delay-${Math.min(i + 1, 4)}`}
                 >
                   <div className="text-3xl md:text-4xl font-black text-primary">{s.value}</div>
                   <div className="text-xs text-muted-foreground mt-1.5 font-medium">{s.label}</div>
-                </motion.div>
+                </div>
               ))}
             </div>
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );
