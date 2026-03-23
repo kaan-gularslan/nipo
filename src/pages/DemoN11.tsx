@@ -36,6 +36,12 @@ const DemoN11 = () => {
     return () => clearInterval(timer);
   }, []);
 
+  // Auto-slide
+  useEffect(() => {
+    const timer = setInterval(() => setCurrentSlide((p) => (p + 1) % slides.length), 5000);
+    return () => clearInterval(timer);
+  }, []);
+
   return (
     <div className="min-h-screen bg-muted/30">
       {/* Header */}
