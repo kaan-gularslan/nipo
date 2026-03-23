@@ -4,7 +4,7 @@ import { Package, Search, MapPin, User, ShoppingCart, ChevronRight, Star, Menu, 
 import { products, formatPrice, getDiscountPercent } from "@/data/products";
 import { categories } from "@/data/categories";
 import { useCart } from "@/context/CartContext";
-import heroImg from "@/assets/hero-amazon.jpg";
+
 
 const topNavLinks = [
   { name: "Çok Satanlar", to: "/urunler" },
