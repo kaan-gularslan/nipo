@@ -16,15 +16,37 @@ import Campaigns from "./pages/Campaigns";
 import Cart from "./pages/Cart";
 import StaticPage from "./pages/StaticPage";
 import CorporateIdentity from "./pages/CorporateIdentity";
+import DemoLayout from "./components/demo/DemoLayout";
 import DemoHepsiburada from "./pages/DemoHepsiburada";
 import DemoBidolu from "./pages/DemoBidolu";
 import DemoTrendyol from "./pages/DemoTrendyol";
 import DemoAmazon from "./pages/DemoAmazon";
 import DemoN11 from "./pages/DemoN11";
+import DemoProducts from "./pages/demo/DemoProducts";
+import DemoCategory from "./pages/demo/DemoCategory";
+import DemoProductDetail from "./pages/demo/DemoProductDetail";
+import DemoCart from "./pages/demo/DemoCart";
+import DemoCampaigns from "./pages/demo/DemoCampaigns";
+import DemoContact from "./pages/demo/DemoContact";
+import DemoFaq from "./pages/demo/DemoFaq";
 import Admin from "./pages/Admin";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
+
+const demoHomeMap: Record<string, React.FC> = {
+  hepsiburada: DemoHepsiburada,
+  bidolu: DemoBidolu,
+  trendyol: DemoTrendyol,
+  amazon: DemoAmazon,
+  n11: DemoN11,
+};
+
+const DemoIndex = () => {
+  const { theme } = require("react-router-dom").useParams();
+  const Home = demoHomeMap[theme] || DemoBidolu;
+  return <Home />;
+};
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
@@ -49,11 +71,23 @@ const App = () => (
             <Route path="/gizlilik" element={<StaticPage page="gizlilik" />} />
             <Route path="/kvkk" element={<StaticPage page="kvkk" />} />
             <Route path="/kurumsal-kimlik" element={<CorporateIdentity />} />
-            <Route path="/demo/hepsiburada" element={<DemoHepsiburada />} />
-            <Route path="/demo/bidolu" element={<DemoBidolu />} />
-            <Route path="/demo/trendyol" element={<DemoTrendyol />} />
-            <Route path="/demo/amazon" element={<DemoAmazon />} />
-            <Route path="/demo/n11" element={<DemoN11 />} />
+            
+            {/* Demo nested routes */}
+            <Route path="/demo/:theme" element={<DemoLayout />}>
+              <Route index element={<DemoIndex />} />
+              <Route path="urunler" element={<DemoProducts />} />
+              <Route path="urunler/:slug" element={<DemoProductDetail />} />
+              <Route path="kategori/:slug" element={<DemoCategory />} />
+              <Route path="sepet" element={<DemoCart />} />
+              <Route path="kampanyalar" element={<DemoCampaigns />} />
+              <Route path="iletisim" element={<DemoContact />} />
+              <Route path="sss" element={<DemoFaq />} />
+              <Route path="kurumsal" element={<DemoFaq />} />
+              <Route path="kargo-bilgileri" element={<DemoFaq />} />
+              <Route path="iade-kosullari" element={<DemoFaq />} />
+              <Route path="gizlilik" element={<DemoFaq />} />
+            </Route>
+
             <Route path="/admin" element={<Admin />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
