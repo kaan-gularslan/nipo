@@ -36,7 +36,11 @@ const serviceLinks = [
   { name: "KVKK", to: "/kvkk" },
 ];
 
-const Footer = () => (
+const themeKeys: ThemeName[] = ["klasik", "pembe", "yesil", "minimal", "koyu"];
+
+const Footer = () => {
+  const { theme, setTheme } = useTheme();
+  return (
   <footer className="bg-primary text-primary-foreground">
     {/* Newsletter */}
     <div className="border-b border-primary-foreground/10">
