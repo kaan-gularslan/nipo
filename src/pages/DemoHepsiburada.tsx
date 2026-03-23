@@ -92,16 +92,16 @@ const DemoHepsiburadaHome = () => {
       </div>
 
       {/* Süper Fırsatlar */}
-      <div className="bg-gradient-to-r from-secondary/10 via-white to-secondary/10 py-8">
+      <div className="bg-gradient-to-r from-secondary/10 via-white to-secondary/10 py-6 md:py-8">
         <div className="container mx-auto px-4">
-          <div className="flex items-center justify-between mb-5">
-            <div className="flex items-center gap-3">
-              <h2 className="text-lg font-black text-foreground">⚡ Süper Fırsatlar</h2>
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 mb-5">
+            <div className="flex items-center gap-3 flex-wrap">
+              <h2 className="text-base md:text-lg font-black text-foreground">⚡ Süper Fırsatlar</h2>
               <div className="flex items-center gap-1.5 text-secondary">
                 <Clock className="w-4 h-4" />
                 <div className="flex gap-1">
                   {[countdown.h, countdown.m, countdown.s].map((v, i) => (
-                    <span key={i} className="bg-secondary text-secondary-foreground text-xs font-black px-2 py-1 rounded">{String(v).padStart(2, "0")}</span>
+                    <span key={i} className="bg-secondary text-secondary-foreground text-[10px] md:text-xs font-black px-1.5 md:px-2 py-0.5 md:py-1 rounded">{String(v).padStart(2, "0")}</span>
                   ))}
                 </div>
               </div>
