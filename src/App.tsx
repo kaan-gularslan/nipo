@@ -15,6 +15,7 @@ import Contact from "./pages/Contact";
 import Campaigns from "./pages/Campaigns";
 import Cart from "./pages/Cart";
 import StaticPage from "./pages/StaticPage";
+import CorporateIdentity from "./pages/CorporateIdentity";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
