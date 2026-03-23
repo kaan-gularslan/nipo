@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Package, Search, MapPin, User, ShoppingCart, ChevronRight, Star, Menu, X } from "lucide-react";
+import { Package, Search, MapPin, User, ShoppingCart, ChevronRight, Star, Menu, X, ChevronUp, Truck, Award, Headphones, Timer } from "lucide-react";
 import { products, formatPrice, getDiscountPercent } from "@/data/products";
 import { categories } from "@/data/categories";
 import { useCart } from "@/context/CartContext";
+import heroImg from "@/assets/hero-amazon.jpg";
 
 const topNavLinks = [
   { name: "Çok Satanlar", to: "/urunler" },
@@ -115,18 +116,20 @@ const DemoAmazon = () => {
         </div>
       )}
 
-      {/* Hero Banner */}
-      <div className="relative gradient-hero-warm h-48 md:h-64 flex items-center">
-        <div className="container mx-auto px-4 relative z-10">
+      {/* Hero Banner with Image */}
+      <div className="relative h-56 md:h-80 overflow-hidden">
+        <img src={heroImg} alt="Nipo Ambalaj Depo" className="absolute inset-0 w-full h-full object-cover" width={1920} height={800} />
+        <div className="absolute inset-0 bg-gradient-to-r from-primary/85 via-primary/50 to-transparent" />
+        <div className="container mx-auto px-4 h-full flex items-center relative z-10">
           <div className="text-primary-foreground max-w-lg">
-            <h1 className="text-2xl md:text-3xl font-black mb-2">Ambalajda Güvenilir Çözüm</h1>
-            <p className="text-sm opacity-70 mb-4">Binlerce ürün, hızlı teslimat, uygun fiyat</p>
+            <span className="bg-secondary text-secondary-foreground text-xs font-bold px-3 py-1 rounded-full">Özel Fiyat</span>
+            <h1 className="text-2xl md:text-4xl font-black mt-3 mb-2 drop-shadow-lg">Ambalajda Büyük Fırsat</h1>
+            <p className="text-sm opacity-90 mb-5">Baskılı kutu, çanta ve bardaklarda toplu sipariş indirimi</p>
             <Link to="/urunler" className="bg-secondary text-secondary-foreground px-6 py-2.5 rounded-lg text-sm font-bold hover:bg-secondary/90 transition-smooth inline-flex items-center gap-1">
               Alışverişe Başla <ChevronRight className="w-4 h-4" />
             </Link>
           </div>
         </div>
-        <div className="absolute inset-0 bg-gradient-to-t from-muted/40 to-transparent" />
       </div>
 
       {/* Category Cards */}

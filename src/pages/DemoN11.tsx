@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Package, Search, ShoppingCart, ChevronRight, ChevronLeft, Star, Clock, Zap, Menu, X } from "lucide-react";
+import { Package, Search, ShoppingCart, ChevronRight, ChevronLeft, Star, Clock, Zap, Menu, X, Heart, User, TrendingUp, Flame } from "lucide-react";
 import { products, formatPrice, getDiscountPercent } from "@/data/products";
 import { categories } from "@/data/categories";
 import { useCart } from "@/context/CartContext";
+import heroImg from "@/assets/hero-n11.jpg";
 
 const slides = [
   { title: "Toplu Siparişe\nÖzel Fiyatlar", subtitle: "1000+ adet siparişlerde %20 indirim", cta: "Fırsatı Yakala", to: "/kampanyalar" },
@@ -109,29 +110,33 @@ const DemoN11 = () => {
         </div>
       )}
 
-      {/* Hero: Slider + Side Banners */}
+      {/* Hero: Slider with Image + Side Banners */}
       <div className="container mx-auto px-4 py-4">
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-3">
           {/* Main Slider */}
-          <div className="lg:col-span-3 relative rounded-xl overflow-hidden">
-            <div className="gradient-hero h-56 md:h-72 flex items-center transition-all duration-500">
-              <div className="container px-8 text-primary-foreground">
-                <h1 className="text-2xl md:text-3xl font-black leading-tight whitespace-pre-line mb-2">{slides[currentSlide].title}</h1>
-                <p className="text-sm opacity-70 mb-4">{slides[currentSlide].subtitle}</p>
-                <Link to={slides[currentSlide].to} className="bg-secondary text-secondary-foreground px-6 py-2.5 rounded-lg text-sm font-bold hover:bg-secondary/90 transition-smooth inline-flex items-center gap-1">
-                  {slides[currentSlide].cta} <ChevronRight className="w-4 h-4" />
-                </Link>
+          <div className="lg:col-span-3 relative rounded-xl overflow-hidden h-64 md:h-80">
+            <img src={heroImg} alt="Nipo Kampanya" className="absolute inset-0 w-full h-full object-cover" width={1920} height={800} />
+            {slides.map((slide, i) => (
+              <div key={i} className={`absolute inset-0 flex items-end transition-all duration-700 ${i === currentSlide ? "opacity-100" : "opacity-0"}`}>
+                <div className="absolute inset-0 bg-gradient-to-t from-primary/85 via-primary/20 to-transparent" />
+                <div className="relative z-10 p-6 md:p-8 text-white w-full">
+                  <h1 className="text-xl md:text-3xl font-black leading-tight whitespace-pre-line mb-2 drop-shadow-lg">{slide.title}</h1>
+                  <p className="text-sm opacity-90 mb-4">{slide.subtitle}</p>
+                  <Link to={slide.to} className="bg-secondary text-secondary-foreground px-6 py-2.5 rounded-lg text-sm font-bold hover:bg-secondary/90 transition-smooth inline-flex items-center gap-1">
+                    {slide.cta} <ChevronRight className="w-4 h-4" />
+                  </Link>
+                </div>
               </div>
-            </div>
-            <button onClick={() => setCurrentSlide((p) => (p === 0 ? slides.length - 1 : p - 1))} className="absolute left-3 top-1/2 -translate-y-1/2 w-9 h-9 bg-white/20 backdrop-blur rounded-full flex items-center justify-center hover:bg-white/40">
-              <ChevronLeft className="w-5 h-5 text-primary-foreground" />
+            ))}
+            <button onClick={() => setCurrentSlide((p) => (p === 0 ? slides.length - 1 : p - 1))} className="absolute left-3 top-1/2 -translate-y-1/2 w-9 h-9 bg-white/20 backdrop-blur rounded-full flex items-center justify-center hover:bg-white/40 z-20">
+              <ChevronLeft className="w-5 h-5 text-white" />
             </button>
-            <button onClick={() => setCurrentSlide((p) => (p + 1) % slides.length)} className="absolute right-3 top-1/2 -translate-y-1/2 w-9 h-9 bg-white/20 backdrop-blur rounded-full flex items-center justify-center hover:bg-white/40">
-              <ChevronRight className="w-5 h-5 text-primary-foreground" />
+            <button onClick={() => setCurrentSlide((p) => (p + 1) % slides.length)} className="absolute right-3 top-1/2 -translate-y-1/2 w-9 h-9 bg-white/20 backdrop-blur rounded-full flex items-center justify-center hover:bg-white/40 z-20">
+              <ChevronRight className="w-5 h-5 text-white" />
             </button>
-            <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1.5">
+            <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1.5 z-20">
               {slides.map((_, i) => (
-                <button key={i} onClick={() => setCurrentSlide(i)} className={`w-2 h-2 rounded-full ${i === currentSlide ? "bg-white w-5" : "bg-white/40"} transition-smooth`} />
+                <button key={i} onClick={() => setCurrentSlide(i)} className={`h-1.5 rounded-full ${i === currentSlide ? "bg-white w-6" : "bg-white/40 w-2"} transition-smooth`} />
               ))}
             </div>
           </div>
@@ -139,7 +144,7 @@ const DemoN11 = () => {
           {/* Side Banners */}
           <div className="hidden lg:flex flex-col gap-3">
             <Link to="/kampanyalar" className="flex-1 bg-secondary/10 border border-secondary/20 rounded-xl p-4 flex flex-col justify-center hover:shadow-nipo-card transition-smooth">
-              <Zap className="w-6 h-6 text-secondary mb-2" />
+              <Flame className="w-6 h-6 text-secondary mb-2" />
               <h3 className="text-sm font-bold text-foreground">Flash İndirimler</h3>
               <p className="text-[10px] text-muted-foreground mt-1">Kaçırılmayacak fırsatlar</p>
             </Link>
