@@ -86,7 +86,7 @@ const HeroSection = () => {
                     <span className={`w-1.5 h-1.5 rounded-full ${slide.accent}`} />
                     {slide.subtitle}
                   </span>
-                  <h2 className="text-3xl md:text-[3.2rem] font-black text-primary-foreground mb-4 leading-[1.1] whitespace-pre-line drop-shadow-md animate-fade-up delay-2">
+                  <h2 className="text-2xl sm:text-3xl md:text-[3.2rem] font-black text-primary-foreground mb-3 md:mb-4 leading-[1.1] whitespace-pre-line drop-shadow-md animate-fade-up delay-2">
                     {slide.title}
                   </h2>
                   <p className="text-primary-foreground/80 mb-8 text-sm md:text-base max-w-sm leading-relaxed animate-fade-up delay-4">
