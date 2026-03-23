@@ -60,12 +60,15 @@ export const N11Header = () => {
       </header>
 
       {mobileMenu && (
-        <div className="lg:hidden bg-white border-b shadow-lg fixed top-[50px] inset-x-0 z-40">
+        <div className="lg:hidden bg-white border-b shadow-lg fixed inset-x-0 z-40 max-h-[70vh] overflow-y-auto" style={{ top: "48px" }}>
           <div className="p-4">
             <div className="relative mb-3">
               <input type="text" placeholder="Ara..." className="w-full h-10 rounded-lg pl-4 pr-10 text-sm border border-border" />
               <Search className="absolute right-3 top-3 w-4 h-4 text-muted-foreground" />
             </div>
+            <Link to={demoLink("/kampanyalar")} className="block py-2 px-3 text-sm font-semibold text-secondary hover:bg-muted rounded" onClick={() => setMobileMenu(false)}>🔥 Kampanyalar</Link>
+            <Link to={demoLink("/sss")} className="block py-2 px-3 text-sm hover:bg-muted rounded" onClick={() => setMobileMenu(false)}>Yardım</Link>
+            <div className="border-t border-border my-2" />
             {categories.slice(0, 8).map((cat) => (
               <Link key={cat.id} to={demoLink(`/kategori/${cat.slug}`)} className="block py-2 px-3 text-sm hover:bg-muted rounded" onClick={() => setMobileMenu(false)}>
                 {cat.icon} {cat.name}

@@ -103,21 +103,21 @@ export const BidoluHeader = () => {
 
       {/* Trust Badges */}
       <div className="bg-white border-b border-border">
-        <div className="container mx-auto px-4 py-5">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div className="container mx-auto px-4 py-3 md:py-5">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
             {[
               { icon: Truck, title: "Ücretsiz Kargo", desc: "500₺ üzeri siparişlerde" },
               { icon: CreditCard, title: "9 Taksit İmkanı", desc: "Tüm kredi kartlarına" },
               { icon: RotateCcw, title: "Kolay İade", desc: "14 gün içinde ücretsiz" },
               { icon: ShieldCheck, title: "Güvenli Alışveriş", desc: "256-bit SSL sertifikası" },
             ].map((badge, i) => (
-              <div key={i} className="flex items-center gap-3">
-                <div className="w-11 h-11 rounded-full bg-primary/8 flex items-center justify-center shrink-0">
-                  <badge.icon className="w-5 h-5 text-primary" />
+              <div key={i} className="flex items-center gap-2 md:gap-3">
+                <div className="w-9 h-9 md:w-11 md:h-11 rounded-full bg-primary/8 flex items-center justify-center shrink-0">
+                  <badge.icon className="w-4 h-4 md:w-5 md:h-5 text-primary" />
                 </div>
                 <div>
-                  <h4 className="text-sm font-bold text-foreground">{badge.title}</h4>
-                  <p className="text-[10px] text-muted-foreground">{badge.desc}</p>
+                  <h4 className="text-[11px] md:text-sm font-bold text-foreground">{badge.title}</h4>
+                  <p className="text-[9px] md:text-[10px] text-muted-foreground hidden sm:block">{badge.desc}</p>
                 </div>
               </div>
             ))}

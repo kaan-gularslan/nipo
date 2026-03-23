@@ -80,7 +80,7 @@ export const AmazonHeader = () => {
       </header>
 
       {mobileMenu && (
-        <div className="lg:hidden bg-white border-b shadow-lg fixed top-[50px] inset-x-0 z-40">
+        <div className="lg:hidden bg-white border-b shadow-lg fixed inset-x-0 z-40 max-h-[70vh] overflow-y-auto" style={{ top: "48px" }}>
           <div className="p-4">
             <div className="flex mb-3">
               <input type="text" placeholder="Ara..." className="flex-1 h-10 rounded-l-lg pl-4 text-sm border border-border" />
@@ -88,11 +88,17 @@ export const AmazonHeader = () => {
                 <Search className="w-5 h-5 text-secondary-foreground" />
               </button>
             </div>
+            <div className="flex items-center gap-1 text-xs text-muted-foreground mb-3 px-3">
+              <MapPin className="w-3.5 h-3.5" /> Gönderim: İstanbul
+            </div>
             {topNavLinks.map((link) => (
               <Link key={link.name} to={demoLink(link.path)} className="block py-2 px-3 text-sm hover:bg-muted rounded" onClick={() => setMobileMenu(false)}>
                 {link.name}
               </Link>
             ))}
+            <div className="border-t border-border my-2" />
+            <Link to={demoLink("/kurumsal")} className="block py-2 px-3 text-sm hover:bg-muted rounded" onClick={() => setMobileMenu(false)}>Hesap</Link>
+            <Link to={demoLink("/sss")} className="block py-2 px-3 text-sm hover:bg-muted rounded" onClick={() => setMobileMenu(false)}>Yardım</Link>
           </div>
         </div>
       )}
