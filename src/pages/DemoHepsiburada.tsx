@@ -4,6 +4,7 @@ import { Package, Search, User, ShoppingCart, ChevronRight, Star, Heart, Menu, X
 import { products, formatPrice, getDiscountPercent } from "@/data/products";
 import { categories } from "@/data/categories";
 import { useCart } from "@/context/CartContext";
+import heroImg from "@/assets/hero-hepsiburada.jpg";
 
 const navCategories = categories.slice(0, 10);
 const featuredProducts = products.filter((p) => p.badge);
