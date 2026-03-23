@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Package, Search, MapPin, User, ShoppingCart, ChevronRight, Star, Menu, X } from "lucide-react";
+import { Package, Search, MapPin, User, ShoppingCart, ChevronRight, Star, Menu, X, ChevronUp, Truck, Award, Headphones, Timer } from "lucide-react";
 import { products, formatPrice, getDiscountPercent } from "@/data/products";
 import { categories } from "@/data/categories";
 import { useCart } from "@/context/CartContext";
+import heroImg from "@/assets/hero-amazon.jpg";
 
 const topNavLinks = [
   { name: "Çok Satanlar", to: "/urunler" },
