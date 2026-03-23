@@ -1,86 +1,86 @@
 
 
-# Demo Sayfaları Düzeltme + Admin Paneli Planı
+# Demo Sayfaları — Tam Site Deneyimi Planı
 
-## Test Sonuçları — Tespit Edilen Sorunlar
+## Sorun
+Demo sayfalarındaki tüm linkler (`/urunler`, `/kategori/xxx`, `/sepet`, `/kampanyalar` vb.) ana sitenin sayfalarına yönlendiriyor. Kullanıcı bir demo temasından çıkıp ana siteye düşüyor.
 
-### Hero Görselleri
-Tüm 5 demo sayfasının hero görselleri AI tarafından üretilmiş ve üzerlerinde anlamsız yazılar var ("SLAL BLARVE NOANG", "SELMΛPEGGAL", "SEUPOVIAL CARA" vb.). Bu görseller profesyonel görünmüyor. Çözüm: Hero bölümlerini görsel bağımlılığından kurtarmak — gradient arka plan + ürün görselleri (mevcut `products` data'daki gerçek ürün fotoğrafları) kullanarak tasarlamak.
+## Çözüm: Nested Routes + Demo Layout Sistemi
 
-### N11 Demo Nav Bar
-Kategori linkleri hep "Baskılı" olarak kısaltılmış, çünkü `cat.name.split(" ")[0]` kullanılıyor — düzeltilecek.
+Her demo kendi alt-rotalarına sahip olacak. Örnek:
+```text
+/demo/bidolu           → Ana sayfa (mevcut)
+/demo/bidolu/urunler   → Ürünler (Bidolu teması)
+/demo/bidolu/urunler/:slug → Ürün detay (Bidolu teması)
+/demo/bidolu/kategori/:slug → Kategori (Bidolu teması)
+/demo/bidolu/sepet     → Sepet (Bidolu teması)
+/demo/bidolu/kampanyalar → Kampanyalar
+/demo/bidolu/iletisim  → İletişim
+/demo/bidolu/sss       → SSS
+```
 
-### Genel Fonksiyon Sorunları
-- Demo sayfalarındaki "Hesabım", "Favorilerim" linkleri çalışmıyor (href yok)
-- Arama çubuğu fonksiyonel değil
-- Mobil menü bazı demolarda eksik
+### Mimari
 
----
+1. **DemoContext** — Aktif demo temasını tutar (`hepsiburada | bidolu | trendyol | amazon | n11`)
+2. **DemoLayout bileşenleri** — Her demo için header + footer ayrı bileşen olarak çıkarılır
+3. **Paylaşılan içerik sayfaları** — `DemoProducts`, `DemoCategory`, `DemoProductDetail`, `DemoCart`, `DemoCampaigns`, `DemoContact`, `DemoFaq` — içerik aynı, sadece layout (header/footer) demo'ya göre değişir
+4. **Link güncelleme** — Tüm demo sayfalarındaki linkler göreceli hale gelir (ör. `/kategori/xxx` → `/demo/bidolu/kategori/xxx`)
 
-## Plan
-
-### Aşama 1: Hero Bölümlerini Yeniden Tasarla (5 dosya)
-AI-generated görselleri kaldır. Her demo için farklı bir CSS-tabanlı hero yaklaşımı:
-
-| Demo | Hero Yaklaşımı |
-|------|---------------|
-| **Hepsiburada** | Gradient arka plan (#004374 → #FF456D) + sağ tarafta ürün görselleri grid + sol tarafta slider metni |
-| **Bidolu** | Açık tonlarda gradient + büyük tipografi + alt kısımda ürün görselleri carousel |
-| **Trendyol** | Pembe-mavi gradient banner + yuvarlak kampanya ikonları overlay |
-| **Amazon** | Koyu mavi gradient + ortada büyük CTA metin + alt kısımda kategori kartları |
-| **N11** | İki renkli split layout (mavi + beyaz) + sağda ürün görseli + solda slider metni |
-
-Mevcut `src/assets/products/` klasöründeki gerçek ürün fotoğrafları kullanılacak.
-
-### Aşama 2: Demo Sayfaları Fonksiyon Düzeltmeleri
-- N11 nav bar'daki kategori isimlerini düzelt (kısaltma yerine slug-based kısa isim)
-- Tüm demolardaki "Hesabım" linklerini `/kurumsal` veya uygun bir sayfaya yönlendir
-- Arama çubuğuna basit ürün filtresi ekle (mevcut ürünlerde arama)
-- Mobil menü tutarlılığı
-
-### Aşama 3: Admin Paneli
-Basit bir client-side admin paneli (localStorage tabanlı, backend yok):
-
-**Rota**: `/admin` (şifre korumalı — basit localStorage pin)
-
-**Sayfalar**:
-- **Dashboard**: Toplam ürün, kategori, sipariş sayısı (mock data), grafik
-- **Ürün Yönetimi**: Ürün listesi tablo, ekleme/düzenleme/silme (localStorage'a kayıt)
-- **Kategori Yönetimi**: Kategori listesi, ekleme/düzenleme
-- **Sipariş Yönetimi**: Mock sipariş listesi, durum güncelleme
-- **Ayarlar**: Site başlığı, iletişim bilgileri
-
-**Bileşenler**:
-- `src/pages/Admin.tsx` — Ana admin layout (sidebar + içerik alanı)
-- `src/pages/admin/AdminDashboard.tsx`
-- `src/pages/admin/AdminProducts.tsx`
-- `src/pages/admin/AdminCategories.tsx`
-- `src/pages/admin/AdminOrders.tsx`
-- `src/pages/admin/AdminSettings.tsx`
-- `src/context/AdminContext.tsx` — Admin state yönetimi
-
-**UI**: Shadcn sidebar, tablo, form bileşenleri kullanılacak. Koyu mavi (#004374) tema.
-
-### Dosya Değişiklikleri
+### Dosya Yapısı
 
 | Dosya | İşlem |
 |-------|-------|
-| `src/pages/DemoHepsiburada.tsx` | Hero yeniden tasarım + fonksiyon düzeltmeleri |
-| `src/pages/DemoBidolu.tsx` | Hero yeniden tasarım + fonksiyon düzeltmeleri |
-| `src/pages/DemoTrendyol.tsx` | Hero yeniden tasarım + fonksiyon düzeltmeleri |
-| `src/pages/DemoAmazon.tsx` | Hero yeniden tasarım + fonksiyon düzeltmeleri |
-| `src/pages/DemoN11.tsx` | Hero yeniden tasarım + nav düzeltmesi + fonksiyon düzeltmeleri |
-| `src/pages/Admin.tsx` | Yeni — Admin paneli ana layout |
-| `src/pages/admin/AdminDashboard.tsx` | Yeni — Dashboard |
-| `src/pages/admin/AdminProducts.tsx` | Yeni — Ürün yönetimi |
-| `src/pages/admin/AdminCategories.tsx` | Yeni — Kategori yönetimi |
-| `src/pages/admin/AdminOrders.tsx` | Yeni — Sipariş yönetimi |
-| `src/pages/admin/AdminSettings.tsx` | Yeni — Ayarlar |
-| `src/App.tsx` | Admin rotaları ekleme |
-| `src/assets/hero-*.jpg` (5 dosya) | Silinecek — artık kullanılmayacak |
+| `src/context/DemoContext.tsx` | **Yeni** — Demo tema context + `useDemo()` hook + `basePath` hesaplama |
+| `src/components/demo/DemoLayout.tsx` | **Yeni** — Aktif temaya göre header/footer seçen wrapper |
+| `src/components/demo/headers/` | **Yeni** — 5 ayrı header bileşeni (mevcut demo sayfalarından çıkarılacak) |
+| `src/components/demo/footers/` | **Yeni** — 5 ayrı footer bileşeni |
+| `src/pages/demo/DemoProducts.tsx` | **Yeni** — Temaya sarılmış ürünler sayfası |
+| `src/pages/demo/DemoCategory.tsx` | **Yeni** — Temaya sarılmış kategori sayfası |
+| `src/pages/demo/DemoProductDetail.tsx` | **Yeni** — Temaya sarılmış ürün detay |
+| `src/pages/demo/DemoCart.tsx` | **Yeni** — Temaya sarılmış sepet |
+| `src/pages/demo/DemoCampaigns.tsx` | **Yeni** — Temaya sarılmış kampanyalar |
+| `src/pages/demo/DemoContact.tsx` | **Yeni** — Temaya sarılmış iletişim |
+| `src/pages/demo/DemoFaq.tsx` | **Yeni** — Temaya sarılmış SSS |
+| `src/pages/DemoHepsiburada.tsx` | Güncelle — Linkleri `/demo/hepsiburada/...` yapma, header/footer'ı bileşene çıkarma |
+| `src/pages/DemoBidolu.tsx` | Aynı |
+| `src/pages/DemoTrendyol.tsx` | Aynı |
+| `src/pages/DemoAmazon.tsx` | Aynı |
+| `src/pages/DemoN11.tsx` | Aynı |
+| `src/App.tsx` | Güncelle — Demo nested route'ları ekleme |
+
+### DemoContext Yapısı
+```text
+DemoContext {
+  theme: "hepsiburada" | "bidolu" | "trendyol" | "amazon" | "n11"
+  basePath: "/demo/bidolu"   // tüm linkler buna göre oluşturulur
+  demoLink(path): string     // "/urunler" → "/demo/bidolu/urunler"
+}
+```
+
+### App.tsx Route Yapısı
+```text
+/demo/:theme          → DemoIndex (mevcut ana sayfa bileşenlerini seçer)
+/demo/:theme/urunler  → DemoProducts
+/demo/:theme/urunler/:slug → DemoProductDetail
+/demo/:theme/kategori/:slug → DemoCategory
+/demo/:theme/sepet    → DemoCart
+/demo/:theme/kampanyalar → DemoCampaigns
+/demo/:theme/iletisim → DemoContact
+/demo/:theme/sss      → DemoFaq
+```
+
+### Ana Sayfa Zenginleştirme
+Her demo'nun ana sayfasına ek bölümler:
+- **Hepsiburada**: "Son Görüntülenenler" carousel, "Markaların Tercihi" referans logoları, alt banner'lar
+- **Bidolu**: Müşteri yorumları slider, "Nasıl Çalışır" 3-adım bölümü, blog kartları
+- **Trendyol**: "Senin İçin" kişisel öneri bölümü, "Butik Fırsatlar" grid, marka highlight
+- **Amazon**: "Tekrar Sipariş Ver" bölümü, "Nipo'yu Tanı" bilgi kartları, ilgi alanı önerileri
+- **N11**: "Haftanın Yıldızları" büyük 2'li kart, "Marka Vitrinleri" banner, flash sale timer
 
 ### Uygulama Sırası
-1. Hero düzeltmeleri (5 demo sayfası)
-2. Fonksiyon düzeltmeleri
-3. Admin paneli (dashboard → ürünler → kategoriler → siparişler → ayarlar)
+1. DemoContext + DemoLayout altyapısı
+2. Header/Footer bileşenlerini çıkar (5 demo)
+3. Paylaşılan alt sayfaları oluştur (Products, Category, ProductDetail, Cart, Campaigns, Contact, Faq)
+4. Demo ana sayfalarını zenginleştir + linklerini güncelle
+5. App.tsx route yapısını güncelle
 
