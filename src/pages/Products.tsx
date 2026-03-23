@@ -42,8 +42,35 @@ const Products = () => {
         <Breadcrumb items={[{ label: "Tüm Ürünler" }]} />
 
         <div className="flex flex-col lg:flex-row gap-6 mt-2 mb-14">
-          {/* Sidebar */}
-          <aside className="lg:w-64 shrink-0">
+          {/* Mobile Category Chips */}
+          <div className="lg:hidden flex gap-2 overflow-x-auto pb-2 scrollbar-thin -mx-4 px-4">
+            <button
+              onClick={() => setSelectedCat(null)}
+              className={`shrink-0 px-3 py-1.5 rounded-full text-xs font-semibold transition-smooth ${
+                !selectedCat ? "bg-primary text-primary-foreground" : "bg-muted text-muted-foreground"
+              }`}
+            >
+              Tümü ({products.length})
+            </button>
+            {categories.map((cat) => {
+              const count = products.filter(p => p.categoryId === cat.id).length;
+              if (count === 0) return null;
+              return (
+                <button
+                  key={cat.id}
+                  onClick={() => setSelectedCat(cat.id)}
+                  className={`shrink-0 px-3 py-1.5 rounded-full text-xs font-semibold transition-smooth ${
+                    selectedCat === cat.id ? "bg-primary text-primary-foreground" : "bg-muted text-muted-foreground"
+                  }`}
+                >
+                  {cat.icon} {cat.name.replace(" Grubu", "")}
+                </button>
+              );
+            })}
+          </div>
+
+          {/* Sidebar - Desktop only */}
+          <aside className="hidden lg:block lg:w-64 shrink-0">
             <div className="bg-card rounded-xl border border-border/60 overflow-hidden sticky top-36">
               <h3 className="px-4 py-3 text-sm font-bold text-foreground border-b border-border/40 bg-muted/30">Kategoriler</h3>
               <ul>

@@ -79,7 +79,7 @@ const Cart = () => {
 
             {/* Summary */}
             <div className="lg:w-80">
-              <div className="bg-card rounded-xl border border-border/60 p-6 sticky top-36">
+              <div className="bg-card rounded-xl border border-border/60 p-6 lg:sticky lg:top-36">
                 <h3 className="text-lg font-bold text-foreground mb-4">Sipariş Özeti</h3>
                 <div className="space-y-3 text-sm">
                   <div className="flex justify-between">
