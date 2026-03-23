@@ -273,6 +273,12 @@
   .scrollbar-thin::-webkit-scrollbar-thumb:hover {
     background: hsl(var(--muted-foreground) / 0.3);
   }
+
+  /* ── Section divider ── */
+  .section-divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, hsl(var(--border)), transparent);
+  }
 }
 
 /* ══════════════════════════════════════════════
@@ -387,11 +393,4 @@
   --nipo-blue-light: 205 40% 20%;
   --nipo-pink-light: 347 40% 18%;
   --nipo-green-light: 77 30% 18%;
-}
-
-  /* ── Section divider ── */
-  .section-divider {
-    height: 1px;
-    background: linear-gradient(90deg, transparent, hsl(var(--border)), transparent);
-  }
 }
