@@ -16,6 +16,11 @@ import Campaigns from "./pages/Campaigns";
 import Cart from "./pages/Cart";
 import StaticPage from "./pages/StaticPage";
 import CorporateIdentity from "./pages/CorporateIdentity";
+import DemoHepsiburada from "./pages/DemoHepsiburada";
+import DemoBidolu from "./pages/DemoBidolu";
+import DemoTrendyol from "./pages/DemoTrendyol";
+import DemoAmazon from "./pages/DemoAmazon";
+import DemoN11 from "./pages/DemoN11";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
