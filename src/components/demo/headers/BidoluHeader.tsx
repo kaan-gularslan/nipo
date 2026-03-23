@@ -21,7 +21,8 @@ export const BidoluHeader = () => {
 
   return (
     <>
-      <div className="bg-muted border-b border-border">
+      {/* Top bar - hidden on mobile */}
+      <div className="bg-muted border-b border-border hidden md:block">
         <div className="container mx-auto px-4 flex items-center justify-between text-[11px] py-1.5 text-muted-foreground">
           <span>Markana Renk Kat! | Nipo Online Ambalaj</span>
           <div className="flex gap-3">
