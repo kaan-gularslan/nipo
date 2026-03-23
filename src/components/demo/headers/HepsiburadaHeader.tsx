@@ -129,7 +129,7 @@ export const HepsiburadaHeader = () => {
             {categories.map((cat) => (
               <Link key={cat.id} to={demoLink(`/kategori/${cat.slug}`)} className="flex flex-col items-center gap-1.5 min-w-[72px] group">
                 <div className="w-14 h-14 rounded-full bg-muted flex items-center justify-center text-2xl group-hover:bg-primary/10 transition-smooth group-hover:scale-110">{cat.icon}</div>
-                <span className="text-[10px] text-muted-foreground text-center leading-tight group-hover:text-primary font-medium">{cat.name.split(" ")[0]}</span>
+                <span className="text-[10px] text-muted-foreground text-center leading-tight group-hover:text-primary font-medium line-clamp-2 max-w-[72px]">{cat.name.replace(" Grubu", "").replace("Baskılı ", "")}</span>
               </Link>
             ))}
           </div>
