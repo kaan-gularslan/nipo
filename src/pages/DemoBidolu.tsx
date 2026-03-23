@@ -35,6 +35,11 @@ const DemoBidolu = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [mobileMenu, setMobileMenu] = useState(false);
 
+  useEffect(() => {
+    const timer = setInterval(() => setCurrentSlide((p) => (p + 1) % slides.length), 5000);
+    return () => clearInterval(timer);
+  }, []);
+
   return (
     <div className="min-h-screen bg-background">
       {/* Top Mini Bar */}
