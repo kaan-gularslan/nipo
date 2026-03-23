@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Package, Search, User, ShoppingCart, ChevronRight, Star, Truck, CreditCard, RotateCcw, ShieldCheck, ChevronLeft, Menu, X } from "lucide-react";
+import { Package, Search, ShoppingCart, ChevronRight, Star, Truck, CreditCard, RotateCcw, ShieldCheck, ChevronLeft, Menu, X, Eye, Award, Zap, HeartHandshake, Phone, Mail } from "lucide-react";
 import { products, formatPrice, getDiscountPercent } from "@/data/products";
 import { categories } from "@/data/categories";
 import { useCart } from "@/context/CartContext";
+import heroImg from "@/assets/hero-bidolu.jpg";
 
 const navLinks = [
   { name: "Baskılı Kutular", to: "/kategori/oluklu-kutu" },
