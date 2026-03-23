@@ -125,27 +125,31 @@ const DemoBidolu = () => {
       )}
 
       {/* Hero Slider */}
-      <div className="relative overflow-hidden">
-        <div className={`bg-gradient-to-r ${slides[currentSlide].gradient} h-64 md:h-80 flex items-center transition-all duration-500`}>
-          <div className="container mx-auto px-4">
-            <div className="max-w-lg text-primary-foreground">
-              <h1 className="text-3xl md:text-4xl font-black leading-tight whitespace-pre-line mb-3">{slides[currentSlide].title}</h1>
-              <p className="text-sm opacity-80 mb-5">{slides[currentSlide].subtitle}</p>
-              <Link to={slides[currentSlide].to} className="bg-secondary text-secondary-foreground px-8 py-3 rounded-lg font-bold text-sm hover:bg-secondary/90 transition-smooth inline-flex items-center gap-1">
-                {slides[currentSlide].cta} <ChevronRight className="w-4 h-4" />
-              </Link>
+      <div className="relative overflow-hidden h-72 md:h-[420px]">
+        <img src={heroImg} alt="Nipo Premium Ambalaj" className="absolute inset-0 w-full h-full object-cover" width={1920} height={900} />
+        {slides.map((slide, i) => (
+          <div key={i} className={`absolute inset-0 flex items-end transition-all duration-1000 ${i === currentSlide ? "opacity-100" : "opacity-0"}`}>
+            <div className="absolute inset-0 bg-gradient-to-t from-primary/80 via-primary/20 to-transparent" />
+            <div className="container mx-auto px-4 relative z-10 pb-10 md:pb-14">
+              <div className="max-w-lg">
+                <h1 className="text-2xl md:text-4xl font-black leading-tight whitespace-pre-line mb-3 text-white drop-shadow-lg">{slide.title}</h1>
+                <p className="text-sm text-white/80 mb-5">{slide.subtitle}</p>
+                <Link to={slide.to} className="bg-secondary text-secondary-foreground px-8 py-3 rounded-full font-bold text-sm hover:bg-secondary/90 transition-smooth inline-flex items-center gap-1">
+                  {slide.cta} <ChevronRight className="w-4 h-4" />
+                </Link>
+              </div>
             </div>
           </div>
-        </div>
-        <button onClick={() => setCurrentSlide((p) => (p === 0 ? slides.length - 1 : p - 1))} className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white/40 transition-smooth">
-          <ChevronLeft className="w-5 h-5 text-primary-foreground" />
+        ))}
+        <button onClick={() => setCurrentSlide((p) => (p === 0 ? slides.length - 1 : p - 1))} className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white/40 transition-smooth z-20">
+          <ChevronLeft className="w-5 h-5 text-white" />
         </button>
-        <button onClick={() => setCurrentSlide((p) => (p + 1) % slides.length)} className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white/40 transition-smooth">
-          <ChevronRight className="w-5 h-5 text-primary-foreground" />
+        <button onClick={() => setCurrentSlide((p) => (p + 1) % slides.length)} className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white/40 transition-smooth z-20">
+          <ChevronRight className="w-5 h-5 text-white" />
         </button>
-        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
+        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2 z-20">
           {slides.map((_, i) => (
-            <button key={i} onClick={() => setCurrentSlide(i)} className={`w-2.5 h-2.5 rounded-full transition-smooth ${i === currentSlide ? "bg-white w-6" : "bg-white/40"}`} />
+            <button key={i} onClick={() => setCurrentSlide(i)} className={`h-1.5 rounded-full transition-smooth ${i === currentSlide ? "bg-white w-8" : "bg-white/40 w-2.5"}`} />
           ))}
         </div>
       </div>
