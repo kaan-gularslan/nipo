@@ -5,6 +5,9 @@ import { products, formatPrice, getDiscountPercent } from "@/data/products";
 import { categories } from "@/data/categories";
 import { useCart } from "@/context/CartContext";
 
+import slideAmbalaj from "@/assets/slides/slide-ambalaj.jpg";
+import slideKraft from "@/assets/slides/slide-kraft.jpg";
+import slideKafe from "@/assets/slides/slide-kafe.jpg";
 
 const navCategories = categories.slice(0, 10);
 const featuredProducts = products.filter((p) => p.badge);
@@ -13,9 +16,9 @@ const discountedProducts = products.filter((p) => p.oldPrice).slice(0, 6);
 const bestSellers = products.filter((p) => p.badge === "Çok Satan");
 
 const heroSlides = [
-  { title: "Baskılı Ambalajda\nToplu Siparişe Özel İndirim", subtitle: "1000+ adet siparişlerde %20'ye varan indirim fırsatı", cta: "Hemen İncele", badge: "Kampanya", to: "/kampanyalar" },
-  { title: "Kraft Ambalaj\nKoleksiyonu Yenilendi", subtitle: "Doğa dostu ve şık ambalaj çözümleri", cta: "Keşfet", badge: "Yeni", to: "/urunler" },
-  { title: "Karton Bardak\nSetlerinde Fırsat", subtitle: "Kafe ve restoranlar için özel fiyatlar", cta: "Fırsatları Gör", badge: "Fırsat", to: "/kampanyalar" },
+  { img: slideAmbalaj, title: "Baskılı Ambalajda\nToplu Siparişe Özel İndirim", subtitle: "1000+ adet siparişlerde %20'ye varan indirim fırsatı", cta: "Hemen İncele", badge: "Kampanya", to: "/kampanyalar" },
+  { img: slideKraft, title: "Kraft Ambalaj\nKoleksiyonu Yenilendi", subtitle: "Doğa dostu ve şık ambalaj çözümleri", cta: "Keşfet", badge: "Yeni", to: "/urunler" },
+  { img: slideKafe, title: "Karton Bardak\nSetlerinde Fırsat", subtitle: "Kafe ve restoranlar için özel fiyatlar", cta: "Fırsatları Gör", badge: "Fırsat", to: "/kampanyalar" },
 ];
 
 const marqueeItems = [
