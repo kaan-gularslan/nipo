@@ -5,6 +5,9 @@ import { products, formatPrice, getDiscountPercent } from "@/data/products";
 import { categories } from "@/data/categories";
 import { useCart } from "@/context/CartContext";
 
+import slideKutu from "@/assets/slides/slide-kutu.jpg";
+import slidePaket from "@/assets/slides/slide-paket.jpg";
+import slideCanta from "@/assets/slides/slide-canta.jpg";
 
 const navLinks = [
   { name: "Baskılı Kutular", to: "/kategori/oluklu-kutu" },
@@ -23,9 +26,9 @@ const trustBadges = [
 ];
 
 const slides = [
-  { title: "Baskılı Ambalajda\nSınırsız Tasarım", subtitle: "Markanıza özel tasarım ambalaj çözümleri", cta: "Keşfet", to: "/urunler", gradient: "from-primary via-primary/80 to-primary/60" },
-  { title: "Toplu Siparişe\nÖzel İndirimler", subtitle: "1000+ adet siparişlerde %20'ye varan indirim", cta: "Kampanyaları Gör", to: "/kampanyalar", gradient: "from-primary/90 via-primary to-primary/70" },
-  { title: "Yeni Sezon\nKraft Çanta", subtitle: "Doğa dostu, şık ve dayanıklı çanta çeşitleri", cta: "Hemen İncele", to: "/kategori/baski-canta", gradient: "from-primary/80 via-primary/90 to-primary" },
+  { img: slideKutu, title: "Baskılı Ambalajda\nSınırsız Tasarım", subtitle: "Markanıza özel tasarım ambalaj çözümleri", cta: "Keşfet", to: "/urunler" },
+  { img: slidePaket, title: "Toplu Siparişe\nÖzel İndirimler", subtitle: "1000+ adet siparişlerde %20'ye varan indirim", cta: "Kampanyaları Gör", to: "/kampanyalar" },
+  { img: slideCanta, title: "Yeni Sezon\nKraft Çanta", subtitle: "Doğa dostu, şık ve dayanıklı çanta çeşitleri", cta: "Hemen İncele", to: "/kategori/baski-canta" },
 ];
 
 const featuredProducts = products.slice(0, 8);
