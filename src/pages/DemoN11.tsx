@@ -5,11 +5,14 @@ import { products, formatPrice, getDiscountPercent } from "@/data/products";
 import { categories } from "@/data/categories";
 import { useCart } from "@/context/CartContext";
 
+import slideAmbalaj from "@/assets/slides/slide-ambalaj.jpg";
+import slideBardak from "@/assets/slides/slide-bardak.jpg";
+import slideKraft from "@/assets/slides/slide-kraft.jpg";
 
 const slides = [
-  { title: "Toplu Siparişe\nÖzel Fiyatlar", subtitle: "1000+ adet siparişlerde %20 indirim", cta: "Fırsatı Yakala", to: "/kampanyalar" },
-  { title: "Baskılı Ambalajda\nSınırsız Tasarım", subtitle: "Markanıza özel profesyonel baskı", cta: "Keşfet", to: "/urunler" },
-  { title: "Yeni Sezon\nÜrünleri Geldi", subtitle: "Kraft çanta ve kutu koleksiyonu", cta: "Hemen İncele", to: "/kategori/baski-canta" },
+  { img: slideAmbalaj, title: "Toplu Siparişe\nÖzel Fiyatlar", subtitle: "1000+ adet siparişlerde %20 indirim", cta: "Fırsatı Yakala", to: "/kampanyalar" },
+  { img: slideBardak, title: "Baskılı Ambalajda\nSınırsız Tasarım", subtitle: "Markanıza özel profesyonel baskı", cta: "Keşfet", to: "/urunler" },
+  { img: slideKraft, title: "Yeni Sezon\nÜrünleri Geldi", subtitle: "Kraft çanta ve kutu koleksiyonu", cta: "Hemen İncele", to: "/kategori/baski-canta" },
 ];
 
 const dealProducts = products.filter((p) => p.oldPrice).slice(0, 3);
