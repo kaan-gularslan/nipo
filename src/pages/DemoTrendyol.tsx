@@ -127,13 +127,17 @@ const DemoTrendyol = () => {
         </div>
       )}
 
-      {/* Campaign Circles */}
-      <div className="bg-white py-5 border-b border-border">
-        <div className="container mx-auto px-4">
+      {/* Campaign Circles + Hero Image */}
+      <div className="relative overflow-hidden">
+        <div className="h-48 md:h-64 relative">
+          <img src={heroImg} alt="Nipo Ambalaj Koleksiyonu" className="absolute inset-0 w-full h-full object-cover" width={1920} height={800} />
+          <div className="absolute inset-0 bg-gradient-to-t from-white via-white/40 to-transparent" />
+        </div>
+        <div className="container mx-auto px-4 -mt-12 relative z-10 pb-5">
           <div className="flex gap-5 overflow-x-auto pb-2 scrollbar-thin justify-center">
             {campaignCircles.map((item, i) => (
               <Link key={i} to={item.to} className="flex flex-col items-center gap-1.5 min-w-[64px] group">
-                <div className="w-16 h-16 rounded-full bg-gradient-to-br from-primary/10 to-secondary/10 flex items-center justify-center text-2xl group-hover:from-primary/20 group-hover:to-secondary/20 transition-smooth group-hover:scale-110 group-hover:shadow-lg">
+                <div className="w-16 h-16 rounded-full bg-white shadow-lg flex items-center justify-center text-2xl group-hover:scale-110 transition-smooth group-hover:shadow-xl border border-border">
                   {item.emoji}
                 </div>
                 <span className="text-[10px] font-medium text-muted-foreground group-hover:text-primary">{item.label}</span>
