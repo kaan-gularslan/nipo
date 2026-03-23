@@ -1,9 +1,9 @@
 import { useState } from "react";
-import { Search, User, ShoppingCart, Heart, Phone, ChevronDown, Menu, X, ArrowRight } from "lucide-react";
-import { Input } from "@/components/ui/input";
+import { User, ShoppingCart, Heart, Phone, ChevronDown, Menu, X, ArrowRight } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import { useCart } from "@/context/CartContext";
 import { categories } from "@/data/categories";
+import SearchBar from "@/components/SearchBar";
 
 const navItems = [
   { label: "Anasayfa", href: "/" },
@@ -74,16 +74,10 @@ const Header = () => {
             </span>
           </Link>
 
-          <div className="hidden md:flex flex-1 max-w-xl relative">
-            <Input
-              placeholder="Ürün, kategori veya marka arayın..."
-              className="pr-12 h-11 rounded-xl border-border/60 bg-muted/50 text-sm focus:bg-card focus:border-primary/30 transition-smooth placeholder:text-muted-foreground/60"
-            />
-            <button className="absolute right-1.5 top-1.5 bottom-1.5 px-3 rounded-lg bg-primary text-primary-foreground hover:bg-primary/90 transition-smooth" aria-label="Ara">
-              <Search className="w-4 h-4" />
-            </button>
-          </div>
+          {/* Search bar */}
+          <SearchBar className="hidden md:flex flex-1 max-w-xl" />
 
+          {/* Right actions */}
           <div className="flex items-center gap-1 md:gap-4 ml-auto">
             <a href="#" className="hidden md:flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm text-muted-foreground hover:bg-muted hover:text-primary transition-smooth">
               <User className="w-5 h-5" />
@@ -187,10 +181,7 @@ const Header = () => {
       {/* Mobile menu */}
       <div className={`md:hidden overflow-hidden bg-card border-b border-border shadow-nipo transition-all duration-300 ease-out ${mobileOpen ? "max-h-[80vh] opacity-100" : "max-h-0 opacity-0"}`}>
         <div className="p-4">
-          <div className="relative mb-4">
-            <Input placeholder="Ürün arayın..." className="pr-10 rounded-xl bg-muted/50" />
-            <Search className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-          </div>
+          <SearchBar mobile className="mb-4" />
           <nav className="space-y-0.5 mb-4" aria-label="Mobil navigasyon">
             {navItems.map((item) => (
               <Link
