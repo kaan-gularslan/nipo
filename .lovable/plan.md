@@ -1,38 +1,73 @@
 
 
-# Site Geneli Tema Demo Sistemi — Nipo Renkleriyle
+# Kurumsal Kimlik Sayfası + Tema Korunması Planı
 
-## Konsept
-5 farklı e-ticaret layout stili, hepsi Nipo'nun 3 ana rengini (Mavi #004374, Pembe #FF456D, Yeşil #9CC33B) kullanacak. Fark: renklerin ağırlık dağılımı, tonları, radius, shadow ve layout stili değişecek. Yabancı renk (turuncu, sarı vb.) kullanılmayacak.
+## Amaç
+1. Nipo'nun mevcut kurumsal kimliğini korumak (footer demo switcher'ı kaldırmak)
+2. Kurumsal kimlik kılavuzunu sergileyen yeni bir `/kurumsal-kimlik` sayfası oluşturmak
 
-## 5 Tema
+## Kurumsal Kimlik Bilgileri (PDF'den)
 
-| # | Ad | İlham | Renk Dağılımı |
-|---|-----|-------|---------------|
-| 1 | **Nipo Klasik** | Mevcut | Mavi header, pembe CTA, yeşil aksan, yuvarlatılmış (0.75rem) |
-| 2 | **Pembe Pazar** | Hepsiburada | Pembe dominant header/CTA, mavi aksan, yeşil badge, keskin köşe (0.25rem) |
-| 3 | **Yeşil Atölye** | Bidolubaski | Yeşil dominant header, mavi slider vurgusu, pembe CTA, orta radius (0.5rem) |
-| 4 | **Mavi Minimal** | Trendyol | Beyaz arka plan, mavi ince header, pembe CTA küçük, yeşil fiyat, minimal shadow, radius 0.5rem |
-| 5 | **Koyu Nipo** | Amazon | Çok koyu mavi header (#001a30), pembe-yeşil vurgular, keskin köşe (0.125rem), shadow yok |
+| Öge | Detay |
+|-----|-------|
+| **Ana Renkler** | Koyu Mavi (R:0 G:67 B:116), Pembe (R:255 G:69 B:109), Yeşil (R:156 G:195 B:59) |
+| **Font** | Montserrat (Ana), Calibri (Yardımcı/resmi yazışmalar) |
+| **Slogan** | "Markana Renk Kat!" |
+| **Logo Hikayesi** | "Nipo" ismindeki "O" harfi boya kutusu olarak betimlenmiş, 3 damlacık logo ile bütünleştirilmiş |
+| **Min Logo Boyut** | Kısa kenar en az 25mm |
+| **Kurumsal Materyaller** | Kartvizit, antetli kağıt, zarf, dosya, fatura, makbuz, bloknot, not kağıdı, mail imza |
+| **Tanıtım Ürünleri** | Kupa, USB, karton çanta, bez çanta, kalem, ajanda, saat, anahtarlık, mouse pad |
+| **Outdoor/Indoor** | Kol banner, yelken bayrak, araç kaplama, yaka ipi |
+
+---
 
 ## Dosya Değişiklikleri
 
 | Dosya | İşlem |
 |-------|-------|
-| `src/context/ThemeContext.tsx` | **Yeni** — tema state, localStorage, `data-theme` toggle |
-| `src/index.css` | **Güncelleme** — 4 yeni `[data-theme="..."]` blokları, Nipo renk tonları |
-| `src/components/Footer.tsx` | **Güncelleme** — tema seçici bar (5 buton) |
-| `src/App.tsx` | **Güncelleme** — ThemeProvider wrapping |
+| `src/pages/CorporateIdentity.tsx` | **Yeni** — Kurumsal kimlik kılavuzu sayfası |
+| `src/components/Footer.tsx` | **Güncelleme** — 5 demo switcher kaldırılacak, sadece Klasik footer kalacak |
+| `src/App.tsx` | **Güncelleme** — `/kurumsal-kimlik` rotası ekleme |
 
-## Teknik Detay
+---
 
-### CSS Override Stratejisi
-Her tema `[data-theme="X"]` selektörüyle `:root` değişkenlerini override eder. Nipo'nun 3 renginin farklı HSL tonları kullanılır:
+## Kurumsal Kimlik Sayfası İçeriği
 
-- **Pembe Pazar**: `--primary: 347 100% 63.5%` (pembe header), `--secondary: 205 100% 30%` (mavi CTA)
-- **Yeşil Atölye**: `--primary: 77 55% 35%` (koyu yeşil header), `--secondary: 347 100% 63.5%` (pembe CTA)
-- **Mavi Minimal**: `--primary: 205 100% 30%` (açık mavi header), düşük shadow, geniş beyaz alan
-- **Koyu Nipo**: `--primary: 205 100% 12%` (çok koyu mavi), `--background: 205 20% 8%` (koyu arka plan)
+### Bölüm 1: Hero
+- Sayfa başlığı: "Kurumsal Kimlik Kılavuzu"
+- Alt metin: Marka tutarlılığı mesajı
+- Breadcrumb
 
-Bileşen kodu değişmez — semantic Tailwind sınıfları (`bg-primary`, `text-foreground`) CSS değişkenlerinden beslenir.
+### Bölüm 2: Kurumsal Renkler
+- 3 ana renk kartı (Koyu Mavi, Pembe, Yeşil)
+- Her kart: büyük renk bloğu + RGB/CMYK/HEX değerleri
+- Her rengin %100'den %10'a kadar tonları (renk paleti şeridi)
+
+### Bölüm 3: Tipografi
+- Montserrat font ailesi gösterimi (Thin, Light, Medium, ExtraBold, Black)
+- Her ağırlıkta örnek metin
+- Calibri yardımcı font bilgisi
+
+### Bölüm 4: Logo Kullanımı
+- Logo hikayesi (O harfi = boya kutusu + 3 damlacık)
+- Açık/koyu zemin kullanım kuralları
+- Minimum boyut bilgisi (25mm)
+- Siyah-beyaz kullanım
+
+### Bölüm 5: Kurumsal Slogan
+- "Markana Renk Kat!" büyük tipografi ile gösterim
+- Kullanım kuralları
+
+### Bölüm 6: Kurumsal Materyaller Grid
+- Kartvizit, antetli kağıt, zarf, dosya, fatura gibi materyallerin kart grid'i
+- Her kart: ikon + isim + baskı özellikleri
+
+### Bölüm 7: Tanıtım Ürünleri Grid
+- Kupa, USB, çanta, kalem, ajanda vb.
+- Kart yapısında listeleme
+
+---
+
+## Footer Düzeltmesi
+Footer'daki 5 demo switcher tamamen kaldırılacak. Sadece **FooterClassic** (Demo 1) kalacak. Switcher bar ve diğer 4 footer varyasyonu silinecek.
 
