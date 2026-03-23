@@ -172,22 +172,22 @@ const DemoHepsiburada = () => {
       {/* Hero Slider + Sidebar */}
       <div className="container mx-auto px-4 py-5">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
-          {/* Slider */}
-          <div className="lg:col-span-2 rounded-xl overflow-hidden bg-primary relative h-56 md:h-72">
+          {/* Slider with hero image */}
+          <div className="lg:col-span-2 rounded-xl overflow-hidden relative h-64 md:h-80">
+            <img src={heroImg} alt="Nipo Ambalaj Ürünleri" className="absolute inset-0 w-full h-full object-cover" width={1920} height={800} />
             {heroSlides.map((slide, i) => (
-              <div key={i} className={`absolute inset-0 flex items-center transition-opacity duration-700 ${i === currentSlide ? "opacity-100" : "opacity-0 pointer-events-none"}`}>
-                <div className="relative z-10 p-8 text-primary-foreground">
-                  <span className="bg-secondary text-secondary-foreground text-xs font-bold px-3 py-1 rounded-full mb-3 inline-block">{slide.badge}</span>
-                  <h2 className="text-2xl md:text-3xl font-black mb-2 whitespace-pre-line">{slide.title}</h2>
-                  <p className="text-sm opacity-80 mb-4">{slide.subtitle}</p>
-                  <Link to={slide.to} className="bg-secondary text-secondary-foreground px-6 py-2.5 rounded-lg text-sm font-bold hover:bg-secondary/90 transition-smooth inline-flex items-center gap-1">
+              <div key={i} className={`absolute inset-0 flex items-end transition-opacity duration-700 ${i === currentSlide ? "opacity-100" : "opacity-0 pointer-events-none"}`}>
+                <div className="absolute inset-0 bg-gradient-to-t from-primary/90 via-primary/30 to-transparent" />
+                <div className="relative z-10 p-6 md:p-8 text-primary-foreground w-full">
+                  <span className="bg-secondary text-secondary-foreground text-xs font-bold px-3 py-1 rounded-full mb-2 inline-block">{slide.badge}</span>
+                  <h2 className="text-xl md:text-2xl font-black mb-1 whitespace-pre-line drop-shadow-lg">{slide.title}</h2>
+                  <p className="text-xs md:text-sm opacity-90 mb-3">{slide.subtitle}</p>
+                  <Link to={slide.to} className="bg-secondary text-secondary-foreground px-5 py-2 rounded-lg text-sm font-bold hover:bg-secondary/90 transition-smooth inline-flex items-center gap-1">
                     {slide.cta} <ChevronRight className="w-4 h-4" />
                   </Link>
                 </div>
-                <div className="absolute inset-0 bg-gradient-to-r from-primary via-primary/80 to-primary/30" />
               </div>
             ))}
-            {/* Slide controls */}
             <button onClick={() => setCurrentSlide((p) => (p - 1 + heroSlides.length) % heroSlides.length)} className="absolute left-3 top-1/2 -translate-y-1/2 z-20 w-8 h-8 bg-white/20 hover:bg-white/40 rounded-full flex items-center justify-center text-white transition-smooth"><ChevronLeft className="w-4 h-4" /></button>
             <button onClick={() => setCurrentSlide((p) => (p + 1) % heroSlides.length)} className="absolute right-3 top-1/2 -translate-y-1/2 z-20 w-8 h-8 bg-white/20 hover:bg-white/40 rounded-full flex items-center justify-center text-white transition-smooth"><ChevronRight className="w-4 h-4" /></button>
             <div className="absolute bottom-3 left-1/2 -translate-x-1/2 z-20 flex gap-2">
