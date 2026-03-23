@@ -24,8 +24,8 @@ export const HepsiburadaHeader = () => {
 
   return (
     <>
-      {/* Marquee */}
-      <div className="bg-primary text-primary-foreground overflow-hidden">
+      {/* Marquee - hidden on mobile */}
+      <div className="bg-primary text-primary-foreground overflow-hidden hidden md:block">
         <div className="animate-[marquee_30s_linear_infinite] flex whitespace-nowrap py-1.5">
           {[...marqueeItems, ...marqueeItems].map((item, i) => (
             <span key={i} className="text-[11px] mx-8 opacity-90">{item}</span>
@@ -33,8 +33,8 @@ export const HepsiburadaHeader = () => {
         </div>
       </div>
 
-      {/* Top Bar */}
-      <div className="bg-primary/95 text-primary-foreground">
+      {/* Top Bar - hidden on mobile */}
+      <div className="bg-primary/95 text-primary-foreground hidden md:block">
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between text-[11px] py-1.5 opacity-70">
             <div className="flex gap-4">
@@ -111,8 +111,13 @@ export const HepsiburadaHeader = () => {
         </div>
       </div>
       {mobileMenu && (
-        <div className="lg:hidden bg-white border-b border-border shadow-lg fixed top-[56px] inset-x-0 z-40">
-          <div className="p-4 space-y-2">
+        <div className="lg:hidden bg-white border-b border-border shadow-lg fixed inset-x-0 z-40 max-h-[70vh] overflow-y-auto" style={{ top: "56px" }}>
+          <div className="p-4 space-y-1">
+            <Link to={demoLink("/kampanyalar")} className="block py-2 px-3 text-sm font-semibold text-secondary hover:bg-muted rounded" onClick={() => setMobileMenu(false)}>🔥 Kampanyalar</Link>
+            <Link to={demoLink("/kurumsal")} className="block py-2 px-3 text-sm hover:bg-muted rounded" onClick={() => setMobileMenu(false)}>Kurumsal</Link>
+            <Link to={demoLink("/iletisim")} className="block py-2 px-3 text-sm hover:bg-muted rounded" onClick={() => setMobileMenu(false)}>İletişim</Link>
+            <Link to={demoLink("/sss")} className="block py-2 px-3 text-sm hover:bg-muted rounded" onClick={() => setMobileMenu(false)}>Yardım</Link>
+            <div className="border-t border-border my-2" />
             {navCategories.map((cat) => (
               <Link key={cat.id} to={demoLink(`/kategori/${cat.slug}`)} className="block py-2 px-3 text-sm hover:bg-muted rounded" onClick={() => setMobileMenu(false)}>
                 {cat.icon} {cat.name}
@@ -138,21 +143,21 @@ export const HepsiburadaHeader = () => {
 
       {/* Trust Badges */}
       <div className="bg-white border-y border-border">
-        <div className="container mx-auto px-4 py-4">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div className="container mx-auto px-4 py-3 md:py-4">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
             {[
               { icon: Truck, label: "Ücretsiz Kargo", desc: "500₺ üzeri siparişlerde" },
               { icon: CreditCard, label: "12 Taksit", desc: "Tüm kredi kartlarına" },
               { icon: RotateCcw, label: "Kolay İade", desc: "14 gün içinde iade" },
               { icon: Shield, label: "Güvenli Ödeme", desc: "256-bit SSL şifreleme" },
             ].map((item, i) => (
-              <div key={i} className="flex items-center gap-3 group">
-                <div className="w-10 h-10 rounded-full bg-primary/5 flex items-center justify-center group-hover:bg-primary/10 transition-smooth">
-                  <item.icon className="w-5 h-5 text-primary" />
+              <div key={i} className="flex items-center gap-2 md:gap-3 group">
+                <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-primary/5 flex items-center justify-center group-hover:bg-primary/10 transition-smooth shrink-0">
+                  <item.icon className="w-4 h-4 md:w-5 md:h-5 text-primary" />
                 </div>
                 <div>
-                  <p className="text-xs font-bold text-foreground">{item.label}</p>
-                  <p className="text-[10px] text-muted-foreground">{item.desc}</p>
+                  <p className="text-[11px] md:text-xs font-bold text-foreground">{item.label}</p>
+                  <p className="text-[9px] md:text-[10px] text-muted-foreground hidden sm:block">{item.desc}</p>
                 </div>
               </div>
             ))}

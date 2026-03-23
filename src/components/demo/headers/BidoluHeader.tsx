@@ -21,7 +21,8 @@ export const BidoluHeader = () => {
 
   return (
     <>
-      <div className="bg-muted border-b border-border">
+      {/* Top bar - hidden on mobile */}
+      <div className="bg-muted border-b border-border hidden md:block">
         <div className="container mx-auto px-4 flex items-center justify-between text-[11px] py-1.5 text-muted-foreground">
           <span>Markana Renk Kat! | Nipo Online Ambalaj</span>
           <div className="flex gap-3">
@@ -81,12 +82,16 @@ export const BidoluHeader = () => {
       </header>
 
       {mobileMenu && (
-        <div className="lg:hidden bg-white border-b border-border shadow-lg fixed top-[60px] inset-x-0 z-40">
-          <div className="p-4 space-y-2">
+        <div className="lg:hidden bg-white border-b border-border shadow-lg fixed inset-x-0 z-40 max-h-[70vh] overflow-y-auto" style={{ top: "56px" }}>
+          <div className="p-4 space-y-1">
             <div className="relative mb-3">
               <input type="text" placeholder="Ürün ara..." className="w-full h-10 rounded-lg pl-4 pr-12 text-sm border border-border" />
               <Search className="absolute right-4 top-3 w-4 h-4 text-muted-foreground" />
             </div>
+            <Link to={demoLink("/kurumsal")} className="block py-2 px-3 text-sm hover:bg-muted rounded" onClick={() => setMobileMenu(false)}>Üye Ol / Giriş</Link>
+            <Link to={demoLink("/sss")} className="block py-2 px-3 text-sm hover:bg-muted rounded" onClick={() => setMobileMenu(false)}>Yardım</Link>
+            <Link to={demoLink("/iletisim")} className="block py-2 px-3 text-sm hover:bg-muted rounded" onClick={() => setMobileMenu(false)}>İletişim</Link>
+            <div className="border-t border-border my-2" />
             {navLinks.map((link) => (
               <Link key={link.name} to={demoLink(link.path)} className="block py-2 px-3 text-sm hover:bg-muted rounded" onClick={() => setMobileMenu(false)}>
                 {link.name}
@@ -98,21 +103,21 @@ export const BidoluHeader = () => {
 
       {/* Trust Badges */}
       <div className="bg-white border-b border-border">
-        <div className="container mx-auto px-4 py-5">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div className="container mx-auto px-4 py-3 md:py-5">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
             {[
               { icon: Truck, title: "Ücretsiz Kargo", desc: "500₺ üzeri siparişlerde" },
               { icon: CreditCard, title: "9 Taksit İmkanı", desc: "Tüm kredi kartlarına" },
               { icon: RotateCcw, title: "Kolay İade", desc: "14 gün içinde ücretsiz" },
               { icon: ShieldCheck, title: "Güvenli Alışveriş", desc: "256-bit SSL sertifikası" },
             ].map((badge, i) => (
-              <div key={i} className="flex items-center gap-3">
-                <div className="w-11 h-11 rounded-full bg-primary/8 flex items-center justify-center shrink-0">
-                  <badge.icon className="w-5 h-5 text-primary" />
+              <div key={i} className="flex items-center gap-2 md:gap-3">
+                <div className="w-9 h-9 md:w-11 md:h-11 rounded-full bg-primary/8 flex items-center justify-center shrink-0">
+                  <badge.icon className="w-4 h-4 md:w-5 md:h-5 text-primary" />
                 </div>
                 <div>
-                  <h4 className="text-sm font-bold text-foreground">{badge.title}</h4>
-                  <p className="text-[10px] text-muted-foreground">{badge.desc}</p>
+                  <h4 className="text-[11px] md:text-sm font-bold text-foreground">{badge.title}</h4>
+                  <p className="text-[9px] md:text-[10px] text-muted-foreground hidden sm:block">{badge.desc}</p>
                 </div>
               </div>
             ))}

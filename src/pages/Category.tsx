@@ -58,8 +58,23 @@ const Category = () => {
         ]} />
 
         <div className="flex flex-col lg:flex-row gap-6 mt-2 mb-14">
-          {/* Sidebar */}
-          <aside className="lg:w-64 shrink-0">
+          {/* Mobile Category Chips */}
+          <div className="lg:hidden flex gap-2 overflow-x-auto pb-2 scrollbar-thin -mx-4 px-4">
+            {categories.map((cat) => (
+              <Link
+                key={cat.id}
+                to={`/kategori/${cat.slug}`}
+                className={`shrink-0 px-3 py-1.5 rounded-full text-xs font-semibold transition-smooth ${
+                  cat.id === category.id ? "bg-primary text-primary-foreground" : "bg-muted text-muted-foreground"
+                }`}
+              >
+                {cat.icon} {cat.name.replace(" Grubu", "")}
+              </Link>
+            ))}
+          </div>
+
+          {/* Sidebar - Desktop only */}
+          <aside className="hidden lg:block lg:w-64 shrink-0">
             <div className="bg-card rounded-xl border border-border/60 overflow-hidden sticky top-36">
               <h3 className="px-4 py-3 text-sm font-bold text-foreground border-b border-border/40 bg-muted/30">Kategoriler</h3>
               <ul>

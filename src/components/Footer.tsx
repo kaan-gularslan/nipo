@@ -47,7 +47,7 @@ const Footer = () => (
         <form className="flex gap-2 w-full md:w-auto" onSubmit={(e) => e.preventDefault()}>
           <Input
             placeholder="E-posta adresiniz"
-            className="w-64 rounded-full px-5 bg-primary-foreground/10 border-primary-foreground/15 text-primary-foreground placeholder:text-primary-foreground/30"
+            className="w-full md:w-64 rounded-full px-5 bg-primary-foreground/10 border-primary-foreground/15 text-primary-foreground placeholder:text-primary-foreground/30"
           />
           <Button variant="hero" size="default" className="rounded-full px-6 gap-1.5">
             Abone Ol <ArrowRight className="w-3.5 h-3.5" />

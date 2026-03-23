@@ -87,13 +87,13 @@ const DemoN11Home = () => {
 
       {/* Deal of the Day */}
       {dealProducts.length > 0 && (
-        <div className="container mx-auto px-4 py-6">
-          <div className="bg-white rounded-xl border border-border p-5 shadow-lg">
-            <div className="flex items-center justify-between mb-5">
-              <div className="flex items-center gap-3">
-                <h2 className="text-lg font-black text-foreground flex items-center gap-2"><Clock className="w-5 h-5 text-secondary" /> Günün Fırsatı</h2>
+        <div className="container mx-auto px-4 py-4 md:py-6">
+          <div className="bg-white rounded-xl border border-border p-4 md:p-5 shadow-lg">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 mb-5">
+              <div className="flex items-center gap-2 md:gap-3 flex-wrap">
+                <h2 className="text-base md:text-lg font-black text-foreground flex items-center gap-2"><Clock className="w-4 md:w-5 h-4 md:h-5 text-secondary" /> Günün Fırsatı</h2>
                 <div className="flex gap-1">
-                  {[countdown.h, countdown.m, countdown.s].map((v, i) => <span key={i} className="bg-primary text-primary-foreground text-sm font-bold px-2.5 py-1 rounded">{String(v).padStart(2, "0")}</span>)}
+                  {[countdown.h, countdown.m, countdown.s].map((v, i) => <span key={i} className="bg-primary text-primary-foreground text-xs md:text-sm font-bold px-2 md:px-2.5 py-0.5 md:py-1 rounded">{String(v).padStart(2, "0")}</span>)}
                 </div>
               </div>
               <Link to={demoLink("/kampanyalar")} className="text-xs font-bold text-primary flex items-center gap-0.5">Tümünü Gör <ChevronRight className="w-3.5 h-3.5" /></Link>
@@ -186,11 +186,11 @@ const DemoN11Home = () => {
       )}
 
       {/* CTA */}
-      <div className="gradient-nipo py-12">
+      <div className="gradient-nipo py-8 md:py-12">
         <div className="container mx-auto px-4 text-center text-primary-foreground">
-          <h2 className="text-2xl md:text-3xl font-black mb-2">Markana Renk Kat!</h2>
+          <h2 className="text-xl md:text-2xl lg:text-3xl font-black mb-2">Markana Renk Kat!</h2>
           <p className="text-sm opacity-70 mb-5">Özel tasarım ambalajlarla fark yaratın</p>
-          <Link to={demoLink("/iletisim")} className="bg-white text-primary px-8 py-3 rounded-lg font-bold text-sm hover:bg-white/90 inline-flex items-center gap-1">Teklif Al <ChevronRight className="w-4 h-4" /></Link>
+          <Link to={demoLink("/iletisim")} className="bg-white text-primary px-6 md:px-8 py-2.5 md:py-3 rounded-lg font-bold text-sm hover:bg-white/90 inline-flex items-center gap-1">Teklif Al <ChevronRight className="w-4 h-4" /></Link>
         </div>
       </div>
     </div>
