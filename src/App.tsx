@@ -42,9 +42,11 @@ const demoHomeMap: Record<string, React.FC> = {
   n11: DemoN11,
 };
 
+import { useParams } from "react-router-dom";
+
 const DemoIndex = () => {
-  const { theme } = require("react-router-dom").useParams();
-  const Home = demoHomeMap[theme] || DemoBidolu;
+  const { theme } = useParams();
+  const Home = demoHomeMap[theme || "bidolu"] || DemoBidolu;
   return <Home />;
 };
 
