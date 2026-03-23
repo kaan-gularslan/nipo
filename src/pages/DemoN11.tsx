@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Package, Search, ShoppingCart, ChevronRight, ChevronLeft, Star, Clock, Zap, Menu, X } from "lucide-react";
+import { Package, Search, ShoppingCart, ChevronRight, ChevronLeft, Star, Clock, Zap, Menu, X, Heart, User, TrendingUp, Flame } from "lucide-react";
 import { products, formatPrice, getDiscountPercent } from "@/data/products";
 import { categories } from "@/data/categories";
 import { useCart } from "@/context/CartContext";
+import heroImg from "@/assets/hero-n11.jpg";
 
 const slides = [
   { title: "Toplu Siparişe\nÖzel Fiyatlar", subtitle: "1000+ adet siparişlerde %20 indirim", cta: "Fırsatı Yakala", to: "/kampanyalar" },
