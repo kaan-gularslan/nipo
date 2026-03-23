@@ -5,6 +5,8 @@ import { products, formatPrice, getDiscountPercent } from "@/data/products";
 import { categories } from "@/data/categories";
 import { useCart } from "@/context/CartContext";
 
+import slideUrunler from "@/assets/slides/slide-urunler.jpg";
+
 
 const topNavLinks = [
   { name: "Çok Satanlar", to: "/urunler" },
