@@ -116,14 +116,17 @@ const DemoAmazon = () => {
         </div>
       )}
 
-      {/* Hero Banner with Image */}
-      <div className="relative h-56 md:h-80 overflow-hidden">
-        <img src={heroImg} alt="Nipo Ambalaj Depo" className="absolute inset-0 w-full h-full object-cover" width={1920} height={800} />
-        <div className="absolute inset-0 bg-gradient-to-r from-primary/85 via-primary/50 to-transparent" />
+      {/* Hero Banner */}
+      <div className="relative h-56 md:h-80 overflow-hidden bg-gradient-to-r from-primary via-primary/90 to-primary/70">
+        <div className="absolute right-0 top-0 w-3/5 h-full hidden md:grid grid-cols-3 gap-3 p-6 opacity-20">
+          {products.slice(0, 6).map((p) => (
+            <img key={p.id} src={p.img} alt="" className="w-full h-full object-cover rounded-lg" />
+          ))}
+        </div>
         <div className="container mx-auto px-4 h-full flex items-center relative z-10">
           <div className="text-primary-foreground max-w-lg">
             <span className="bg-secondary text-secondary-foreground text-xs font-bold px-3 py-1 rounded-full">Özel Fiyat</span>
-            <h1 className="text-2xl md:text-4xl font-black mt-3 mb-2 drop-shadow-lg">Ambalajda Büyük Fırsat</h1>
+            <h1 className="text-2xl md:text-4xl font-black mt-3 mb-2">Ambalajda Büyük Fırsat</h1>
             <p className="text-sm opacity-90 mb-5">Baskılı kutu, çanta ve bardaklarda toplu sipariş indirimi</p>
             <Link to="/urunler" className="bg-secondary text-secondary-foreground px-6 py-2.5 rounded-lg text-sm font-bold hover:bg-secondary/90 transition-smooth inline-flex items-center gap-1">
               Alışverişe Başla <ChevronRight className="w-4 h-4" />

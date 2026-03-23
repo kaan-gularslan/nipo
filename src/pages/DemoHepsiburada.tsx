@@ -172,19 +172,27 @@ const DemoHepsiburada = () => {
       {/* Hero Slider + Sidebar */}
       <div className="container mx-auto px-4 py-5">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
-          {/* Slider with hero image */}
+          {/* Slider */}
           <div className="lg:col-span-2 rounded-xl overflow-hidden relative h-64 md:h-80">
-            <img src={heroImg} alt="Nipo Ambalaj Ürünleri" className="absolute inset-0 w-full h-full object-cover" width={1920} height={800} />
             {heroSlides.map((slide, i) => (
-              <div key={i} className={`absolute inset-0 flex items-end transition-opacity duration-700 ${i === currentSlide ? "opacity-100" : "opacity-0 pointer-events-none"}`}>
-                <div className="absolute inset-0 bg-gradient-to-t from-primary/90 via-primary/30 to-transparent" />
-                <div className="relative z-10 p-6 md:p-8 text-primary-foreground w-full">
-                  <span className="bg-secondary text-secondary-foreground text-xs font-bold px-3 py-1 rounded-full mb-2 inline-block">{slide.badge}</span>
-                  <h2 className="text-xl md:text-2xl font-black mb-1 whitespace-pre-line drop-shadow-lg">{slide.title}</h2>
-                  <p className="text-xs md:text-sm opacity-90 mb-3">{slide.subtitle}</p>
-                  <Link to={slide.to} className="bg-secondary text-secondary-foreground px-5 py-2 rounded-lg text-sm font-bold hover:bg-secondary/90 transition-smooth inline-flex items-center gap-1">
-                    {slide.cta} <ChevronRight className="w-4 h-4" />
-                  </Link>
+              <div key={i} className={`absolute inset-0 transition-opacity duration-700 ${i === currentSlide ? "opacity-100" : "opacity-0 pointer-events-none"}`}>
+                <div className="absolute inset-0 bg-gradient-to-br from-primary via-primary/90 to-secondary/60" />
+                <div className="absolute right-0 bottom-0 w-1/2 h-full opacity-20">
+                  <div className="absolute inset-0 grid grid-cols-2 gap-2 p-4">
+                    {products.slice(i * 2, i * 2 + 4).map((p) => (
+                      <img key={p.id} src={p.img} alt="" className="w-full h-full object-cover rounded-lg" />
+                    ))}
+                  </div>
+                </div>
+                <div className="absolute inset-0 flex items-center">
+                  <div className="relative z-10 p-6 md:p-8 text-primary-foreground max-w-md">
+                    <span className="bg-secondary text-secondary-foreground text-xs font-bold px-3 py-1 rounded-full mb-3 inline-block">{slide.badge}</span>
+                    <h2 className="text-xl md:text-2xl font-black mb-2 whitespace-pre-line leading-tight">{slide.title}</h2>
+                    <p className="text-xs md:text-sm opacity-90 mb-4">{slide.subtitle}</p>
+                    <Link to={slide.to} className="bg-secondary text-secondary-foreground px-5 py-2 rounded-lg text-sm font-bold hover:bg-secondary/90 transition-smooth inline-flex items-center gap-1">
+                      {slide.cta} <ChevronRight className="w-4 h-4" />
+                    </Link>
+                  </div>
                 </div>
               </div>
             ))}

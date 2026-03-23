@@ -85,7 +85,7 @@ const DemoN11 = () => {
             <div className="flex items-center gap-1 text-xs">
               {categories.slice(0, 8).map((cat) => (
                 <Link key={cat.id} to={`/kategori/${cat.slug}`} className="px-3 py-1.5 hover:bg-primary-foreground/10 rounded transition-smooth whitespace-nowrap">
-                  {cat.name.split(" ")[0]}
+                  {cat.name}
                 </Link>
               ))}
             </div>

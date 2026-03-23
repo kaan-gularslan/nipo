@@ -126,17 +126,25 @@ const DemoBidolu = () => {
 
       {/* Hero Slider */}
       <div className="relative overflow-hidden h-72 md:h-[420px]">
-        <img src={heroImg} alt="Nipo Premium Ambalaj" className="absolute inset-0 w-full h-full object-cover" width={1920} height={900} />
         {slides.map((slide, i) => (
-          <div key={i} className={`absolute inset-0 flex items-end transition-all duration-1000 ${i === currentSlide ? "opacity-100" : "opacity-0"}`}>
-            <div className="absolute inset-0 bg-gradient-to-t from-primary/80 via-primary/20 to-transparent" />
-            <div className="container mx-auto px-4 relative z-10 pb-10 md:pb-14">
-              <div className="max-w-lg">
-                <h1 className="text-2xl md:text-4xl font-black leading-tight whitespace-pre-line mb-3 text-white drop-shadow-lg">{slide.title}</h1>
-                <p className="text-sm text-white/80 mb-5">{slide.subtitle}</p>
-                <Link to={slide.to} className="bg-secondary text-secondary-foreground px-8 py-3 rounded-full font-bold text-sm hover:bg-secondary/90 transition-smooth inline-flex items-center gap-1">
-                  {slide.cta} <ChevronRight className="w-4 h-4" />
-                </Link>
+          <div key={i} className={`absolute inset-0 transition-all duration-1000 ${i === currentSlide ? "opacity-100" : "opacity-0"}`}>
+            <div className={`absolute inset-0 bg-gradient-to-br ${slide.gradient}`} />
+            <div className="absolute right-0 top-0 w-2/5 h-full hidden md:flex items-center justify-center p-8 opacity-30">
+              <div className="grid grid-cols-2 gap-3 w-full">
+                {products.slice(i * 2, i * 2 + 4).map((p) => (
+                  <img key={p.id} src={p.img} alt="" className="w-full aspect-square object-cover rounded-xl" />
+                ))}
+              </div>
+            </div>
+            <div className="absolute inset-0 flex items-end">
+              <div className="container mx-auto px-4 relative z-10 pb-10 md:pb-14">
+                <div className="max-w-lg">
+                  <h1 className="text-2xl md:text-4xl font-black leading-tight whitespace-pre-line mb-3 text-white drop-shadow-lg">{slide.title}</h1>
+                  <p className="text-sm text-white/80 mb-5">{slide.subtitle}</p>
+                  <Link to={slide.to} className="bg-secondary text-secondary-foreground px-8 py-3 rounded-full font-bold text-sm hover:bg-secondary/90 transition-smooth inline-flex items-center gap-1">
+                    {slide.cta} <ChevronRight className="w-4 h-4" />
+                  </Link>
+                </div>
               </div>
             </div>
           </div>
