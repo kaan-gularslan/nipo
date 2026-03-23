@@ -111,8 +111,13 @@ export const HepsiburadaHeader = () => {
         </div>
       </div>
       {mobileMenu && (
-        <div className="lg:hidden bg-white border-b border-border shadow-lg fixed top-[56px] inset-x-0 z-40">
-          <div className="p-4 space-y-2">
+        <div className="lg:hidden bg-white border-b border-border shadow-lg fixed inset-x-0 z-40 max-h-[70vh] overflow-y-auto" style={{ top: "56px" }}>
+          <div className="p-4 space-y-1">
+            <Link to={demoLink("/kampanyalar")} className="block py-2 px-3 text-sm font-semibold text-secondary hover:bg-muted rounded" onClick={() => setMobileMenu(false)}>🔥 Kampanyalar</Link>
+            <Link to={demoLink("/kurumsal")} className="block py-2 px-3 text-sm hover:bg-muted rounded" onClick={() => setMobileMenu(false)}>Kurumsal</Link>
+            <Link to={demoLink("/iletisim")} className="block py-2 px-3 text-sm hover:bg-muted rounded" onClick={() => setMobileMenu(false)}>İletişim</Link>
+            <Link to={demoLink("/sss")} className="block py-2 px-3 text-sm hover:bg-muted rounded" onClick={() => setMobileMenu(false)}>Yardım</Link>
+            <div className="border-t border-border my-2" />
             {navCategories.map((cat) => (
               <Link key={cat.id} to={demoLink(`/kategori/${cat.slug}`)} className="block py-2 px-3 text-sm hover:bg-muted rounded" onClick={() => setMobileMenu(false)}>
                 {cat.icon} {cat.name}
