@@ -21,6 +21,7 @@ import DemoBidolu from "./pages/DemoBidolu";
 import DemoTrendyol from "./pages/DemoTrendyol";
 import DemoAmazon from "./pages/DemoAmazon";
 import DemoN11 from "./pages/DemoN11";
+import Admin from "./pages/Admin";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
