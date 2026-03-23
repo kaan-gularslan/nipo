@@ -132,8 +132,26 @@ const Footer = () => (
         </div>
       </div>
 
-      {/* Copyright */}
+      {/* Demo Pages */}
       <div className="border-t border-primary-foreground/8 mt-10 pt-6">
+        <p className="text-[10px] uppercase tracking-wider opacity-40 mb-3 text-center">Tema Demoları</p>
+        <div className="flex flex-wrap items-center justify-center gap-2">
+          {[
+            { name: "Hepsiburada", to: "/demo/hepsiburada" },
+            { name: "Bidolu", to: "/demo/bidolu" },
+            { name: "Trendyol", to: "/demo/trendyol" },
+            { name: "Amazon", to: "/demo/amazon" },
+            { name: "N11", to: "/demo/n11" },
+          ].map((demo) => (
+            <Link key={demo.name} to={demo.to} className="text-[10px] font-medium px-3 py-1.5 rounded-full bg-primary-foreground/8 hover:bg-secondary hover:text-secondary-foreground transition-smooth">
+              {demo.name}
+            </Link>
+          ))}
+        </div>
+      </div>
+
+      {/* Copyright */}
+      <div className="border-t border-primary-foreground/8 mt-6 pt-6">
         <div className="flex flex-col md:flex-row items-center justify-between gap-3">
           <p className="text-[11px] opacity-30">© 2026 Nipo Ambalaj. Tüm hakları saklıdır.</p>
           <p className="text-[11px] opacity-30">Mimar Sinan Merkez Mh. İnönü Cd. No:95/3 Büyükçekmece / İSTANBUL</p>

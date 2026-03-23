@@ -16,6 +16,11 @@ import Campaigns from "./pages/Campaigns";
 import Cart from "./pages/Cart";
 import StaticPage from "./pages/StaticPage";
 import CorporateIdentity from "./pages/CorporateIdentity";
+import DemoHepsiburada from "./pages/DemoHepsiburada";
+import DemoBidolu from "./pages/DemoBidolu";
+import DemoTrendyol from "./pages/DemoTrendyol";
+import DemoAmazon from "./pages/DemoAmazon";
+import DemoN11 from "./pages/DemoN11";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -43,6 +48,11 @@ const App = () => (
             <Route path="/gizlilik" element={<StaticPage page="gizlilik" />} />
             <Route path="/kvkk" element={<StaticPage page="kvkk" />} />
             <Route path="/kurumsal-kimlik" element={<CorporateIdentity />} />
+            <Route path="/demo/hepsiburada" element={<DemoHepsiburada />} />
+            <Route path="/demo/bidolu" element={<DemoBidolu />} />
+            <Route path="/demo/trendyol" element={<DemoTrendyol />} />
+            <Route path="/demo/amazon" element={<DemoAmazon />} />
+            <Route path="/demo/n11" element={<DemoN11 />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
