@@ -255,7 +255,7 @@ const DemoN11 = () => {
             {categories.map((cat) => (
               <Link key={cat.id} to={`/kategori/${cat.slug}`} className="p-3 text-center group hover:shadow-nipo-card transition-smooth rounded-xl border border-border">
                 <span className="text-3xl block mb-1">{cat.icon}</span>
-                <span className="text-[10px] font-medium text-muted-foreground group-hover:text-primary">{cat.name.split(" ")[0]}</span>
+                <span className="text-[10px] font-medium text-muted-foreground group-hover:text-primary">{cat.name}</span>
               </Link>
             ))}
           </div>
