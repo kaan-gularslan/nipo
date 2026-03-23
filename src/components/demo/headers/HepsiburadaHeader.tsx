@@ -24,8 +24,8 @@ export const HepsiburadaHeader = () => {
 
   return (
     <>
-      {/* Marquee */}
-      <div className="bg-primary text-primary-foreground overflow-hidden">
+      {/* Marquee - hidden on mobile */}
+      <div className="bg-primary text-primary-foreground overflow-hidden hidden md:block">
         <div className="animate-[marquee_30s_linear_infinite] flex whitespace-nowrap py-1.5">
           {[...marqueeItems, ...marqueeItems].map((item, i) => (
             <span key={i} className="text-[11px] mx-8 opacity-90">{item}</span>
