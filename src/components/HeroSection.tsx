@@ -107,11 +107,11 @@ const HeroSection = () => {
               </div>
             </div>
 
-            <button onClick={prev} aria-label="Önceki slayt" className="absolute left-4 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-primary-foreground/10 backdrop-blur-md flex items-center justify-center text-primary-foreground hover:bg-primary-foreground/20 transition-smooth z-10 border border-primary-foreground/10">
-              <ChevronLeft className="w-5 h-5" />
+            <button onClick={prev} aria-label="Önceki slayt" className="absolute left-2 md:left-4 top-1/2 -translate-y-1/2 w-8 h-8 md:w-11 md:h-11 rounded-full bg-primary-foreground/10 backdrop-blur-md flex items-center justify-center text-primary-foreground hover:bg-primary-foreground/20 transition-smooth z-10 border border-primary-foreground/10">
+              <ChevronLeft className="w-4 h-4 md:w-5 md:h-5" />
             </button>
-            <button onClick={next} aria-label="Sonraki slayt" className="absolute right-4 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-primary-foreground/10 backdrop-blur-md flex items-center justify-center text-primary-foreground hover:bg-primary-foreground/20 transition-smooth z-10 border border-primary-foreground/10">
-              <ChevronRight className="w-5 h-5" />
+            <button onClick={next} aria-label="Sonraki slayt" className="absolute right-2 md:right-4 top-1/2 -translate-y-1/2 w-8 h-8 md:w-11 md:h-11 rounded-full bg-primary-foreground/10 backdrop-blur-md flex items-center justify-center text-primary-foreground hover:bg-primary-foreground/20 transition-smooth z-10 border border-primary-foreground/10">
+              <ChevronRight className="w-4 h-4 md:w-5 md:h-5" />
             </button>
 
             <div className="absolute bottom-5 left-1/2 -translate-x-1/2 flex items-center gap-2 z-10 bg-primary/30 backdrop-blur-sm rounded-full px-3 py-1.5">
