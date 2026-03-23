@@ -207,8 +207,8 @@ const DemoHepsiburadaHome = () => {
       )}
 
       {/* CTA */}
-      <div className="container mx-auto px-4 py-8">
-        <div className="bg-primary rounded-2xl p-8 md:p-12 text-primary-foreground text-center relative overflow-hidden">
+      <div className="container mx-auto px-4 py-6 md:py-8">
+        <div className="bg-primary rounded-2xl p-5 md:p-8 lg:p-12 text-primary-foreground text-center relative overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-r from-primary via-primary/90 to-primary/70" />
           <div className="relative z-10">
             <h2 className="text-2xl md:text-3xl font-black mb-3">Toplu Sipariş Teklif Alın</h2>

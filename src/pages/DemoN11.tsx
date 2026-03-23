@@ -186,11 +186,11 @@ const DemoN11Home = () => {
       )}
 
       {/* CTA */}
-      <div className="gradient-nipo py-12">
+      <div className="gradient-nipo py-8 md:py-12">
         <div className="container mx-auto px-4 text-center text-primary-foreground">
-          <h2 className="text-2xl md:text-3xl font-black mb-2">Markana Renk Kat!</h2>
+          <h2 className="text-xl md:text-2xl lg:text-3xl font-black mb-2">Markana Renk Kat!</h2>
           <p className="text-sm opacity-70 mb-5">Özel tasarım ambalajlarla fark yaratın</p>
-          <Link to={demoLink("/iletisim")} className="bg-white text-primary px-8 py-3 rounded-lg font-bold text-sm hover:bg-white/90 inline-flex items-center gap-1">Teklif Al <ChevronRight className="w-4 h-4" /></Link>
+          <Link to={demoLink("/iletisim")} className="bg-white text-primary px-6 md:px-8 py-2.5 md:py-3 rounded-lg font-bold text-sm hover:bg-white/90 inline-flex items-center gap-1">Teklif Al <ChevronRight className="w-4 h-4" /></Link>
         </div>
       </div>
     </div>
