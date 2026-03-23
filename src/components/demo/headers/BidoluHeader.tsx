@@ -82,12 +82,16 @@ export const BidoluHeader = () => {
       </header>
 
       {mobileMenu && (
-        <div className="lg:hidden bg-white border-b border-border shadow-lg fixed top-[60px] inset-x-0 z-40">
-          <div className="p-4 space-y-2">
+        <div className="lg:hidden bg-white border-b border-border shadow-lg fixed inset-x-0 z-40 max-h-[70vh] overflow-y-auto" style={{ top: "56px" }}>
+          <div className="p-4 space-y-1">
             <div className="relative mb-3">
               <input type="text" placeholder="Ürün ara..." className="w-full h-10 rounded-lg pl-4 pr-12 text-sm border border-border" />
               <Search className="absolute right-4 top-3 w-4 h-4 text-muted-foreground" />
             </div>
+            <Link to={demoLink("/kurumsal")} className="block py-2 px-3 text-sm hover:bg-muted rounded" onClick={() => setMobileMenu(false)}>Üye Ol / Giriş</Link>
+            <Link to={demoLink("/sss")} className="block py-2 px-3 text-sm hover:bg-muted rounded" onClick={() => setMobileMenu(false)}>Yardım</Link>
+            <Link to={demoLink("/iletisim")} className="block py-2 px-3 text-sm hover:bg-muted rounded" onClick={() => setMobileMenu(false)}>İletişim</Link>
+            <div className="border-t border-border my-2" />
             {navLinks.map((link) => (
               <Link key={link.name} to={demoLink(link.path)} className="block py-2 px-3 text-sm hover:bg-muted rounded" onClick={() => setMobileMenu(false)}>
                 {link.name}
