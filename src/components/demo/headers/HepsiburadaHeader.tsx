@@ -33,8 +33,8 @@ export const HepsiburadaHeader = () => {
         </div>
       </div>
 
-      {/* Top Bar */}
-      <div className="bg-primary/95 text-primary-foreground">
+      {/* Top Bar - hidden on mobile */}
+      <div className="bg-primary/95 text-primary-foreground hidden md:block">
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between text-[11px] py-1.5 opacity-70">
             <div className="flex gap-4">
