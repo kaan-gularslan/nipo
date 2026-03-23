@@ -5,6 +5,8 @@ import { products, formatPrice, getDiscountPercent } from "@/data/products";
 import { categories } from "@/data/categories";
 import { useCart } from "@/context/CartContext";
 
+import slideEtiket from "@/assets/slides/slide-etiket.jpg";
+
 
 const campaignCircles = [
   { label: "Süper Fiyat", emoji: "🔥", to: "/kampanyalar" },
