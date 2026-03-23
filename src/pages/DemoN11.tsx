@@ -126,13 +126,11 @@ const DemoN11 = () => {
           <div className="lg:col-span-3 relative rounded-xl overflow-hidden h-64 md:h-80">
             {slides.map((slide, i) => (
               <div key={i} className={`absolute inset-0 transition-all duration-700 ${i === currentSlide ? "opacity-100" : "opacity-0"}`}>
-                <div className="absolute inset-0 bg-gradient-to-br from-primary via-primary/85 to-accent/40" />
-                <div className="absolute right-0 top-0 w-2/5 h-full hidden md:flex items-center justify-center p-6 opacity-25">
-                  <img src={products[i]?.img || products[0].img} alt="" className="w-48 h-48 object-cover rounded-2xl rotate-6 shadow-2xl" />
-                </div>
+                <img src={slide.img} alt={slide.title} className="w-full h-full object-cover" loading={i === 0 ? "eager" : "lazy"} />
+                <div className="absolute inset-0 bg-gradient-to-r from-primary/85 via-primary/40 to-transparent" />
                 <div className="absolute inset-0 flex items-end">
-                  <div className="relative z-10 p-6 md:p-8 text-white w-full">
-                    <h1 className="text-xl md:text-3xl font-black leading-tight whitespace-pre-line mb-2">{slide.title}</h1>
+                  <div className="relative z-10 p-6 md:p-8 text-primary-foreground w-full">
+                    <h1 className="text-xl md:text-3xl font-black leading-tight whitespace-pre-line mb-2 drop-shadow-lg">{slide.title}</h1>
                     <p className="text-sm opacity-90 mb-4">{slide.subtitle}</p>
                     <Link to={slide.to} className="bg-secondary text-secondary-foreground px-6 py-2.5 rounded-lg text-sm font-bold hover:bg-secondary/90 transition-smooth inline-flex items-center gap-1">
                       {slide.cta} <ChevronRight className="w-4 h-4" />
@@ -142,14 +140,14 @@ const DemoN11 = () => {
               </div>
             ))}
             <button onClick={() => setCurrentSlide((p) => (p === 0 ? slides.length - 1 : p - 1))} className="absolute left-3 top-1/2 -translate-y-1/2 w-9 h-9 bg-white/20 backdrop-blur rounded-full flex items-center justify-center hover:bg-white/40 z-20">
-              <ChevronLeft className="w-5 h-5 text-white" />
+              <ChevronLeft className="w-5 h-5 text-primary-foreground" />
             </button>
             <button onClick={() => setCurrentSlide((p) => (p + 1) % slides.length)} className="absolute right-3 top-1/2 -translate-y-1/2 w-9 h-9 bg-white/20 backdrop-blur rounded-full flex items-center justify-center hover:bg-white/40 z-20">
-              <ChevronRight className="w-5 h-5 text-white" />
+              <ChevronRight className="w-5 h-5 text-primary-foreground" />
             </button>
             <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1.5 z-20">
               {slides.map((_, i) => (
-                <button key={i} onClick={() => setCurrentSlide(i)} className={`h-1.5 rounded-full ${i === currentSlide ? "bg-white w-6" : "bg-white/40 w-2"} transition-smooth`} />
+                <button key={i} onClick={() => setCurrentSlide(i)} className={`h-1.5 rounded-full ${i === currentSlide ? "bg-primary-foreground w-6" : "bg-primary-foreground/40 w-2"} transition-smooth`} />
               ))}
             </div>
           </div>

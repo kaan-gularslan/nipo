@@ -119,16 +119,14 @@ const DemoAmazon = () => {
       )}
 
       {/* Hero Banner */}
-      <div className="relative h-56 md:h-80 overflow-hidden bg-gradient-to-r from-primary via-primary/90 to-primary/70">
-        <div className="absolute right-0 top-0 w-3/5 h-full hidden md:grid grid-cols-3 gap-3 p-6 opacity-20">
-          {products.slice(0, 6).map((p) => (
-            <img key={p.id} src={p.img} alt="" className="w-full h-full object-cover rounded-lg" />
-          ))}
-        </div>
+      <div className="relative h-56 md:h-80 overflow-hidden">
+        <img src={slideUrunler} alt="Ambalajda Büyük Fırsat" className="w-full h-full object-cover" loading="eager" />
+        <div className="absolute inset-0 bg-gradient-to-r from-primary/90 via-primary/60 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-primary/30 via-transparent to-transparent" />
         <div className="container mx-auto px-4 h-full flex items-center relative z-10">
           <div className="text-primary-foreground max-w-lg">
             <span className="bg-secondary text-secondary-foreground text-xs font-bold px-3 py-1 rounded-full">Özel Fiyat</span>
-            <h1 className="text-2xl md:text-4xl font-black mt-3 mb-2">Ambalajda Büyük Fırsat</h1>
+            <h1 className="text-2xl md:text-4xl font-black mt-3 mb-2 drop-shadow-lg">Ambalajda Büyük Fırsat</h1>
             <p className="text-sm opacity-90 mb-5">Baskılı kutu, çanta ve bardaklarda toplu sipariş indirimi</p>
             <Link to="/urunler" className="bg-secondary text-secondary-foreground px-6 py-2.5 rounded-lg text-sm font-bold hover:bg-secondary/90 transition-smooth inline-flex items-center gap-1">
               Alışverişe Başla <ChevronRight className="w-4 h-4" />
