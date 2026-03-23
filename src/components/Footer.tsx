@@ -27,7 +27,6 @@ const Footer = () => {
 
       <div className="container mx-auto px-4 py-10">
         <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-8">
-          {/* Brand */}
           <div className="col-span-2 md:col-span-1 lg:col-span-1">
             <Link to="/" className="flex items-center gap-2 mb-5 group">
               <Package className="w-5 h-5 group-hover:text-secondary transition-smooth" />
@@ -60,12 +59,17 @@ const Footer = () => {
             </div>
           </div>
 
-          {/* Product categories */}
           <div>
             <h4 className="font-bold mb-4 text-xs uppercase tracking-wider text-primary-foreground/80">Ürün Grupları</h4>
             <ul className="space-y-2 text-xs text-primary-foreground/50">
-              {["Baskılı Kutular", "Kağıt Çantalar", "Bardak & Kase", "Etiket & Sticker", "Peçete & Servis"].map(item => (
-                <li key={item}><Link to="/urunler" className="hover:text-primary-foreground hover:pl-1 transition-smooth">{item}</Link></li>
+              {[
+                { name: "Baskılı Kutular", slug: "oluklu-kutu" },
+                { name: "Kağıt Çantalar", slug: "baski-canta" },
+                { name: "Bardak & Kase", slug: "bardak" },
+                { name: "Etiket & Sticker", slug: "etiket" },
+                { name: "Peçete & Servis", slug: "pecete" },
+              ].map(item => (
+                <li key={item.name}><Link to={`/kategori/${item.slug}`} className="hover:text-primary-foreground hover:pl-1 transition-smooth">{item.name}</Link></li>
               ))}
             </ul>
           </div>
@@ -73,8 +77,14 @@ const Footer = () => {
           <div>
             <h4 className="font-bold mb-4 text-xs uppercase tracking-wider text-primary-foreground/80">Daha Fazla</h4>
             <ul className="space-y-2 text-xs text-primary-foreground/50">
-              {["Poşet Grubu", "Streç Film", "Koli Bandı", "Koruyucu Ambalaj", "Islak Mendil"].map(item => (
-                <li key={item}><Link to="/urunler" className="hover:text-primary-foreground hover:pl-1 transition-smooth">{item}</Link></li>
+              {[
+                { name: "Poşet Grubu", slug: "poset" },
+                { name: "Streç Film", slug: "strec-bant" },
+                { name: "Islak Mendil", slug: "islak-mendil" },
+                { name: "Kasap Kağıtları", slug: "kasap-kagit" },
+                { name: "Toz Dolum", slug: "toz-dolum" },
+              ].map(item => (
+                <li key={item.name}><Link to={`/kategori/${item.slug}`} className="hover:text-primary-foreground hover:pl-1 transition-smooth">{item.name}</Link></li>
               ))}
             </ul>
           </div>
@@ -84,9 +94,8 @@ const Footer = () => {
             <ul className="space-y-2 text-xs text-primary-foreground/50">
               <li><Link to="/kurumsal" className="hover:text-primary-foreground hover:pl-1 transition-smooth">Hakkımızda</Link></li>
               <li><Link to="/iletisim" className="hover:text-primary-foreground hover:pl-1 transition-smooth">İletişim</Link></li>
-              <li><a href="#" className="hover:text-primary-foreground hover:pl-1 transition-smooth">Kariyer</a></li>
-              <li><a href="#" className="hover:text-primary-foreground hover:pl-1 transition-smooth">Blog</a></li>
-              <li><a href="#" className="hover:text-primary-foreground hover:pl-1 transition-smooth">Duyurular</a></li>
+              <li><Link to="/kampanyalar" className="hover:text-primary-foreground hover:pl-1 transition-smooth">Kampanyalar</Link></li>
+              <li><Link to="/sss" className="hover:text-primary-foreground hover:pl-1 transition-smooth">S.S.S</Link></li>
             </ul>
           </div>
 
@@ -94,21 +103,17 @@ const Footer = () => {
             <h4 className="font-bold mb-4 text-xs uppercase tracking-wider text-primary-foreground/80">Müşteri Hizmetleri</h4>
             <ul className="space-y-2 text-xs text-primary-foreground/50">
               <li><Link to="/sss" className="hover:text-primary-foreground hover:pl-1 transition-smooth">S.S.S</Link></li>
-              <li><a href="#" className="hover:text-primary-foreground hover:pl-1 transition-smooth">Kargo Bilgileri</a></li>
-              <li><a href="#" className="hover:text-primary-foreground hover:pl-1 transition-smooth">İade Koşulları</a></li>
-              <li><a href="#" className="hover:text-primary-foreground hover:pl-1 transition-smooth">Gizlilik Politikası</a></li>
-              <li><a href="#" className="hover:text-primary-foreground hover:pl-1 transition-smooth">KVKK</a></li>
+              <li><Link to="/kargo-bilgileri" className="hover:text-primary-foreground hover:pl-1 transition-smooth">Kargo Bilgileri</Link></li>
+              <li><Link to="/iade-kosullari" className="hover:text-primary-foreground hover:pl-1 transition-smooth">İade Koşulları</Link></li>
+              <li><Link to="/gizlilik" className="hover:text-primary-foreground hover:pl-1 transition-smooth">Gizlilik Politikası</Link></li>
+              <li><Link to="/kvkk" className="hover:text-primary-foreground hover:pl-1 transition-smooth">KVKK</Link></li>
             </ul>
           </div>
         </div>
 
         <div className="border-t border-primary-foreground/8 mt-10 pt-6 flex flex-col md:flex-row items-center justify-between gap-3">
-          <p className="text-[11px] text-primary-foreground/30">
-            © 2026 Nipo Ambalaj. Tüm hakları saklıdır.
-          </p>
-          <p className="text-[11px] text-primary-foreground/30">
-            Mimar Sinan Merkez Mh. İnönü Cd. No:95/3 Büyükçekmece / İSTANBUL
-          </p>
+          <p className="text-[11px] text-primary-foreground/30">© 2026 Nipo Ambalaj. Tüm hakları saklıdır.</p>
+          <p className="text-[11px] text-primary-foreground/30">Mimar Sinan Merkez Mh. İnönü Cd. No:95/3 Büyükçekmece / İSTANBUL</p>
         </div>
       </div>
     </footer>

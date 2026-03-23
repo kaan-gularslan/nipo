@@ -2,51 +2,16 @@ import { useState, useEffect, useCallback } from "react";
 import { ChevronLeft, ChevronRight, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
+import { categories } from "@/data/categories";
 
 import slideKutu from "@/assets/slides/slide-kutu.jpg";
 import slideCanta from "@/assets/slides/slide-canta.jpg";
 import slideBardak from "@/assets/slides/slide-bardak.jpg";
 
 const slides = [
-  {
-    img: slideKutu,
-    subtitle: "Özel Tasarım",
-    title: "KUTU\nTASARIMLARI",
-    desc: "Pizza, Lahmacun, Pide Kutuları ve markanıza özel tasarımlar.",
-    cta: "Kutuları Keşfet",
-    accent: "bg-secondary",
-  },
-  {
-    img: slideCanta,
-    subtitle: "Kraft & Karton",
-    title: "BASKILI\nÇANTALAR",
-    desc: "Kraft Çanta, Karton Çanta ve Özel Tasarım Çanta Çözümleri.",
-    cta: "Çantaları İncele",
-    accent: "bg-accent",
-  },
-  {
-    img: slideBardak,
-    subtitle: "Paket Servis",
-    title: "BARDAK\n& KASE",
-    desc: "Baskılı Karton Bardak, Gıda Kasesi ve Paket Servis Ürünleri.",
-    cta: "Ürünleri Gör",
-    accent: "bg-primary",
-  },
-];
-
-const categories = [
-  { name: "Baskılı Kağıt Grubu", icon: "📄" },
-  { name: "Amerikan Servis", icon: "🍽️" },
-  { name: "Kasap Kağıtları", icon: "🥩" },
-  { name: "Baskılı Çanta Grubu", icon: "👜" },
-  { name: "Baskılı Oluklu Kutu Grubu", icon: "📦" },
-  { name: "Baskılı Islak Mendil Grubu", icon: "🧻" },
-  { name: "Baskılı Poşet Grubu", icon: "🛍️" },
-  { name: "Baskılı Toz Dolum Grubu", icon: "☕" },
-  { name: "Baskılı Bardak Grubu", icon: "🥤" },
-  { name: "Baskılı Gıda Kabı Grubu", icon: "🥡" },
-  { name: "Baskılı Peçete Grubu", icon: "🧴" },
-  { name: "Baskılı Etiket Grubu", icon: "🏷️" },
+  { img: slideKutu, subtitle: "Özel Tasarım", title: "KUTU\nTASARIMLARI", desc: "Pizza, Lahmacun, Pide Kutuları ve markanıza özel tasarımlar.", cta: "Kutuları Keşfet", ctaLink: "/kategori/oluklu-kutu", accent: "bg-secondary" },
+  { img: slideCanta, subtitle: "Kraft & Karton", title: "BASKILI\nÇANTALAR", desc: "Kraft Çanta, Karton Çanta ve Özel Tasarım Çanta Çözümleri.", cta: "Çantaları İncele", ctaLink: "/kategori/baski-canta", accent: "bg-accent" },
+  { img: slideBardak, subtitle: "Paket Servis", title: "BARDAK\n& KASE", desc: "Baskılı Karton Bardak, Gıda Kasesi ve Paket Servis Ürünleri.", cta: "Ürünleri Gör", ctaLink: "/kategori/bardak", accent: "bg-primary" },
 ];
 
 const HeroSection = () => {
@@ -81,9 +46,9 @@ const HeroSection = () => {
             <nav className="bg-card rounded-xl border border-border overflow-hidden shadow-nipo-card">
               <ul className="max-h-[524px] overflow-y-auto scrollbar-thin">
                 {categories.map((cat, i) => (
-                  <li key={cat.name}>
+                  <li key={cat.id}>
                     <Link
-                      to="/urunler"
+                      to={`/kategori/${cat.slug}`}
                       className={`group flex items-center gap-3 px-4 py-[11px] text-[13px] text-foreground hover:bg-nipo-blue-light hover:text-primary transition-smooth ${
                         i < categories.length - 1 ? "border-b border-border/40" : ""
                       }`}
@@ -111,19 +76,10 @@ const HeroSection = () => {
             onMouseEnter={() => setIsPaused(true)}
             onMouseLeave={() => setIsPaused(false)}
           >
-            {/* Slide image with CSS animation */}
             <div key={slideKey} className="absolute inset-0 animate-hero-slide">
-              <img
-                src={slide.img}
-                alt={slide.title}
-                className="w-full h-full object-cover"
-                loading="eager"
-              />
-              {/* Overlays */}
+              <img src={slide.img} alt={slide.title} className="w-full h-full object-cover" loading="eager" />
               <div className="absolute inset-0 bg-gradient-to-r from-primary/90 via-primary/50 to-transparent" />
               <div className="absolute inset-0 bg-gradient-to-t from-primary/30 via-transparent to-transparent" />
-
-              {/* Content */}
               <div className="absolute inset-0 flex items-center px-8 md:px-14">
                 <div className="max-w-lg">
                   <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary-foreground/15 backdrop-blur-sm text-primary-foreground text-xs font-semibold mb-4 border border-primary-foreground/10 animate-fade-up">
@@ -138,7 +94,7 @@ const HeroSection = () => {
                   </p>
                   <div className="flex items-center gap-3 animate-fade-up delay-6">
                     <Button size="lg" variant="hero" className="rounded-full px-8 shadow-lg" asChild>
-                      <Link to="/urunler">
+                      <Link to={slide.ctaLink}>
                         {slide.cta}
                         <ArrowRight className="w-4 h-4" />
                       </Link>
@@ -151,23 +107,13 @@ const HeroSection = () => {
               </div>
             </div>
 
-            {/* Navigation arrows */}
-            <button
-              onClick={prev}
-              aria-label="Önceki slayt"
-              className="absolute left-4 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-primary-foreground/10 backdrop-blur-md flex items-center justify-center text-primary-foreground hover:bg-primary-foreground/20 transition-smooth z-10 border border-primary-foreground/10"
-            >
+            <button onClick={prev} aria-label="Önceki slayt" className="absolute left-4 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-primary-foreground/10 backdrop-blur-md flex items-center justify-center text-primary-foreground hover:bg-primary-foreground/20 transition-smooth z-10 border border-primary-foreground/10">
               <ChevronLeft className="w-5 h-5" />
             </button>
-            <button
-              onClick={next}
-              aria-label="Sonraki slayt"
-              className="absolute right-4 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-primary-foreground/10 backdrop-blur-md flex items-center justify-center text-primary-foreground hover:bg-primary-foreground/20 transition-smooth z-10 border border-primary-foreground/10"
-            >
+            <button onClick={next} aria-label="Sonraki slayt" className="absolute right-4 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-primary-foreground/10 backdrop-blur-md flex items-center justify-center text-primary-foreground hover:bg-primary-foreground/20 transition-smooth z-10 border border-primary-foreground/10">
               <ChevronRight className="w-5 h-5" />
             </button>
 
-            {/* Progress dots with animated bar */}
             <div className="absolute bottom-5 left-1/2 -translate-x-1/2 flex items-center gap-2 z-10 bg-primary/30 backdrop-blur-sm rounded-full px-3 py-1.5">
               {slides.map((_, i) => (
                 <button
@@ -175,20 +121,11 @@ const HeroSection = () => {
                   onClick={() => { setCurrent(i); setSlideKey((k) => k + 1); }}
                   aria-label={`Slayt ${i + 1}`}
                   className={`rounded-full transition-all duration-500 relative overflow-hidden ${
-                    i === current
-                      ? "w-8 h-2 bg-primary-foreground/30"
-                      : "w-2 h-2 bg-primary-foreground/40 hover:bg-primary-foreground/60"
+                    i === current ? "w-8 h-2 bg-primary-foreground/30" : "w-2 h-2 bg-primary-foreground/40 hover:bg-primary-foreground/60"
                   }`}
                 >
-                  {i === current && !isPaused && (
-                    <span
-                      key={slideKey}
-                      className="absolute inset-0 rounded-full bg-secondary animate-slide-progress"
-                    />
-                  )}
-                  {i === current && isPaused && (
-                    <span className="absolute inset-0 rounded-full bg-secondary" />
-                  )}
+                  {i === current && !isPaused && <span key={slideKey} className="absolute inset-0 rounded-full bg-secondary animate-slide-progress" />}
+                  {i === current && isPaused && <span className="absolute inset-0 rounded-full bg-secondary" />}
                 </button>
               ))}
             </div>
