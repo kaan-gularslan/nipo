@@ -1,7 +1,8 @@
-import { Package, Instagram, Facebook, Twitter, ArrowRight, MapPin, Phone, Mail } from "lucide-react";
+import { Package, Instagram, Facebook, Twitter, ArrowRight, MapPin, Phone, Mail, Palette } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
+import { useTheme, themeLabels, themeColors, type ThemeName } from "@/context/ThemeContext";
 
 const productLinks = [
   { name: "Baskılı Kutular", slug: "oluklu-kutu" },
@@ -35,7 +36,11 @@ const serviceLinks = [
   { name: "KVKK", to: "/kvkk" },
 ];
 
-const Footer = () => (
+const themeKeys: ThemeName[] = ["klasik", "pembe", "yesil", "minimal", "koyu"];
+
+const Footer = () => {
+  const { theme, setTheme } = useTheme();
+  return (
   <footer className="bg-primary text-primary-foreground">
     {/* Newsletter */}
     <div className="border-b border-primary-foreground/10">
@@ -132,8 +137,36 @@ const Footer = () => (
         </div>
       </div>
 
+      {/* Theme Switcher */}
+      <div className="border-t border-primary-foreground/8 mt-10 pt-5 pb-2">
+        <div className="flex items-center justify-center gap-3 flex-wrap">
+          <div className="flex items-center gap-1.5 text-[11px] opacity-50">
+            <Palette className="w-3.5 h-3.5" />
+            <span>Tema</span>
+          </div>
+          {themeKeys.map((key) => (
+            <button
+              key={key}
+              onClick={() => setTheme(key)}
+              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[11px] font-medium transition-smooth ${
+                theme === key
+                  ? "bg-primary-foreground/20 ring-1 ring-primary-foreground/40"
+                  : "bg-primary-foreground/5 hover:bg-primary-foreground/10"
+              }`}
+              title={themeLabels[key]}
+            >
+              <span
+                className="w-3 h-3 rounded-full ring-1 ring-white/30"
+                style={{ background: themeColors[key] }}
+              />
+              <span className="hidden sm:inline">{themeLabels[key]}</span>
+            </button>
+          ))}
+        </div>
+      </div>
+
       {/* Copyright */}
-      <div className="border-t border-primary-foreground/8 mt-10 pt-6">
+      <div className="border-t border-primary-foreground/8 mt-4 pt-5">
         <div className="flex flex-col md:flex-row items-center justify-between gap-3">
           <p className="text-[11px] opacity-30">© 2026 Nipo Ambalaj. Tüm hakları saklıdır.</p>
           <p className="text-[11px] opacity-30">Mimar Sinan Merkez Mh. İnönü Cd. No:95/3 Büyükçekmece / İSTANBUL</p>
@@ -141,6 +174,7 @@ const Footer = () => (
       </div>
     </div>
   </footer>
-);
+  );
+};
 
 export default Footer;
