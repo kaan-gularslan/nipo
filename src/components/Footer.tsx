@@ -1,7 +1,8 @@
-import { Package, Instagram, Facebook, Twitter, ArrowRight, MapPin, Phone, Mail } from "lucide-react";
+import { Package, Instagram, Facebook, Twitter, ArrowRight, MapPin, Phone, Mail, Palette } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
+import { useTheme, themeLabels, themeColors, type ThemeName } from "@/context/ThemeContext";
 
 const productLinks = [
   { name: "Baskılı Kutular", slug: "oluklu-kutu" },
