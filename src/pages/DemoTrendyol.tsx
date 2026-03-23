@@ -4,7 +4,7 @@ import { Package, Search, User, Heart, ShoppingCart, ChevronRight, Star, Menu, X
 import { products, formatPrice, getDiscountPercent } from "@/data/products";
 import { categories } from "@/data/categories";
 import { useCart } from "@/context/CartContext";
-import heroImg from "@/assets/hero-trendyol.jpg";
+
 
 const campaignCircles = [
   { label: "Süper Fiyat", emoji: "🔥", to: "/kampanyalar" },
