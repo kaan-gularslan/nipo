@@ -5,6 +5,8 @@ import { products, formatPrice, getDiscountPercent } from "@/data/products";
 import { categories } from "@/data/categories";
 import { useCart } from "@/context/CartContext";
 
+import slideEtiket from "@/assets/slides/slide-etiket.jpg";
+
 
 const campaignCircles = [
   { label: "Süper Fiyat", emoji: "🔥", to: "/kampanyalar" },
@@ -129,20 +131,17 @@ const DemoTrendyol = () => {
 
       {/* Campaign Circles + Hero */}
       <div className="relative overflow-hidden">
-        <div className="h-48 md:h-64 relative bg-gradient-to-r from-primary via-primary/80 to-secondary/40">
-          <div className="absolute right-0 top-0 w-1/2 h-full hidden md:flex items-center justify-end pr-8 gap-3 opacity-25">
-            {products.slice(0, 3).map((p) => (
-              <img key={p.id} src={p.img} alt="" className="w-36 h-36 object-cover rounded-2xl rotate-3 shadow-lg" />
-            ))}
-          </div>
+        <div className="h-56 md:h-72 relative">
+          <img src={slideEtiket} alt="Ambalajda Süper Fırsatlar" className="w-full h-full object-cover" loading="eager" />
+          <div className="absolute inset-0 bg-gradient-to-r from-primary/90 via-primary/60 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-white via-transparent to-transparent" />
           <div className="container mx-auto px-4 h-full flex items-center relative z-10">
             <div className="text-primary-foreground max-w-md">
-              <h2 className="text-2xl md:text-3xl font-black mb-2">Ambalajda Süper Fırsatlar</h2>
-              <p className="text-sm opacity-80 mb-4">Tüm kategorilerde indirimli fiyatlar</p>
+              <h2 className="text-2xl md:text-3xl font-black mb-2 drop-shadow-lg">Ambalajda Süper Fırsatlar</h2>
+              <p className="text-sm opacity-90 mb-4">Tüm kategorilerde indirimli fiyatlar</p>
               <Link to="/kampanyalar" className="bg-secondary text-secondary-foreground px-6 py-2.5 rounded-lg text-sm font-bold hover:bg-secondary/90 transition-smooth inline-flex items-center gap-1">Fırsatları Gör <ChevronRight className="w-4 h-4" /></Link>
             </div>
           </div>
-          <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-white to-transparent" />
         </div>
         <div className="container mx-auto px-4 -mt-8 relative z-10 pb-5">
           <div className="flex gap-5 overflow-x-auto pb-2 scrollbar-thin justify-center">

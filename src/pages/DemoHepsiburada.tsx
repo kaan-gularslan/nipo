@@ -5,6 +5,9 @@ import { products, formatPrice, getDiscountPercent } from "@/data/products";
 import { categories } from "@/data/categories";
 import { useCart } from "@/context/CartContext";
 
+import slideAmbalaj from "@/assets/slides/slide-ambalaj.jpg";
+import slideKraft from "@/assets/slides/slide-kraft.jpg";
+import slideKafe from "@/assets/slides/slide-kafe.jpg";
 
 const navCategories = categories.slice(0, 10);
 const featuredProducts = products.filter((p) => p.badge);
@@ -13,9 +16,9 @@ const discountedProducts = products.filter((p) => p.oldPrice).slice(0, 6);
 const bestSellers = products.filter((p) => p.badge === "Çok Satan");
 
 const heroSlides = [
-  { title: "Baskılı Ambalajda\nToplu Siparişe Özel İndirim", subtitle: "1000+ adet siparişlerde %20'ye varan indirim fırsatı", cta: "Hemen İncele", badge: "Kampanya", to: "/kampanyalar" },
-  { title: "Kraft Ambalaj\nKoleksiyonu Yenilendi", subtitle: "Doğa dostu ve şık ambalaj çözümleri", cta: "Keşfet", badge: "Yeni", to: "/urunler" },
-  { title: "Karton Bardak\nSetlerinde Fırsat", subtitle: "Kafe ve restoranlar için özel fiyatlar", cta: "Fırsatları Gör", badge: "Fırsat", to: "/kampanyalar" },
+  { img: slideAmbalaj, title: "Baskılı Ambalajda\nToplu Siparişe Özel İndirim", subtitle: "1000+ adet siparişlerde %20'ye varan indirim fırsatı", cta: "Hemen İncele", badge: "Kampanya", to: "/kampanyalar" },
+  { img: slideKraft, title: "Kraft Ambalaj\nKoleksiyonu Yenilendi", subtitle: "Doğa dostu ve şık ambalaj çözümleri", cta: "Keşfet", badge: "Yeni", to: "/urunler" },
+  { img: slideKafe, title: "Karton Bardak\nSetlerinde Fırsat", subtitle: "Kafe ve restoranlar için özel fiyatlar", cta: "Fırsatları Gör", badge: "Fırsat", to: "/kampanyalar" },
 ];
 
 const marqueeItems = [
@@ -176,18 +179,12 @@ const DemoHepsiburada = () => {
           <div className="lg:col-span-2 rounded-xl overflow-hidden relative h-64 md:h-80">
             {heroSlides.map((slide, i) => (
               <div key={i} className={`absolute inset-0 transition-opacity duration-700 ${i === currentSlide ? "opacity-100" : "opacity-0 pointer-events-none"}`}>
-                <div className="absolute inset-0 bg-gradient-to-br from-primary via-primary/90 to-secondary/60" />
-                <div className="absolute right-0 bottom-0 w-1/2 h-full opacity-20">
-                  <div className="absolute inset-0 grid grid-cols-2 gap-2 p-4">
-                    {products.slice(i * 2, i * 2 + 4).map((p) => (
-                      <img key={p.id} src={p.img} alt="" className="w-full h-full object-cover rounded-lg" />
-                    ))}
-                  </div>
-                </div>
+                <img src={slide.img} alt={slide.title} className="w-full h-full object-cover" loading={i === 0 ? "eager" : "lazy"} />
+                <div className="absolute inset-0 bg-gradient-to-r from-primary/85 via-primary/50 to-transparent" />
                 <div className="absolute inset-0 flex items-center">
                   <div className="relative z-10 p-6 md:p-8 text-primary-foreground max-w-md">
                     <span className="bg-secondary text-secondary-foreground text-xs font-bold px-3 py-1 rounded-full mb-3 inline-block">{slide.badge}</span>
-                    <h2 className="text-xl md:text-2xl font-black mb-2 whitespace-pre-line leading-tight">{slide.title}</h2>
+                    <h2 className="text-xl md:text-2xl font-black mb-2 whitespace-pre-line leading-tight drop-shadow-md">{slide.title}</h2>
                     <p className="text-xs md:text-sm opacity-90 mb-4">{slide.subtitle}</p>
                     <Link to={slide.to} className="bg-secondary text-secondary-foreground px-5 py-2 rounded-lg text-sm font-bold hover:bg-secondary/90 transition-smooth inline-flex items-center gap-1">
                       {slide.cta} <ChevronRight className="w-4 h-4" />
@@ -196,8 +193,8 @@ const DemoHepsiburada = () => {
                 </div>
               </div>
             ))}
-            <button onClick={() => setCurrentSlide((p) => (p - 1 + heroSlides.length) % heroSlides.length)} className="absolute left-3 top-1/2 -translate-y-1/2 z-20 w-8 h-8 bg-white/20 hover:bg-white/40 rounded-full flex items-center justify-center text-white transition-smooth"><ChevronLeft className="w-4 h-4" /></button>
-            <button onClick={() => setCurrentSlide((p) => (p + 1) % heroSlides.length)} className="absolute right-3 top-1/2 -translate-y-1/2 z-20 w-8 h-8 bg-white/20 hover:bg-white/40 rounded-full flex items-center justify-center text-white transition-smooth"><ChevronRight className="w-4 h-4" /></button>
+            <button onClick={() => setCurrentSlide((p) => (p - 1 + heroSlides.length) % heroSlides.length)} className="absolute left-3 top-1/2 -translate-y-1/2 z-20 w-8 h-8 bg-white/20 hover:bg-white/40 rounded-full flex items-center justify-center text-white transition-smooth backdrop-blur-sm"><ChevronLeft className="w-4 h-4" /></button>
+            <button onClick={() => setCurrentSlide((p) => (p + 1) % heroSlides.length)} className="absolute right-3 top-1/2 -translate-y-1/2 z-20 w-8 h-8 bg-white/20 hover:bg-white/40 rounded-full flex items-center justify-center text-white transition-smooth backdrop-blur-sm"><ChevronRight className="w-4 h-4" /></button>
             <div className="absolute bottom-3 left-1/2 -translate-x-1/2 z-20 flex gap-2">
               {heroSlides.map((_, i) => (
                 <button key={i} onClick={() => setCurrentSlide(i)} className={`w-2.5 h-2.5 rounded-full transition-smooth ${i === currentSlide ? "bg-white scale-125" : "bg-white/40"}`} />
