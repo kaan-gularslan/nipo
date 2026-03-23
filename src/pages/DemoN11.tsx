@@ -110,21 +110,25 @@ const DemoN11 = () => {
         </div>
       )}
 
-      {/* Hero: Slider with Image + Side Banners */}
+      {/* Hero: Slider + Side Banners */}
       <div className="container mx-auto px-4 py-4">
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-3">
           {/* Main Slider */}
           <div className="lg:col-span-3 relative rounded-xl overflow-hidden h-64 md:h-80">
-            <img src={heroImg} alt="Nipo Kampanya" className="absolute inset-0 w-full h-full object-cover" width={1920} height={800} />
             {slides.map((slide, i) => (
-              <div key={i} className={`absolute inset-0 flex items-end transition-all duration-700 ${i === currentSlide ? "opacity-100" : "opacity-0"}`}>
-                <div className="absolute inset-0 bg-gradient-to-t from-primary/85 via-primary/20 to-transparent" />
-                <div className="relative z-10 p-6 md:p-8 text-white w-full">
-                  <h1 className="text-xl md:text-3xl font-black leading-tight whitespace-pre-line mb-2 drop-shadow-lg">{slide.title}</h1>
-                  <p className="text-sm opacity-90 mb-4">{slide.subtitle}</p>
-                  <Link to={slide.to} className="bg-secondary text-secondary-foreground px-6 py-2.5 rounded-lg text-sm font-bold hover:bg-secondary/90 transition-smooth inline-flex items-center gap-1">
-                    {slide.cta} <ChevronRight className="w-4 h-4" />
-                  </Link>
+              <div key={i} className={`absolute inset-0 transition-all duration-700 ${i === currentSlide ? "opacity-100" : "opacity-0"}`}>
+                <div className="absolute inset-0 bg-gradient-to-br from-primary via-primary/85 to-accent/40" />
+                <div className="absolute right-0 top-0 w-2/5 h-full hidden md:flex items-center justify-center p-6 opacity-25">
+                  <img src={products[i]?.img || products[0].img} alt="" className="w-48 h-48 object-cover rounded-2xl rotate-6 shadow-2xl" />
+                </div>
+                <div className="absolute inset-0 flex items-end">
+                  <div className="relative z-10 p-6 md:p-8 text-white w-full">
+                    <h1 className="text-xl md:text-3xl font-black leading-tight whitespace-pre-line mb-2">{slide.title}</h1>
+                    <p className="text-sm opacity-90 mb-4">{slide.subtitle}</p>
+                    <Link to={slide.to} className="bg-secondary text-secondary-foreground px-6 py-2.5 rounded-lg text-sm font-bold hover:bg-secondary/90 transition-smooth inline-flex items-center gap-1">
+                      {slide.cta} <ChevronRight className="w-4 h-4" />
+                    </Link>
+                  </div>
                 </div>
               </div>
             ))}
