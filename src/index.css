@@ -388,10 +388,3 @@
   --nipo-pink-light: 347 40% 18%;
   --nipo-green-light: 77 30% 18%;
 }
-
-  /* ── Section divider ── */
-  .section-divider {
-    height: 1px;
-    background: linear-gradient(90deg, transparent, hsl(var(--border)), transparent);
-  }
-}
