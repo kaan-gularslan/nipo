@@ -1,73 +1,70 @@
 
 
-# Kurumsal Kimlik Sayfası + Tema Korunması Planı
+# 5 Tema Demo Sayfaları — Güncellenmiş Plan
 
-## Amaç
-1. Nipo'nun mevcut kurumsal kimliğini korumak (footer demo switcher'ı kaldırmak)
-2. Kurumsal kimlik kılavuzunu sergileyen yeni bir `/kurumsal-kimlik` sayfası oluşturmak
+Nipo'nun marka renkleri (Koyu Mavi #004374, Pembe #FF456D, Yeşil #9CC33B) tüm temalarda korunacak. **Birincil renk her zaman #004374 olacak** — hiçbir temada turuncu, mor veya başka bir birincil renk kullanılmayacak. Referans sitelerin sadece **yerleşim ve UX pattern'leri** alınacak.
 
-## Kurumsal Kimlik Bilgileri (PDF'den)
+## Renk Kuralı (Tüm Temalar İçin)
 
-| Öge | Detay |
-|-----|-------|
-| **Ana Renkler** | Koyu Mavi (R:0 G:67 B:116), Pembe (R:255 G:69 B:109), Yeşil (R:156 G:195 B:59) |
-| **Font** | Montserrat (Ana), Calibri (Yardımcı/resmi yazışmalar) |
-| **Slogan** | "Markana Renk Kat!" |
-| **Logo Hikayesi** | "Nipo" ismindeki "O" harfi boya kutusu olarak betimlenmiş, 3 damlacık logo ile bütünleştirilmiş |
-| **Min Logo Boyut** | Kısa kenar en az 25mm |
-| **Kurumsal Materyaller** | Kartvizit, antetli kağıt, zarf, dosya, fatura, makbuz, bloknot, not kağıdı, mail imza |
-| **Tanıtım Ürünleri** | Kupa, USB, karton çanta, bez çanta, kalem, ajanda, saat, anahtarlık, mouse pad |
-| **Outdoor/Indoor** | Kol banner, yelken bayrak, araç kaplama, yaka ipi |
+| Rol | Renk | Kullanım |
+|-----|------|----------|
+| **Birincil** | #004374 (Koyu Mavi) | Header, butonlar, linkler, aktif durumlar |
+| **İkincil** | #FF456D (Pembe) | CTA butonlar, badge'ler, vurgular |
+| **Aksan** | #9CC33B (Yeşil) | Fiyat, stok durumu, başarı göstergeleri |
+| **Arka plan** | Beyaz / Açık gri | Sayfa zemini |
 
----
+## 5 Tema
+
+| # | Rota | İlham | Layout Farkı |
+|---|------|-------|-------------|
+| 1 | `/demo/hepsiburada` | Hepsiburada | Yatay kategori ikonları, banner+sidebar, carousel |
+| 2 | `/demo/bidolu` | Bidolubaski | Full-width slider, güven badge barı, temiz grid |
+| 3 | `/demo/trendyol` | Trendyol | Minimal beyaz header, yuvarlak kampanya ikonları, yatay scroll |
+| 4 | `/demo/amazon` | Amazon TR | Koyu mavi (#004374) üst bar, büyük arama, kategori grid kartları |
+| 5 | `/demo/n11` | N11 | Mega slider, günün fırsatı countdown, fırsat banner'ları |
 
 ## Dosya Değişiklikleri
 
 | Dosya | İşlem |
 |-------|-------|
-| `src/pages/CorporateIdentity.tsx` | **Yeni** — Kurumsal kimlik kılavuzu sayfası |
-| `src/components/Footer.tsx` | **Güncelleme** — 5 demo switcher kaldırılacak, sadece Klasik footer kalacak |
-| `src/App.tsx` | **Güncelleme** — `/kurumsal-kimlik` rotası ekleme |
+| `src/pages/DemoHepsiburada.tsx` | Yeni |
+| `src/pages/DemoBidolu.tsx` | Yeni |
+| `src/pages/DemoTrendyol.tsx` | Yeni |
+| `src/pages/DemoAmazon.tsx` | Yeni |
+| `src/pages/DemoN11.tsx` | Yeni |
+| `src/App.tsx` | 5 demo rotası ekleme |
+| `src/components/Footer.tsx` | Demo sayfa linklerini ekleme |
 
----
+## Her Temanın Kısa Özeti
 
-## Kurumsal Kimlik Sayfası İçeriği
+### 1. Hepsiburada Tarzı
+- **Header**: #004374 arka plan, logo sol, arama ortada, hesap+sepet sağda, alt kategori tab barı
+- **Hero**: Yuvarlak kategori ikonları satırı + büyük banner (sol 2/3) + küçük kart (sağ 1/3)
+- **Ürünler**: Yatay carousel bölümleri, fiyat+indirim badge
 
-### Bölüm 1: Hero
-- Sayfa başlığı: "Kurumsal Kimlik Kılavuzu"
-- Alt metin: Marka tutarlılığı mesajı
-- Breadcrumb
+### 2. Bidolubaski Tarzı
+- **Header**: Beyaz, logo sol, arama ortada, nav linkler alt satırda
+- **Hero**: Full-width slider + 4 güven badge'i (Kargo, Taksit, İade, Güvenli)
+- **Ürünler**: Temiz 4'lü grid, büyük kartlar
 
-### Bölüm 2: Kurumsal Renkler
-- 3 ana renk kartı (Koyu Mavi, Pembe, Yeşil)
-- Her kart: büyük renk bloğu + RGB/CMYK/HEX değerleri
-- Her rengin %100'den %10'a kadar tonları (renk paleti şeridi)
+### 3. Trendyol Tarzı
+- **Header**: Minimal beyaz, ince #004374 üst çizgi, geniş arama
+- **Hero**: Yuvarlak kampanya daireleri + yatay scroll ürün kartları
+- **Ürünler**: Yatay scroll listeleri, farklı başlıklarla
 
-### Bölüm 3: Tipografi
-- Montserrat font ailesi gösterimi (Thin, Light, Medium, ExtraBold, Black)
-- Her ağırlıkta örnek metin
-- Calibri yardımcı font bilgisi
+### 4. Amazon Tarzı
+- **Header**: Koyu #004374 tam genişlik üst bar, büyük arama, alt nav barı
+- **Hero**: Full-width banner + 4'lü kategori kartları (resimli)
+- **Ürünler**: Çoklu grid bölümleri
 
-### Bölüm 4: Logo Kullanımı
-- Logo hikayesi (O harfi = boya kutusu + 3 damlacık)
-- Açık/koyu zemin kullanım kuralları
-- Minimum boyut bilgisi (25mm)
-- Siyah-beyaz kullanım
+### 5. N11 Tarzı
+- **Header**: #004374 üst bar, logo+arama+sepet, kategori menü butonu
+- **Hero**: Büyük slider + yan 2 banner + günün fırsatı countdown
+- **Ürünler**: Fırsat grid + kategori kartları + çok satanlar carousel
 
-### Bölüm 5: Kurumsal Slogan
-- "Markana Renk Kat!" büyük tipografi ile gösterim
-- Kullanım kuralları
-
-### Bölüm 6: Kurumsal Materyaller Grid
-- Kartvizit, antetli kağıt, zarf, dosya, fatura gibi materyallerin kart grid'i
-- Her kart: ikon + isim + baskı özellikleri
-
-### Bölüm 7: Tanıtım Ürünleri Grid
-- Kupa, USB, çanta, kalem, ajanda vb.
-- Kart yapısında listeleme
-
----
-
-## Footer Düzeltmesi
-Footer'daki 5 demo switcher tamamen kaldırılacak. Sadece **FooterClassic** (Demo 1) kalacak. Switcher bar ve diğer 4 footer varyasyonu silinecek.
+## Teknik
+- Tüm demolar mevcut `products`, `categories`, `useCart()` kullanacak
+- Ürün linkleri mevcut `/urunler/:slug`'a yönlenecek
+- Her demo ~400 satır, bileşenler inline
+- Sıralı uygulama: önce Hepsiburada, sonra diğerleri
 
