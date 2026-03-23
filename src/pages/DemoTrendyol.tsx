@@ -4,7 +4,7 @@ import { Package, Search, User, Heart, ShoppingCart, ChevronRight, Star, Menu, X
 import { products, formatPrice, getDiscountPercent } from "@/data/products";
 import { categories } from "@/data/categories";
 import { useCart } from "@/context/CartContext";
-import heroImg from "@/assets/hero-trendyol.jpg";
+
 
 const campaignCircles = [
   { label: "Süper Fiyat", emoji: "🔥", to: "/kampanyalar" },
@@ -127,13 +127,24 @@ const DemoTrendyol = () => {
         </div>
       )}
 
-      {/* Campaign Circles + Hero Image */}
+      {/* Campaign Circles + Hero */}
       <div className="relative overflow-hidden">
-        <div className="h-48 md:h-64 relative">
-          <img src={heroImg} alt="Nipo Ambalaj Koleksiyonu" className="absolute inset-0 w-full h-full object-cover" width={1920} height={800} />
-          <div className="absolute inset-0 bg-gradient-to-t from-white via-white/40 to-transparent" />
+        <div className="h-48 md:h-64 relative bg-gradient-to-r from-primary via-primary/80 to-secondary/40">
+          <div className="absolute right-0 top-0 w-1/2 h-full hidden md:flex items-center justify-end pr-8 gap-3 opacity-25">
+            {products.slice(0, 3).map((p) => (
+              <img key={p.id} src={p.img} alt="" className="w-36 h-36 object-cover rounded-2xl rotate-3 shadow-lg" />
+            ))}
+          </div>
+          <div className="container mx-auto px-4 h-full flex items-center relative z-10">
+            <div className="text-primary-foreground max-w-md">
+              <h2 className="text-2xl md:text-3xl font-black mb-2">Ambalajda Süper Fırsatlar</h2>
+              <p className="text-sm opacity-80 mb-4">Tüm kategorilerde indirimli fiyatlar</p>
+              <Link to="/kampanyalar" className="bg-secondary text-secondary-foreground px-6 py-2.5 rounded-lg text-sm font-bold hover:bg-secondary/90 transition-smooth inline-flex items-center gap-1">Fırsatları Gör <ChevronRight className="w-4 h-4" /></Link>
+            </div>
+          </div>
+          <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-white to-transparent" />
         </div>
-        <div className="container mx-auto px-4 -mt-12 relative z-10 pb-5">
+        <div className="container mx-auto px-4 -mt-8 relative z-10 pb-5">
           <div className="flex gap-5 overflow-x-auto pb-2 scrollbar-thin justify-center">
             {campaignCircles.map((item, i) => (
               <Link key={i} to={item.to} className="flex flex-col items-center gap-1.5 min-w-[64px] group">

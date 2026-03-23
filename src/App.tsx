@@ -21,6 +21,7 @@ import DemoBidolu from "./pages/DemoBidolu";
 import DemoTrendyol from "./pages/DemoTrendyol";
 import DemoAmazon from "./pages/DemoAmazon";
 import DemoN11 from "./pages/DemoN11";
+import Admin from "./pages/Admin";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -53,6 +54,7 @@ const App = () => (
             <Route path="/demo/trendyol" element={<DemoTrendyol />} />
             <Route path="/demo/amazon" element={<DemoAmazon />} />
             <Route path="/demo/n11" element={<DemoN11 />} />
+            <Route path="/admin" element={<Admin />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
