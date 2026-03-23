@@ -5,7 +5,7 @@ import {
   Package, Type, Palette, Image, MessageSquareQuote,
   CreditCard, FileText, Mail, FolderOpen, Receipt, BookOpen, StickyNote, AtSign,
   Coffee, Usb, ShoppingBag, PenTool, BookMarked, Clock, KeyRound, Monitor,
-  Flag, Car, Lanyard
+  Flag, Car
 } from "lucide-react";
 
 /* ── Renk Verileri ── */
